@@ -4,6 +4,10 @@ import AboutPage from "./pages/AboutPage";
 import ProductsPage from "./pages/ProductsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { useAuth } from "./hooks";
+import { useEffect } from "react";
+import { refreshUser } from "./redux/auth/operations";
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -13,8 +17,18 @@ const StyledLink = styled(NavLink)`
 `;
 
 function App() {
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+  console.log("🚀 ~ App ~ isRefreshing:", isRefreshing);
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
     <>
+      {isRefreshing ? <div>QWE</div> : <div>ZXC</div>}
+
       <nav>
         <StyledLink to='/'>Home</StyledLink>
         <StyledLink to='/about'>About</StyledLink>
