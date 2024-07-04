@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectAllTasks } from "../../redux/keys/selectors";
 
 export default function KeyFilter() {
+  const keys = useSelector(selectAllTasks);
+  console.log("🚀 ~ KeyFilter ~ keys:", keys);
+
   // Исходные данные
   const initialData = [
     { id: "1", firstName: "Petro", secondName: "Karpyk", birthdayYear: "1990" },
@@ -9,11 +14,11 @@ export default function KeyFilter() {
   ];
 
   // Состояние для данных и фильтров
-  const [data] = useState(initialData);
+  const [data] = useState(keys);
   const [filters, setFilters] = useState({
-    firstName: "",
-    secondName: "",
-    birthdayYear: "",
+    Maker: "",
+    Year: "",
+    Model: "",
   });
 
   // Обработчик изменения ввода
@@ -25,11 +30,9 @@ export default function KeyFilter() {
   // Фильтрация данных
   const filteredData = data.filter((item) => {
     return (
-      item.firstName.toLowerCase().includes(filters.firstName.toLowerCase()) &&
-      item.secondName
-        .toLowerCase()
-        .includes(filters.secondName.toLowerCase()) &&
-      item.birthdayYear.includes(filters.birthdayYear)
+      item.Year.toLowerCase().includes(filters.Year.toLowerCase()) &&
+      item.Maker.toLowerCase().includes(filters.Maker.toLowerCase()) &&
+      item.Model.includes(filters.Model)
     );
   });
 
@@ -38,23 +41,23 @@ export default function KeyFilter() {
       <div>
         <input
           type='text'
-          name='firstName'
-          placeholder='First Name'
-          value={filters.firstName}
+          name='Year'
+          placeholder='Year'
+          value={filters.Year}
           onChange={handleInputChange}
         />
         <input
           type='text'
-          name='secondName'
-          placeholder='Second Name'
-          value={filters.secondName}
+          name='Maker'
+          placeholder='Maker'
+          value={filters.Maker}
           onChange={handleInputChange}
         />
         <input
           type='text'
-          name='birthdayYear'
-          placeholder='Birthday Year'
-          value={filters.birthdayYear}
+          name='Model'
+          placeholder='Model'
+          value={filters.Model}
           onChange={handleInputChange}
         />
       </div>
@@ -72,9 +75,9 @@ export default function KeyFilter() {
           {filteredData.map((item) => (
             <tr key={item.id}>
               <td>{item.id}</td>
-              <td>{item.firstName}</td>
-              <td>{item.secondName}</td>
-              <td>{item.birthdayYear}</td>
+              <td>{item.Year}</td>
+              <td>{item.Maker}</td>
+              <td>{item.Model}</td>
             </tr>
           ))}
         </tbody>
