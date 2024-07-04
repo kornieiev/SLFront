@@ -1,48 +1,52 @@
-import { NavLink, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
-import ProductsPage from "./pages/ProductsPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import styled from "styled-components";
+import { useEffect, lazy } from "react";
 import { useDispatch } from "react-redux";
-import { useAuth } from "./hooks";
-import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { Layout } from "./components/Layout";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { RestrictedRoute } from "./components/RestrictedRoute";
 import { refreshUser } from "./redux/auth/operations";
+import { useAuth } from "./hooks";
 
-const StyledLink = styled(NavLink)`
-  color: black;
-  &.active {
-    color: orange;
-  }
-`;
+const HomePage = lazy(() => import("./pages/Home"));
+const RegisterPage = lazy(() => import("./pages/Register"));
+const LoginPage = lazy(() => import("./pages/Login"));
+const TasksPage = lazy(() => import("./pages/Keys"));
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
-  console.log("🚀 ~ App ~ isRefreshing:", isRefreshing);
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
-    <>
-      {isRefreshing ? <div>QWE</div> : <div>ZXC</div>}
-
-      <nav>
-        <StyledLink to='/'>Home</StyledLink>
-        <StyledLink to='/about'>About</StyledLink>
-        <StyledLink to='/products'>Products</StyledLink>
-      </nav>
-
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/about' element={<AboutPage />} />
-        <Route path='/products' element={<ProductsPage />} />
-        <Route path='*' element={<NotFoundPage />} />
-      </Routes>
-    </>
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route
+          path='/register'
+          element={
+            <RestrictedRoute redirectTo='/keys' component={<RegisterPage />} />
+          }
+        />
+        <Route
+          path='/login'
+          element={
+            <RestrictedRoute redirectTo='/keys' component={<LoginPage />} />
+          }
+        />
+        <Route
+          path='/keys'
+          element={
+            <PrivateRoute redirectTo='/login' component={<TasksPage />} />
+          }
+        />
+      </Route>
+    </Routes>
   );
-}
+};
 
 export default App;
