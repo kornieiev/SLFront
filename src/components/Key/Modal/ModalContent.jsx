@@ -14,7 +14,6 @@ export default function ModalContent({ item }) {
   };
   return (
     <div>
-      ModalContent
       <ul>
         <li>
           <strong>Year:</strong>
