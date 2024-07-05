@@ -31,7 +31,6 @@ export const deleteKey = createAsyncThunk(
     try {
       const response = await axios.delete(`/keys/${keyId}`);
 
-      console.log("🚀 ~ response:", response);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

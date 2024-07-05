@@ -1,6 +1,4 @@
 export default function ModalContent({ item }) {
-  console.log("🚀 ~ ModalContent ~ item:", item);
-
   return (
     <div>
       ModalContent

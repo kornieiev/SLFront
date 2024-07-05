@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { selectAllTasks } from "../../redux/keys/selectors";
 import { KeyList } from "../../components/KeyList/KeyList";
 
+import css from "./KeyFilter.module.css";
+
 export default function KeyFilter() {
   const keys = useSelector(selectAllTasks);
 
@@ -20,8 +22,6 @@ export default function KeyFilter() {
   const [showMakerSelect, setShowMakerSelect] = useState(false);
   const [showModelSelect, setShowModelSelect] = useState(false);
   const [showYearSelect, setShowYearSelect] = useState(false);
-
-  console.log("🚀 ~ KeyFilter ~ keysFilteredByMaker:", keysFilteredByMaker);
 
   const handleMakerChange = (e) => {
     setShowModelSelect(false);
@@ -70,12 +70,14 @@ export default function KeyFilter() {
   });
 
   return (
-    <div>
+    <ul className={css.list}>
       {/* Step one - Maker*/}
-      <div>
-        <p>Step one:</p>
-        <label htmlFor='Maker'>Choose Maker: </label>
+      <li className={css.item}>
+        <label className={css.label} htmlFor='Maker'>
+          Choose Maker:{" "}
+        </label>
         <select
+          className={css.select}
           type='text'
           name='Maker'
           // multiple={true}
@@ -88,13 +90,15 @@ export default function KeyFilter() {
             </option>
           ))}
         </select>
-      </div>
+      </li>
       {/* Step two - Model*/}
       {showMakerSelect && (
-        <div>
-          <p>Step two:</p>
-          <label htmlFor='Model'>Choose Model: </label>
+        <li className={css.item}>
+          <label className={css.label} htmlFor='Model'>
+            Choose Model:{" "}
+          </label>
           <select
+            className={css.select}
             type='text'
             name='Model'
             placeholder='Model'
@@ -109,14 +113,16 @@ export default function KeyFilter() {
               </option>
             ))}
           </select>
-        </div>
+        </li>
       )}
       {/* Step three - Year */}
       {showModelSelect && (
-        <div>
-          <p>Step three:</p>
-          <label htmlFor='Year'>Choose Year: </label>
+        <li className={css.item}>
+          <label className={css.label} htmlFor='Year'>
+            Choose Year:{" "}
+          </label>
           <select
+            className={css.select}
             type='text'
             name='Year'
             placeholder='Year'
@@ -131,13 +137,12 @@ export default function KeyFilter() {
               </option>
             ))}
           </select>
-        </div>
+        </li>
       )}
 
-      {showMakerSelect &&
-        showModelSelect &&
-        showYearSelect &&
-        filters !== filtersInitialState && <KeyList data={filteredData} />}
-    </div>
+      {showYearSelect && filters !== filtersInitialState && (
+        <KeyList data={filteredData} />
+      )}
+    </ul>
   );
 }

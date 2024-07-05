@@ -1,0 +1,30 @@
+.list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  /* grid-template-columns: 1fr; */
+  /* grid-gap: 12px; */
+}
+
+.item {
+  display: flex;
+  gap: 10px;
+}
+
+p {
+  margin: 0;
+}
+
+.label {
+  width: 150px;
+}
+
+.select {
+  margin-right: auto;
+
+  width: 200px;
+}
