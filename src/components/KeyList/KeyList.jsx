@@ -1,14 +1,14 @@
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Key } from "../Key/Key";
-import { selectAllTasks } from "../../redux/keys/selectors";
+// import { selectAllTasks } from "../../redux/keys/selectors";
 import css from "./KeyList.module.css";
 
-export const KeyList = () => {
-  const keys = useSelector(selectAllTasks);
+export const KeyList = ({ data }) => {
+  // const keys = useSelector(selectAllTasks);
 
   return (
     <ul className={css.list}>
-      {keys.map((item) => (
+      {data.map((item) => (
         <li key={item._id}>
           <Key item={item} />
         </li>

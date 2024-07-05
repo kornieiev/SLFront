@@ -1,87 +1,143 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectAllTasks } from "../../redux/keys/selectors";
+import { KeyList } from "../../components/KeyList/KeyList";
 
 export default function KeyFilter() {
   const keys = useSelector(selectAllTasks);
-  console.log("🚀 ~ KeyFilter ~ keys:", keys);
 
-  // Исходные данные
-  const initialData = [
-    { id: "1", firstName: "Petro", secondName: "Karpyk", birthdayYear: "1990" },
-    { id: "2", firstName: "Pavlo", secondName: "Rotkov", birthdayYear: "1991" },
-    { id: "3", firstName: "Igor", secondName: "Rotov", birthdayYear: "1990" },
-  ];
+  const uniqueMakers = [...new Set(keys.map((item) => item.Maker))];
 
-  // Состояние для данных и фильтров
-  const [data] = useState(keys);
-  const [filters, setFilters] = useState({
+  const filtersInitialState = {
     Maker: "",
     Year: "",
     Model: "",
-  });
+  };
+  const [filters, setFilters] = useState(filtersInitialState);
+  const [keysFilteredByMaker, setKeysFilteredByMaker] = useState([]);
+  const [keysFilteredByMakerAndModel, setKeysFilteredByMakerAndModel] =
+    useState([]);
+  const [showMakerSelect, setShowMakerSelect] = useState(false);
+  const [showModelSelect, setShowModelSelect] = useState(false);
+  const [showYearSelect, setShowYearSelect] = useState(false);
+
+  console.log("🚀 ~ KeyFilter ~ keysFilteredByMaker:", keysFilteredByMaker);
+
+  const handleMakerChange = (e) => {
+    setShowModelSelect(false);
+    setShowYearSelect(false);
+
+    const { value } = e.target;
+
+    const data = keys.filter((item) => {
+      return item.Maker.toLowerCase().includes(value.toLowerCase());
+    });
+    setKeysFilteredByMaker(data);
+    setShowMakerSelect(true);
+  };
+
+  const handleModelChange = (e) => {
+    setShowYearSelect(false);
+
+    const { value } = e.target;
+
+    const data = keysFilteredByMaker.filter((item) => {
+      return item.Model.toLowerCase().includes(value.toLowerCase());
+    });
+    setKeysFilteredByMakerAndModel(data);
+    setShowModelSelect(true);
+  };
+
+  const uniqueModels = [
+    ...new Set(keysFilteredByMaker.map((item) => item.Model)),
+  ];
+  const uniqueYears = [
+    ...new Set(keysFilteredByMakerAndModel.map((item) => item.Year)),
+  ];
 
   // Обработчик изменения ввода
-  const handleInputChange = (e) => {
+  const handleYearChange = (e) => {
     const { name, value } = e.target;
+
     setFilters({ ...filters, [name]: value });
+
+    setShowYearSelect(true);
   };
 
   // Фильтрация данных
-  const filteredData = data.filter((item) => {
-    return (
-      item.Year.toLowerCase().includes(filters.Year.toLowerCase()) &&
-      item.Maker.toLowerCase().includes(filters.Maker.toLowerCase()) &&
-      item.Model.includes(filters.Model)
-    );
+  const filteredData = keysFilteredByMakerAndModel.filter((item) => {
+    return item.Year.toLowerCase().includes(filters.Year.toLowerCase());
   });
 
   return (
     <div>
+      {/* Step one - Maker*/}
       <div>
-        <input
-          type='text'
-          name='Year'
-          placeholder='Year'
-          value={filters.Year}
-          onChange={handleInputChange}
-        />
-        <input
+        <p>Step one:</p>
+        <label htmlFor='Maker'>Choose Maker: </label>
+        <select
           type='text'
           name='Maker'
-          placeholder='Maker'
-          value={filters.Maker}
-          onChange={handleInputChange}
-        />
-        <input
-          type='text'
-          name='Model'
-          placeholder='Model'
-          value={filters.Model}
-          onChange={handleInputChange}
-        />
-      </div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Second Name</th>
-            <th>Birthday Year</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.Year}</td>
-              <td>{item.Maker}</td>
-              <td>{item.Model}</td>
-            </tr>
+          // multiple={true}
+          onChange={handleMakerChange}
+        >
+          <option>--Please choose maker--</option>
+          {uniqueMakers.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
           ))}
-        </tbody>
-      </table>
+        </select>
+      </div>
+      {/* Step two - Model*/}
+      {showMakerSelect && (
+        <div>
+          <p>Step two:</p>
+          <label htmlFor='Model'>Choose Model: </label>
+          <select
+            type='text'
+            name='Model'
+            placeholder='Model'
+            // value={filters.Model}
+            onChange={handleModelChange}
+          >
+            <option>--Please choose model--</option>
+
+            {uniqueModels.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+      {/* Step three - Year */}
+      {showModelSelect && (
+        <div>
+          <p>Step three:</p>
+          <label htmlFor='Year'>Choose Year: </label>
+          <select
+            type='text'
+            name='Year'
+            placeholder='Year'
+            // value={filters.Year}
+            onChange={handleYearChange}
+          >
+            <option>--Please choose year--</option>
+
+            {uniqueYears.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {showMakerSelect &&
+        showModelSelect &&
+        showYearSelect &&
+        filters !== filtersInitialState && <KeyList data={filteredData} />}
     </div>
   );
 }
