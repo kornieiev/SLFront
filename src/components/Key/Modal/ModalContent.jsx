@@ -1,23 +1,57 @@
+import { useState } from "react";
+
 export default function ModalContent({ item }) {
+  console.log("🚀 ~ ModalContent ~ item:", item);
+
+  const [values, setValues] = useState(item);
+
+  const handleInputChange = (e) => {
+    console.log(e.target);
+    const { name, value } = e.target;
+    console.log("🚀 ~ handleInputChange ~ value:", value);
+    console.log("🚀 ~ handleInputChange ~ name:", name);
+    setValues({ ...values, [name]: value });
+  };
   return (
     <div>
       ModalContent
       <ul>
         <li>
           <strong>Year:</strong>
-          <input value={item.Year} type='text' />
+          <input
+            name='Year'
+            value={values.Year}
+            type='text'
+            onChange={handleInputChange}
+          />
         </li>
         <li>
           <strong>Maker:</strong>
-          <input value={item.Maker} type='text' />
+
+          <input
+            name='Maker'
+            value={values.Maker}
+            type='text'
+            onChange={handleInputChange}
+          />
         </li>
         <li>
           <strong>Model:</strong>
-          <input value={item.Model} type='text' />
+          <input
+            name='Model'
+            value={values.Model}
+            type='text'
+            onChange={handleInputChange}
+          />
         </li>
         <li>
           <strong>Type of Ignition:</strong>
-          <input value={item["Type of Ignition"]} type='text' />
+          <input
+            name='Type of Ignition'
+            value={values["Type of Ignition"]}
+            type='text'
+            onChange={handleInputChange}
+          />
         </li>
         <li>
           <strong>Type of Key:</strong> {item["Type of Key"]}
