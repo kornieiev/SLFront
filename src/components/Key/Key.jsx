@@ -14,7 +14,10 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "background.paper",
+  maxHeight: "90vh", // Ограничиваем высоту модального окна 90% высоты экрана
+  overflowY: "auto", // Разрешаем вертикальную прокрутку
+  // bgcolor: "background.paper",
+  bgcolor: "#8ef9ef",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,

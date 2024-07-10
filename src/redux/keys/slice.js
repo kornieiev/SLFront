@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { logOut } from "../auth/operations";
 
-import { fetchKeys, addTask, deleteKey } from "./operations";
+import { fetchKeys, addTask, deleteKey, fetchKeysByMaker } from "./operations";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -12,22 +12,33 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
-const tasksSlice = createSlice({
-  name: "tasks",
+const keysSlice = createSlice({
+  name: "keys",
   initialState: {
-    items: [],
+    allKeys: [],
+    keysByMaker: [],
     isLoading: false,
     error: null,
   },
   extraReducers: (builder) => {
     builder
+      // fetchKeys
       .addCase(fetchKeys.pending, handlePending)
       .addCase(fetchKeys.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload;
+        state.allKeys = action.payload;
       })
       .addCase(fetchKeys.rejected, handleRejected)
+      // fetchKeysByMaker
+      .addCase(fetchKeysByMaker.pending, handlePending)
+      .addCase(fetchKeysByMaker.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.keysByMaker = action.payload;
+      })
+      .addCase(fetchKeysByMaker.rejected, handleRejected)
+      //
       .addCase(addTask.pending, handlePending)
       .addCase(addTask.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -53,4 +64,4 @@ const tasksSlice = createSlice({
   },
 });
 
-export const tasksReducer = tasksSlice.reducer;
+export const keysReducer = keysSlice.reducer;

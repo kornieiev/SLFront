@@ -1,0 +1,70 @@
+.formWrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+
+.fieldWrapper {
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 5px;
+  background-color: #8ef9ef;
+}
+
+.inputLabel {
+  display: flex;
+  font-weight: 600;
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.inputField {
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 8px;
+  margin-top: 8px;
+  background-color: #fef6b3;
+}
+
+.oldName {
+  display: block;
+  color: lightseagreen;
+  font-size: 12px;
+  margin-left: auto;
+  margin-right: 4px;
+}
+
+.yearWrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  /* align-items: flex-end; */
+  justify-content: space-between;
+  padding: 4px;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+}
+
+.yearfield {
+  width: 100%;
+}
+
+.originalName {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn {
+  margin-top: 5px;
+  padding: 8px 0;
+  background-color: #f9ef8e;
+  border: 1px solid #8ef9ef;
+  border-radius: 5px;
+}
