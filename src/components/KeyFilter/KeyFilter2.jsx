@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectFilters,
-  selectKeysByMaker,
+  selectMakersArr,
   selectModelsArr,
   selectYearsArr,
   selectTypeOfKeyArr,
@@ -15,13 +15,12 @@ import { setFilters2 } from "../../redux/keys/slice";
 import { KeyList } from "../../components/KeyList/KeyList";
 
 export default function KeyFilter2() {
-  const keysByMaker = useSelector(selectKeysByMaker);
+  const makersArr = useSelector(selectMakersArr);
   const filters2 = useSelector(selectFilters);
   const modelsArr = useSelector(selectModelsArr);
   const yearsArr = useSelector(selectYearsArr);
   const typeOfKeyArr = useSelector(selectTypeOfKeyArr);
   const keysForRender = useSelector(selectkeysForRender);
-  console.log("🚀 ~ KeyFilter2 ~ keysForRender:", keysForRender);
 
   const dispatch = useDispatch();
 
@@ -63,8 +62,8 @@ export default function KeyFilter2() {
           onChange={handleChange}
         >
           <option value=''>--Please choose maker--</option>
-          {keysByMaker &&
-            keysByMaker.map((item) => (
+          {makersArr &&
+            makersArr.map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>

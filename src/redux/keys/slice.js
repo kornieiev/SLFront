@@ -1,13 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { logOut } from "../auth/operations";
 
-import {
-  fetchKeys,
-  addTask,
-  deleteKey,
-  fetchKeysByMaker,
-  editKeyById,
-} from "./operations";
+import { fetchKeys, addTask, deleteKey, editKeyById } from "./operations";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -41,51 +35,46 @@ const keysSlice = createSlice({
   reducers: {
     setFilteredKeys: {
       reducer(state, action) {
-        console.log(
-          "action.payload in keys slice - filteredKeys:",
-          action.payload
-        );
         state.filteredKeys = action.payload;
       },
     },
     setFilters2: {
       reducer(state, action) {
-        console.log("🚀 ~ reducer ~ action.payload:", action.payload);
         const [name, value] = action.payload;
-        console.log("name: value", name, ":", value);
-        console.log("state", state.filters);
 
         state.filters = { ...state.filters, [name]: value };
 
         if (name === "Maker") {
-          console.log("Maker CHANGED");
           state.filters.ModelsArr = state.allKeys.filter(
             (item) => item.Maker === state.filters.Maker
           );
+          state.filters.Model = "";
           state.filters.Year = "";
           state.filters.TypeOfKey = "";
+          state.keysForRender = [];
         }
 
         if (name === "Model") {
-          console.log("Model CHANGED");
-          state.filters.YearsArr = state.filters.ModelsArr.filter((item) => {
-            return item.Model === state.filters.Model;
-          });
+          state.filters.YearsArr = state.filters.ModelsArr.filter(
+            (item) => item.Model === state.filters.Model
+          );
           state.filters.TypeOfKey = "";
+          state.filters.Year = "";
+          state.keysForRender = [];
         }
 
         if (name === "Year") {
-          console.log("Year CHANGED");
-          state.filters.TypeOfKeyArr = state.filters.YearsArr.filter((item) => {
-            return item.Year === state.filters.Year;
-          });
+          state.filters.TypeOfKeyArr = state.filters.YearsArr.filter(
+            (item) => item.Year === state.filters.Year
+          );
+          state.filters.TypeOfKey = "";
+          state.keysForRender = [];
         }
         if (name === "TypeOfKey") {
-          console.log("TypeOfKey CHANGED");
-          state.keysForRender = state.filters.TypeOfKeyArr.filter((item) => {
-            console.log("item.TypeOfKey", item["Type of Key"]);
-            return item["Type of Key"] === value;
-          });
+          console.log("state.keysForRender", state.keysForRender);
+          state.keysForRender = state.filters.TypeOfKeyArr.filter(
+            (item) => item["Type of Key"] === value
+          );
         }
       },
     },
@@ -100,21 +89,19 @@ const keysSlice = createSlice({
         state.allKeys = action.payload;
       })
       .addCase(fetchKeys.rejected, handleRejected)
-      // fetchKeysByMaker
-      .addCase(fetchKeysByMaker.pending, handlePending)
-      .addCase(fetchKeysByMaker.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        state.keysByMaker = action.payload;
-      })
-      .addCase(fetchKeysByMaker.rejected, handleRejected)
       // editKeyById
       .addCase(editKeyById.pending, handlePending)
       .addCase(editKeyById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.keysByMaker = action.payload;
-        state.filteredKeys = action.payload;
+        state.keysForRender = [];
+        state.filters.Maker = "";
+        state.filters.Model = "";
+        state.filters.Year = "";
+        state.filters.TypeOfKey = "";
+        state.filters.ModelsArr = [];
+        state.filters.YearsArr = [];
+        state.filters.TypeOfKeyArr = [];
       })
       .addCase(editKeyById.rejected, handleRejected)
       //

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// GET @ /api/keys
+// fetchKeys - GET @ /api/keys
 export const fetchKeys = createAsyncThunk("/api/keys", async (_, thunkAPI) => {
   try {
     const res = await axios.get("/keys");
@@ -12,20 +12,7 @@ export const fetchKeys = createAsyncThunk("/api/keys", async (_, thunkAPI) => {
   }
 });
 
-// GET @ /api/getKeysByMaker
-export const fetchKeysByMaker = createAsyncThunk(
-  "/keys/getKeysByMaker",
-  async ({ maker, model }, thunkAPI) => {
-    try {
-      const res = await axios.get(`/keys/${maker}+${model}`);
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-// PATCH @ /keys/:id
+// editKeyById - PATCH @ /keys/:id
 export const editKeyById = createAsyncThunk(
   "keys/editKeyById",
   async (credentials, thunkAPI) => {

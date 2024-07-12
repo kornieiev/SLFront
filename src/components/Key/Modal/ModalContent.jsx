@@ -1,23 +1,21 @@
 import { Formik, Field, Form } from "formik";
 
-import { useState } from "react";
-
-import ALLKEYS from "../../../constants/AllKeysJSON.json";
+import {
+  selectMakersArr,
+  selectTypesOfIgnition,
+  selectTypesOfKey,
+} from "../../../redux/keys/selectors";
 
 import css from "./ModalContent.module.css";
-import { useDispatch } from "react-redux";
-import { editKeyById } from "../../../redux/keys/operations";
+import { useDispatch, useSelector } from "react-redux";
+import { editKeyById, fetchKeys } from "../../../redux/keys/operations";
 
 export default function ModalContent({ item, handleClose }) {
+  const makersArr = useSelector(selectMakersArr);
+  const IgnitionTypes = useSelector(selectTypesOfIgnition);
+  const typesOfKey = useSelector(selectTypesOfKey);
+
   const dispatch = useDispatch();
-  const values = {
-    Maker: [...new Set(ALLKEYS.map((item) => item.Maker))],
-    Model: [...new Set(ALLKEYS.map((item) => item.Model))],
-    "Type of Ignition": [
-      ...new Set(ALLKEYS.map((item) => item["Type of Ignition"])),
-    ],
-    "Type of Key": [...new Set(ALLKEYS.map((item) => item["Type of Key"]))],
-  };
 
   function checkKeyData(keyData) {
     const updatedValues = { ...item };
@@ -34,13 +32,8 @@ export default function ModalContent({ item, handleClose }) {
     updatedValues.Year = date;
 
     dispatch(editKeyById(updatedValues));
-
-    // dispatch(
-    //   fetchKeysByMaker({
-    //     maker: filters.Maker,
-    //     model: value,
-    //   })
-    // );
+    dispatch(fetchKeys());
+    // dispatch()
 
     handleClose(true);
   }
@@ -89,7 +82,7 @@ export default function ModalContent({ item, handleClose }) {
                 component='select'
               >
                 <option>- choose one -</option>
-                {values.Maker.map((item) => (
+                {makersArr.map((item) => (
                   <option key={item} value={item}>
                     {item}
                   </option>
@@ -150,7 +143,7 @@ export default function ModalContent({ item, handleClose }) {
                 component='select'
               >
                 <option>- choose one -</option>
-                {values["Type of Ignition"].map((item) => (
+                {IgnitionTypes.map((item) => (
                   <option key={item} value={item}>
                     {item}
                   </option>
@@ -173,7 +166,7 @@ export default function ModalContent({ item, handleClose }) {
                 component='select'
               >
                 <option>- choose one -</option>
-                {values["Type of Key"].map((item) => (
+                {typesOfKey.map((item) => (
                   <option key={item} value={item}>
                     {item}
                   </option>
