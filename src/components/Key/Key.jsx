@@ -8,6 +8,8 @@ import css from "./Key.module.css";
 import { useState } from "react";
 import ModalContent from "./Modal/ModalContent";
 
+import { selectKeysByMaker } from "../../redux/keys/selectors";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -30,6 +32,8 @@ export const Key = ({ item }) => {
 
   // const dispatch = useDispatch();
   // const handleDelete = () => dispatch(deleteKey(item._id));
+
+  //
 
   return (
     <div className={css.wrapper}>
@@ -103,7 +107,7 @@ export const Key = ({ item }) => {
           aria-describedby='modal-modal-description'
         >
           <Box sx={style}>
-            <ModalContent item={item} />
+            <ModalContent item={item} handleClose={handleClose} />
           </Box>
         </Modal>
       </div>

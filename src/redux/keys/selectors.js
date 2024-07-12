@@ -1,11 +1,19 @@
+import { createSelector } from "reselect";
+
 export const selectLoading = (state) => state.keys.loading;
-// console.log("🚀 ~ selectLoading:", selectLoading);
 
-export const selectFilter = (state) => state.keys.filter;
-// console.log("🚀 ~ selectFilter:", selectFilter);
+export const selectFilters = (state) => state.keys.filters;
 
-export const selectAllTasks = (state) => state.keys.allKeys;
-// console.log("🚀 ~ selectAllTasks:", selectAllTasks);
+export const selectAllKeys = (state) => state.keys.allKeys;
 
-export const selectKeysByMaker = (state) => state.keys.keysByMaker;
-// console.log("🚀 ~ selectKeysByMaker:", selectKeysByMaker);
+export const selectKeysByMaker = createSelector(
+  [selectAllKeys],
+  (selectAllKeys) => {
+    const uniqueMakers = [...new Set(selectAllKeys.map((item) => item.Maker))];
+    return uniqueMakers;
+  }
+);
+
+export const selectModelsArr = (state) => state.keys.filters.ModelsArr;
+
+export const selectYearsArr = (state) => state.keys.filters.YearsArr;

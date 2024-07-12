@@ -12,30 +12,12 @@ export const fetchKeys = createAsyncThunk("/api/keys", async (_, thunkAPI) => {
   }
 });
 
-// // GET @ /api/getKeysByMaker
-// export const fetchKeysByMaker = createAsyncThunk(
-//   "/api/keys/getKeysByMaker",
-//   async (credentials, thunkAPI) => {
-//     console.log("🚀 ~ Keys credentials:", credentials);
-//     try {
-//       const res = await axios.post("/keys/getKeysByMaker", credentials);
-//       console.log("🚀 ~ res:", res);
-//       return res.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 // GET @ /api/getKeysByMaker
 export const fetchKeysByMaker = createAsyncThunk(
   "/keys/getKeysByMaker",
   async ({ maker, model }, thunkAPI) => {
     try {
       const res = await axios.get(`/keys/${maker}+${model}`);
-
-      // console.log("🚀 ~ res:", res);
-
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -43,21 +25,26 @@ export const fetchKeysByMaker = createAsyncThunk(
   }
 );
 
-// // GET @ /api/keys/getKeysByMaker with params
-// export const fetchKeysByMaker = createAsyncThunk(
-//   "/api/keys/getKeysByMaker",
-//   async (credentials, thunkAPI) => {
-//     console.log("🚀 ~ Keys credentials:", credentials);
-//     try {
-//       const queryParams = new URLSearchParams(credentials).toString();
-//       const res = await axios.get(`/api/keys/getKeysByMaker?${queryParams}`);
-//       console.log("🚀 ~ res:", res);
-//       return res.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+// PATCH @ /keys/:id
+export const editKeyById = createAsyncThunk(
+  "keys/editKeyById",
+  async (credentials, thunkAPI) => {
+    console.log("operations-credentials:", credentials);
+    console.log("operations-credentials._id:", credentials._id);
+
+    try {
+      const response = await axios.patch(
+        `/keys/${credentials._id}`,
+        credentials
+      );
+      console.log("operations-response:", response);
+
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
 
 // POST @ /tasks
 export const addTask = createAsyncThunk(

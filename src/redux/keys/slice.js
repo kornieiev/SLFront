@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { logOut } from "../auth/operations";
 
-import { fetchKeys, addTask, deleteKey, fetchKeysByMaker } from "./operations";
+import {
+  fetchKeys,
+  addTask,
+  deleteKey,
+  fetchKeysByMaker,
+  editKeyById,
+} from "./operations";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -19,6 +25,63 @@ const keysSlice = createSlice({
     keysByMaker: [],
     isLoading: false,
     error: null,
+    filteredKeys: [],
+    filters: {
+      Maker: "",
+
+      ModelsArr: [],
+      Model: "",
+
+      YearsArr: [],
+      Year: "",
+
+      TypeOfKeyArr: [],
+      TypeOfKey: "",
+    },
+  },
+  reducers: {
+    setFilteredKeys: {
+      reducer(state, action) {
+        console.log(
+          "action.payload in keys slice - filteredKeys:",
+          action.payload
+        );
+        state.filteredKeys = action.payload;
+      },
+    },
+    setFilters2: {
+      reducer(state, action) {
+        console.log("🚀 ~ reducer ~ action.payload:", action.payload);
+        const [name, value] = action.payload;
+        console.log("name: value", name, ":", value);
+        console.log("state", state.filters);
+
+        state.filters = { ...state.filters, [name]: value };
+
+        if (name === "Maker") {
+          console.log("Maker CHANGED");
+          state.filters.ModelsArr = state.allKeys.filter(
+            (item) => item.Maker === state.filters.Maker
+          );
+        }
+
+        if (name === "Model") {
+          console.log("Model CHANGED");
+          state.filters.YearsArr = state.filters.ModelsArr.filter((item) => {
+            console.log("item-Model", item);
+            return item.Model === state.filters.Model;
+          });
+        }
+
+        if (name === "Year") {
+          console.log("Year CHANGED");
+          state.filters.TypeOfKeyArr = state.filters.YearsArr.filter((item) => {
+            console.log("item-TypeOfKey", item);
+            return item["TypeOfKey"] === state.filters.TypeOfKey;
+          });
+        }
+      },
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -38,6 +101,15 @@ const keysSlice = createSlice({
         state.keysByMaker = action.payload;
       })
       .addCase(fetchKeysByMaker.rejected, handleRejected)
+      // editKeyById
+      .addCase(editKeyById.pending, handlePending)
+      .addCase(editKeyById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.keysByMaker = action.payload;
+        state.filteredKeys = action.payload;
+      })
+      .addCase(editKeyById.rejected, handleRejected)
       //
       .addCase(addTask.pending, handlePending)
       .addCase(addTask.fulfilled, (state, action) => {
@@ -65,3 +137,9 @@ const keysSlice = createSlice({
 });
 
 export const keysReducer = keysSlice.reducer;
+
+export const { setFilteredKeys, setFilters2 } = keysSlice.actions;
+
+export const getAllKeys = (state) => state.keys.allKeys;
+export const getFilteredKeys = (state) => state.keys.filteredKeys;
+export const getFilters = (state) => state.keys.filters;

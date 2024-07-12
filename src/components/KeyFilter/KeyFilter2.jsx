@@ -1,124 +1,45 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectKeysByMaker } from "../../redux/keys/selectors";
+import {
+  selectFilters,
+  selectKeysByMaker,
+  selectModelsArr,
+  selectYearsArr,
+} from "../../redux/keys/selectors";
 import { KeyList } from "../KeyList/KeyList";
 
 import css from "./KeyFilter.module.css";
 import { fetchKeysByMaker } from "../../redux/keys/operations";
 
 import ALLKEYS from "../../constants/AllKeysJSON.json";
+import { setFilters2 } from "../../redux/keys/slice";
 
 export default function KeyFilter2() {
   const keysByMaker = useSelector(selectKeysByMaker);
+  const filters2 = useSelector(selectFilters);
+  const modelsArr = useSelector(selectModelsArr);
+  const yearsArr = useSelector(selectYearsArr);
+
   const dispatch = useDispatch();
 
-  const filtersInitialState = {
-    Maker: "",
-    Model: "",
-    Year: "",
-    TypeOfKey: "",
-  };
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
 
-  const uniqueDataInitialState = useMemo(
-    () => ({
-      makers: [...new Set(ALLKEYS.map((item) => item.Maker))],
-      models: [],
-      years: [],
-      keyType: [],
-    }),
-    []
-  );
-
-  const [filters, setFilters] = useState(filtersInitialState);
-  const [uniqueData, setUniqueData] = useState(uniqueDataInitialState);
-  const [dataFilteredByYears, setDataFilteredByYears] = useState([]);
-  const [filteredKeysType, setFilteredKeysType] = useState([]);
-  const [renderData, setRenderData] = useState([]);
-
-  useEffect(() => {
-    if (keysByMaker.length > 0) {
-      setDataFilteredByYears(
-        keysByMaker.filter(
-          (item) => item.Maker === filters.Maker && item.Model === filters.Model
-        )
-      );
+    if (name === "Maker") {
+      dispatch(setFilters2([name, value]));
     }
-  }, [filters.Maker, filters.Model, keysByMaker]);
 
-  useEffect(() => {
-    if (keysByMaker.length > 0) {
-      setFilteredKeysType(
-        keysByMaker.filter((item) => item.Year === filters.Year)
-      );
+    if (name === "Model") {
+      dispatch(setFilters2([name, value]));
     }
-  }, [filters.Year, keysByMaker]);
 
-  const uniqueYears = useMemo(
-    () => [...new Set(dataFilteredByYears.map((item) => item.Year))],
-    [dataFilteredByYears]
-  );
+    if (name === "Year") {
+      dispatch(setFilters2([name, value]));
+    }
 
-  const uniqueKeysType = useMemo(
-    () => [...new Set(filteredKeysType.map((item) => item["Type of Key"]))],
-    [filteredKeysType]
-  );
-
-  const handleChange = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-
-      if (name === "Maker") {
-        setFilters({
-          ...filtersInitialState,
-          [name]: value,
-        });
-        setRenderData([]);
-
-        setUniqueData({
-          ...uniqueData,
-          models: [
-            ...new Set(
-              ALLKEYS.filter(
-                (item) =>
-                  item.Maker.toLowerCase().trim() === value.toLowerCase().trim()
-              ).map((item) => item.Model)
-            ),
-          ],
-        });
-      }
-
-      if (name === "Model") {
-        setFilters({ ...filters, [name]: value, Year: "" });
-        setRenderData([]);
-        setFilteredKeysType([]);
-        dispatch(
-          fetchKeysByMaker({
-            maker: filters.Maker,
-            model: value,
-          })
-        );
-      }
-
-      if (name === "Year") {
-        setFilters({ ...filters, [name]: value, TypeOfKey: "" });
-        setRenderData([]);
-        setFilteredKeysType([]);
-
-        setUniqueData({
-          ...uniqueData,
-          years: keysByMaker.filter((item) => item.Year === value),
-        });
-      }
-
-      if (name === "TypeOfKey") {
-        setFilters({ ...filters, [name]: value });
-        setRenderData(
-          keysByMaker.filter((item) => item["Type of Key"] === value)
-        );
-      }
-    },
-    [filters, filtersInitialState, keysByMaker, uniqueData, dispatch]
-  );
+    if (name === "TypeOfKey") {
+    }
+  }, []);
 
   return (
     <ul className={css.list}>
@@ -131,19 +52,20 @@ export default function KeyFilter2() {
           className={css.select}
           type='text'
           name='Maker'
-          value={filters.Maker}
+          value={filters2.Maker}
           onChange={handleChange}
         >
           <option value=''>--Please choose maker--</option>
-          {uniqueData.makers.map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
+          {keysByMaker &&
+            keysByMaker.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
         </select>
       </li>
       {/* Step two - Model */}
-      {filters.Maker && (
+      {filters2.Maker && (
         <li className={css.item}>
           <label className={css.label} htmlFor='Model'>
             Model:{" "}
@@ -153,11 +75,11 @@ export default function KeyFilter2() {
             type='text'
             name='Model'
             placeholder='Model'
-            value={filters.Model}
+            value={filters2.Model}
             onChange={handleChange}
           >
             <option value=''>--Please choose model--</option>
-            {uniqueData.models.map((item) => (
+            {[...new Set(modelsArr.map((item) => item.Model))].map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>
@@ -166,7 +88,7 @@ export default function KeyFilter2() {
         </li>
       )}
       {/* Step three - Year */}
-      {filters.Model && (
+      {filters2.Model && (
         <li className={css.item}>
           <label className={css.label} htmlFor='Year'>
             Year:{" "}
@@ -176,11 +98,11 @@ export default function KeyFilter2() {
             type='text'
             name='Year'
             placeholder='Year'
-            value={filters.Year}
+            value={filters2.Year}
             onChange={handleChange}
           >
             <option value=''>--Please choose year--</option>
-            {uniqueYears.map((item) => (
+            {[...new Set(yearsArr.map((item) => item.Year))].map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>
@@ -189,7 +111,7 @@ export default function KeyFilter2() {
         </li>
       )}
       {/* Step four - TypeOfKey */}
-      {filters.Year && (
+      {filters2.Year && (
         <li className={css.item}>
           <label className={css.label} htmlFor='TypeOfKey'>
             TypeOfKey:{" "}
@@ -199,11 +121,11 @@ export default function KeyFilter2() {
             type='text'
             name='TypeOfKey'
             placeholder='TypeOfKey'
-            value={filters.TypeOfKey}
+            value={filters2.TypeOfKey}
             onChange={handleChange}
           >
             <option value=''>--Please choose TypeOfKey--</option>
-            {uniqueKeysType.map((item) => (
+            {[...new Set(modelsArr.map((item) => item.Year))].map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>
@@ -211,9 +133,10 @@ export default function KeyFilter2() {
           </select>
         </li>
       )}
-      {renderData.length > 0 && (
-        <KeyList data={renderData} makers={uniqueData.makers} />
-      )}
+      {filters2.modelsArr?.length > 0 &&
+        {
+          /* <KeyList data={renderData} makers={filters.makers} /> */
+        }}
     </ul>
   );
 }

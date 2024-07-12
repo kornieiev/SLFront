@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchKeys } from "../redux/keys/operations";
 import { selectLoading } from "../redux/keys/selectors";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import KeyFilter from "../components/KeyFilter/KeyFilter";
+// import KeyFilter from "../components/KeyFilter/KeyFilter";
 import KeyFilter2 from "../components/KeyFilter/KeyFilter2";
 
 export default function Keys() {

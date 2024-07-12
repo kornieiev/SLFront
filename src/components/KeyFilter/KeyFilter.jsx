@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllTasks, selectKeysByMaker } from "../../redux/keys/selectors";
+import { selectAllKeys, selectKeysByMaker } from "../../redux/keys/selectors";
 import { KeyList } from "../../components/KeyList/KeyList";
 
 import css from "./KeyFilter.module.css";
@@ -9,7 +9,7 @@ import { fetchKeysByMaker } from "../../redux/keys/operations";
 import MAKERS from "../../constants/MakerModelList.json";
 
 export default function KeyFilter() {
-  const keys = useSelector(selectAllTasks);
+  const keys = useSelector(selectAllKeys);
 
   // const keysByMaker = useSelector(selectKeysByMaker);
 

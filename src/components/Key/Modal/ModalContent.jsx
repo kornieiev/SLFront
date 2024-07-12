@@ -5,47 +5,44 @@ import { useState } from "react";
 import ALLKEYS from "../../../constants/AllKeysJSON.json";
 
 import css from "./ModalContent.module.css";
+import { useDispatch } from "react-redux";
+import { editKeyById } from "../../../redux/keys/operations";
 
-export default function ModalContent({ item }) {
-  const [values, setValues] = useState({
+export default function ModalContent({ item, handleClose }) {
+  const dispatch = useDispatch();
+  const values = {
     Maker: [...new Set(ALLKEYS.map((item) => item.Maker))],
     Model: [...new Set(ALLKEYS.map((item) => item.Model))],
     "Type of Ignition": [
       ...new Set(ALLKEYS.map((item) => item["Type of Ignition"])),
     ],
     "Type of Key": [...new Set(ALLKEYS.map((item) => item["Type of Key"]))],
-    "No Buttons": "",
-    "Price All Keys Lost": "",
-    "Price Add a Key": "",
-    "Price Program Only": "",
-    "Dealer Price": "",
-    "Dealer Program": "",
-    "Dealer Emergency Blade": "",
-    "Dealer Price Total": "",
-    "Dealer Location": "",
-    "Secure Locks Parts": "",
-    "Part #": "",
-    Link: "",
-    Comments: "",
-  });
-  // console.log("🚀🚀🚀🚀🚀🚀 ~ values:", values);
-
-  const [initialValues, setInitialValues] = useState(item);
-  console.log("🚀 🚀🚀🚀🚀🚀🚀 ~ initialValues:", initialValues);
+  };
 
   function checkKeyData(keyData) {
-    console.log("checkKeyData", keyData);
+    const updatedValues = { ...item };
 
-    // Object.keys(keyData).forEach((key) => {
-    //   if (!item[key]) {
-    //     item[key] = "no data";
-    //   }
-    //   setInitialValues({
-    //     ...initialValues,
-    //     key: keyData[key] ? keyData[key] : item[key],
-    //   });
-    //   console.log(`${key}: ${keyData[key]} ==== ${item[key]}`);
-    // });
+    Object.keys(keyData).forEach((key) => {
+      if (!updatedValues[key]) {
+        updatedValues[key] = "no data";
+      }
+      updatedValues[key] = keyData[key] || updatedValues[key];
+    });
+
+    let date = `${keyData.YearStart}-${keyData.YearEnd}`;
+
+    updatedValues.Year = date;
+
+    dispatch(editKeyById(updatedValues));
+
+    // dispatch(
+    //   fetchKeysByMaker({
+    //     maker: filters.Maker,
+    //     model: value,
+    //   })
+    // );
+
+    handleClose(true);
   }
 
   return (
@@ -73,11 +70,9 @@ export default function ModalContent({ item }) {
           Link: "",
           Comments: "",
         }}
-        onSubmit={async (keyData) => {
+        onSubmit={async (keyData, { resetForm }) => {
           checkKeyData(keyData);
-
-          // await new Promise((r) => setTimeout(r, 500));
-          // alert(JSON.stringify(values, null, 2));
+          resetForm();
         }}
       >
         <Form className={css.formWrap}>
