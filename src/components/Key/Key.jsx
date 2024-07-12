@@ -2,13 +2,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 
-import { useDispatch } from "react-redux";
-import { deleteKey } from "../../redux/keys/operations";
 import css from "./Key.module.css";
 import { useState } from "react";
 import ModalContent from "./Modal/ModalContent";
-
-import { selectKeysByMaker } from "../../redux/keys/selectors";
 
 const style = {
   position: "absolute",

@@ -1,26 +1,22 @@
 import { useSelector } from "react-redux";
 import { Key } from "../Key/Key";
 import css from "./KeyList.module.css";
-import { getFilteredKeys } from "../../redux/keys/slice";
-import { useEffect } from "react";
+import { selectkeysForRender } from "../../redux/keys/selectors";
 
-export const KeyList = ({ makers }) => {
-  console.log("🚀 ~ KeyList ~ makers:", makers);
-  const filteredKeys = useSelector(getFilteredKeys);
-  console.log("🚀 ~ KeyList ~ filteredKeys:", filteredKeys);
-
-  useEffect(() => {}, [filteredKeys]);
+export const KeyList = () => {
+  const keysForRender = useSelector(selectkeysForRender);
+  console.log("🚀 ~ KeyList ~ keysForRender:", keysForRender);
 
   return (
     <>
       <p>
-        By your request founded <strong>{filteredKeys.length}</strong>{" "}
-        {filteredKeys.length > 1 ? "options:" : "option"}
+        By your request founded <strong>{keysForRender.length}</strong>{" "}
+        {keysForRender.length > 0 ? "options:" : "option"}
       </p>
       <ul className={css.list}>
-        {filteredKeys.map((item) => (
+        {keysForRender.map((item) => (
           <li key={item._id}>
-            <Key item={item} cars={makers} />
+            <Key item={item} />
           </li>
         ))}
       </ul>

@@ -1,45 +1,52 @@
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectFilters,
   selectKeysByMaker,
   selectModelsArr,
   selectYearsArr,
+  selectTypeOfKeyArr,
+  selectkeysForRender,
 } from "../../redux/keys/selectors";
-import { KeyList } from "../KeyList/KeyList";
 
 import css from "./KeyFilter.module.css";
-import { fetchKeysByMaker } from "../../redux/keys/operations";
 
-import ALLKEYS from "../../constants/AllKeysJSON.json";
 import { setFilters2 } from "../../redux/keys/slice";
+import { KeyList } from "../../components/KeyList/KeyList";
 
 export default function KeyFilter2() {
   const keysByMaker = useSelector(selectKeysByMaker);
   const filters2 = useSelector(selectFilters);
   const modelsArr = useSelector(selectModelsArr);
   const yearsArr = useSelector(selectYearsArr);
+  const typeOfKeyArr = useSelector(selectTypeOfKeyArr);
+  const keysForRender = useSelector(selectkeysForRender);
+  console.log("🚀 ~ KeyFilter2 ~ keysForRender:", keysForRender);
 
   const dispatch = useDispatch();
 
-  const handleChange = useCallback((e) => {
-    const { name, value } = e.target;
+  const handleChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
 
-    if (name === "Maker") {
-      dispatch(setFilters2([name, value]));
-    }
+      if (name === "Maker") {
+        dispatch(setFilters2([name, value]));
+      }
 
-    if (name === "Model") {
-      dispatch(setFilters2([name, value]));
-    }
+      if (name === "Model") {
+        dispatch(setFilters2([name, value]));
+      }
 
-    if (name === "Year") {
-      dispatch(setFilters2([name, value]));
-    }
+      if (name === "Year") {
+        dispatch(setFilters2([name, value]));
+      }
 
-    if (name === "TypeOfKey") {
-    }
-  }, []);
+      if (name === "TypeOfKey") {
+        dispatch(setFilters2([name, value]));
+      }
+    },
+    [dispatch]
+  );
 
   return (
     <ul className={css.list}>
@@ -125,18 +132,21 @@ export default function KeyFilter2() {
             onChange={handleChange}
           >
             <option value=''>--Please choose TypeOfKey--</option>
-            {[...new Set(modelsArr.map((item) => item.Year))].map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
+            {[...new Set(typeOfKeyArr.map((item) => item["Type of Key"]))].map(
+              (item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              )
+            )}
           </select>
         </li>
       )}
-      {filters2.modelsArr?.length > 0 &&
-        {
-          /* <KeyList data={renderData} makers={filters.makers} /> */
-        }}
+      {keysForRender?.length > 0 && (
+        <>
+          <KeyList />
+        </>
+      )}
     </ul>
   );
 }

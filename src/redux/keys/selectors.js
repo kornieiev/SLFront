@@ -2,9 +2,9 @@ import { createSelector } from "reselect";
 
 export const selectLoading = (state) => state.keys.loading;
 
-export const selectFilters = (state) => state.keys.filters;
-
 export const selectAllKeys = (state) => state.keys.allKeys;
+
+export const selectFilters = (state) => state.keys.filters;
 
 export const selectKeysByMaker = createSelector(
   [selectAllKeys],
@@ -17,3 +17,7 @@ export const selectKeysByMaker = createSelector(
 export const selectModelsArr = (state) => state.keys.filters.ModelsArr;
 
 export const selectYearsArr = (state) => state.keys.filters.YearsArr;
+
+export const selectTypeOfKeyArr = (state) => state.keys.filters.TypeOfKeyArr;
+
+export const selectkeysForRender = (state) => state.keys.keysForRender;

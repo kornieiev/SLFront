@@ -22,10 +22,9 @@ const keysSlice = createSlice({
   name: "keys",
   initialState: {
     allKeys: [],
-    keysByMaker: [],
+    keysForRender: [],
     isLoading: false,
     error: null,
-    filteredKeys: [],
     filters: {
       Maker: "",
 
@@ -63,21 +62,29 @@ const keysSlice = createSlice({
           state.filters.ModelsArr = state.allKeys.filter(
             (item) => item.Maker === state.filters.Maker
           );
+          state.filters.Year = "";
+          state.filters.TypeOfKey = "";
         }
 
         if (name === "Model") {
           console.log("Model CHANGED");
           state.filters.YearsArr = state.filters.ModelsArr.filter((item) => {
-            console.log("item-Model", item);
             return item.Model === state.filters.Model;
           });
+          state.filters.TypeOfKey = "";
         }
 
         if (name === "Year") {
           console.log("Year CHANGED");
           state.filters.TypeOfKeyArr = state.filters.YearsArr.filter((item) => {
-            console.log("item-TypeOfKey", item);
-            return item["TypeOfKey"] === state.filters.TypeOfKey;
+            return item.Year === state.filters.Year;
+          });
+        }
+        if (name === "TypeOfKey") {
+          console.log("TypeOfKey CHANGED");
+          state.keysForRender = state.filters.TypeOfKeyArr.filter((item) => {
+            console.log("item.TypeOfKey", item["Type of Key"]);
+            return item["Type of Key"] === value;
           });
         }
       },
@@ -139,7 +146,3 @@ const keysSlice = createSlice({
 export const keysReducer = keysSlice.reducer;
 
 export const { setFilteredKeys, setFilters2 } = keysSlice.actions;
-
-export const getAllKeys = (state) => state.keys.allKeys;
-export const getFilteredKeys = (state) => state.keys.filteredKeys;
-export const getFilters = (state) => state.keys.filters;
