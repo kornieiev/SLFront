@@ -12,9 +12,9 @@ import {
 import css from "./KeyFilter.module.css";
 
 import { setFilters2 } from "../../redux/keys/slice";
-import { KeyList } from "../../components/KeyList/KeyList";
+import { KeyList } from "../KeyList/KeyList";
 
-export default function KeyFilter2() {
+export default function KeyFilter() {
   const makersArr = useSelector(selectMakersArr);
   const filters2 = useSelector(selectFilters);
   const modelsArr = useSelector(selectModelsArr);

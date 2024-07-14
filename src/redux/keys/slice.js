@@ -71,7 +71,6 @@ const keysSlice = createSlice({
           state.keysForRender = [];
         }
         if (name === "TypeOfKey") {
-          console.log("state.keysForRender", state.keysForRender);
           state.keysForRender = state.filters.TypeOfKeyArr.filter(
             (item) => item["Type of Key"] === value
           );
@@ -94,14 +93,14 @@ const keysSlice = createSlice({
       .addCase(editKeyById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.keysForRender = [];
-        state.filters.Maker = "";
-        state.filters.Model = "";
-        state.filters.Year = "";
-        state.filters.TypeOfKey = "";
-        state.filters.ModelsArr = [];
-        state.filters.YearsArr = [];
-        state.filters.TypeOfKeyArr = [];
+
+        const newArrToRender = state.keysForRender.map((item) => {
+          if (item._id === action.payload._id) {
+            return action.payload;
+          }
+          return item;
+        });
+        state.keysForRender = newArrToRender;
       })
       .addCase(editKeyById.rejected, handleRejected)
       //

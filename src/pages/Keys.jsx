@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { KeyEditor } from "../components/KeyEditor/KeyEditor";
 import { fetchKeys } from "../redux/keys/operations";
 import { selectLoading } from "../redux/keys/selectors";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-// import KeyFilter from "../components/KeyFilter/KeyFilter";
-import KeyFilter2 from "../components/KeyFilter/KeyFilter2";
+import KeyFilter from "../components/KeyFilter/KeyFilter";
 
 export default function Keys() {
   const dispatch = useDispatch();
@@ -19,14 +17,12 @@ export default function Keys() {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>Your tasks</title>
+          <title>Find your keys</title>
         </Helmet>
       </HelmetProvider>
 
-      {/* <KeyEditor /> */}
-      <h3>Keys filter:</h3>
-      {/* <KeyFilter /> */}
-      <KeyFilter2 />
+      <h3>Choose needed key below:</h3>
+      <KeyFilter />
 
       <div>{isLoading && "Request in progress..."}</div>
     </>

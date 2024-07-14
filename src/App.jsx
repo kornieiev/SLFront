@@ -10,7 +10,8 @@ import { useAuth } from "./hooks";
 const HomePage = lazy(() => import("./pages/Home"));
 const RegisterPage = lazy(() => import("./pages/Register"));
 const LoginPage = lazy(() => import("./pages/Login"));
-const TasksPage = lazy(() => import("./pages/Keys"));
+const FindKeysPage = lazy(() => import("./pages/Keys"));
+const AddKeyPage = lazy(() => import("./pages/AddKey"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,13 @@ const App = () => {
         <Route
           path='/keys'
           element={
-            <PrivateRoute redirectTo='/login' component={<TasksPage />} />
+            <PrivateRoute redirectTo='/login' component={<FindKeysPage />} />
+          }
+        />
+        <Route
+          path='/addKey'
+          element={
+            <PrivateRoute redirectTo='/login' component={<AddKeyPage />} />
           }
         />
       </Route>

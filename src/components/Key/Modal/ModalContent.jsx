@@ -1,21 +1,34 @@
 import { Formik, Field, Form } from "formik";
 
-import {
-  selectMakersArr,
-  selectTypesOfIgnition,
-  selectTypesOfKey,
-} from "../../../redux/keys/selectors";
-
 import css from "./ModalContent.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { editKeyById, fetchKeys } from "../../../redux/keys/operations";
+import { useEffect } from "react";
+import TypeOfIgnition from "./components/TypeOfIgnition";
+import Maker from "./components/Maker";
+import Model from "./components/Model";
+import Year from "./components/Year";
+import TypeOfKey from "./components/TypeOfKey";
+import NoButtons from "./components/NoButtons";
+import PriceAllKeysLost from "./components/PriceAllKeysLost";
+import PriceAddaKey from "./components/PriceAddaKey";
+import PriceProgramOnly from "./components/PriceProgramOnly";
+import DealerPrice from "./components/DealerPrice";
+import DealerPriceTotal from "./components/DealerPriceTotal";
+import DealerLocation from "./components/DealerLocation";
+import DealerProgram from "./components/DealerProgram";
+import DealerEmergencyBlade from "./components/DealerEmergencyBlade";
+import SecureLocksParts from "./components/SecureLocksParts";
+import PartNumber from "./components/PartNumber";
+import Link from "./components/Link";
+import Comments from "./components/Comments";
 
 export default function ModalContent({ item, handleClose }) {
-  const makersArr = useSelector(selectMakersArr);
-  const IgnitionTypes = useSelector(selectTypesOfIgnition);
-  const typesOfKey = useSelector(selectTypesOfKey);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchKeys());
+  }, [dispatch]);
 
   function checkKeyData(keyData) {
     const updatedValues = { ...item };
@@ -33,7 +46,6 @@ export default function ModalContent({ item, handleClose }) {
 
     dispatch(editKeyById(updatedValues));
     dispatch(fetchKeys());
-    // dispatch()
 
     handleClose(true);
   }
@@ -43,10 +55,10 @@ export default function ModalContent({ item, handleClose }) {
       <Formik
         className={css.formWrap}
         initialValues={{
-          YearStart: "",
-          YearEnd: "",
           Maker: "",
           Model: "",
+          YearStart: "",
+          YearEnd: "",
           "Type of Ignition": "",
           "Type of Key": "",
           "No Buttons": "",
@@ -69,262 +81,24 @@ export default function ModalContent({ item, handleClose }) {
         }}
       >
         <Form className={css.formWrap}>
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Maker'>
-              Maker: <span className={css.oldName}>{item.Maker}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Maker'
-                name='Maker'
-                placeholder='Maker'
-                component='select'
-              >
-                <option>- choose one -</option>
-                {makersArr.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </Field>
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Year'>
-              Year: <span className={css.oldName}>{item.Year}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='YearStart'
-                name='YearStart'
-                placeholder='YearStart'
-                type='number'
-                pattern='^(19[0-9]{2}|20[0-9]{2}|2100)$'
-              />
-              <Field
-                className={css.inputField}
-                id='YearEnd'
-                name='YearEnd'
-                placeholder='YearEnd'
-                type='number'
-                pattern='^(19[0-9]{2}|20[0-9]{2}|2100)$'
-              />
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Model'>
-              Model: <span className={css.oldName}>{item.Model}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Model'
-                name='Model'
-                placeholder='Model'
-              />
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Type of Ignition'>
-              Type of Ignition:{" "}
-              <span className={css.oldName}>{item["Type of Ignition"]}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Type of Ignition'
-                name='Type of Ignition'
-                placeholder='Type of Ignition'
-                component='select'
-              >
-                <option>- choose one -</option>
-                {IgnitionTypes.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </Field>
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Type of Key'>
-              Type of Key:{" "}
-              <span className={css.oldName}>{item["Type of Key"]}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Type of Key'
-                name='Type of Key'
-                placeholder='Type of Key'
-                component='select'
-              >
-                <option>- choose one -</option>
-                {typesOfKey.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </Field>
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='No Buttons'>
-              No Buttons:{" "}
-              <span className={css.oldName}>{item["No Buttons"]}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='No Buttons'
-                name='No Buttons'
-                placeholder='No Buttons'
-                type='number'
-              />
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Price All Keys Lost'>
-              Price All Keys Lost:{" "}
-              <span className={css.oldName}>{item["Price All Keys Lost"]}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Price All Keys Lost'
-                name='Price All Keys Lost'
-                placeholder='Price All Keys Lost'
-              />
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Price Add a Key'>
-              Price Add a Key:{" "}
-              <span className={css.oldName}>{item["Price Add a Key"]}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Price Add a Key'
-                name='Price Add a Key'
-                placeholder='Price Add a Key'
-              />
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Price Program Only'>
-              Price Program Only:{" "}
-              <span className={css.oldName}>{item["Price Program Only"]}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Price Program Only'
-                name='Price Program Only'
-                placeholder='Price Program Only'
-              />
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Dealer Price'>
-              Dealer Price:{" "}
-              <span className={css.oldName}>{item["Dealer Price"]}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Dealer Price'
-                name='Dealer Price'
-                placeholder='Dealer Price'
-              />
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Dealer Program'>
-              Dealer Program:{" "}
-              <span className={css.oldName}>{item["Dealer Program"]}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Dealer Program'
-                name='Dealer Program'
-                placeholder='Dealer Program'
-              />
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Dealer Emergency Blade'>
-              Dealer Emergency Blade:{" "}
-              <span className={css.oldName}>
-                {item["Dealer Emergency Blade"]}
-              </span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Dealer Emergency Blade'
-                name='Dealer Emergency Blade'
-                placeholder='Dealer Emergency Blade'
-              />
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Secure Locks Parts'>
-              Secure Locks Parts:{" "}
-              <span className={css.oldName}>{item["Secure Locks Parts"]}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Secure Locks Parts'
-                name='Secure Locks Parts'
-                placeholder='Secure Locks Parts'
-              />
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Link'>
-              Link: <span className={css.oldName}>{item["Link"]}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Link'
-                name='Link'
-                placeholder='Link'
-              />
-            </div>
-          </div>
-
-          <div className={css.fieldWrapper}>
-            <label className={css.inputLabel} htmlFor='Comments'>
-              Comments: <span className={css.oldName}>{item["Comments"]}</span>
-            </label>
-            <div className={css.yearWrapper}>
-              <Field
-                className={css.inputField}
-                id='Comments'
-                name='Comments'
-                placeholder='Comments'
-              />
-            </div>
-          </div>
+          <Maker item={item} />
+          <Model item={item} />
+          <Year item={item} />
+          <TypeOfIgnition item={item} />
+          <TypeOfKey item={item} />
+          <NoButtons item={item} />
+          <PriceAllKeysLost item={item} />
+          <PriceAddaKey item={item} />
+          <PriceProgramOnly item={item} />
+          <DealerPrice item={item} />
+          <DealerPriceTotal item={item} />
+          <DealerLocation item={item} />
+          <DealerProgram item={item} />
+          <DealerEmergencyBlade item={item} />
+          <SecureLocksParts item={item} />
+          <PartNumber item={item} />
+          <Link item={item} />
+          <Comments item={item} />
 
           <button className={css.btn} type='submit'>
             CHANGE DATA

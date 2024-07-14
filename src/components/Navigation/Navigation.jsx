@@ -11,9 +11,15 @@ export const Navigation = () => {
         Home
       </NavLink>
       {isLoggedIn && (
-        <NavLink className={css.link} to='/keys'>
-          Find key
-        </NavLink>
+        <>
+          <NavLink className={css.link} to='/keys'>
+            Find (change) key
+          </NavLink>
+
+          <NavLink className={css.link} to='/addKey'>
+            Add key
+          </NavLink>
+        </>
       )}
     </nav>
   );

@@ -5,7 +5,6 @@ import { selectkeysForRender } from "../../redux/keys/selectors";
 
 export const KeyList = () => {
   const keysForRender = useSelector(selectkeysForRender);
-  // console.log("🚀 ~ KeyList ~ keysForRender:", keysForRender);
 
   return (
     <>

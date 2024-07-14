@@ -16,16 +16,11 @@ export const fetchKeys = createAsyncThunk("/api/keys", async (_, thunkAPI) => {
 export const editKeyById = createAsyncThunk(
   "keys/editKeyById",
   async (credentials, thunkAPI) => {
-    console.log("operations-credentials:", credentials);
-    console.log("operations-credentials._id:", credentials._id);
-
     try {
       const response = await axios.patch(
         `/keys/${credentials._id}`,
         credentials
       );
-      console.log("operations-response:", response);
-
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
