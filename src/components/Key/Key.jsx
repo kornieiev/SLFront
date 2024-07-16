@@ -1,11 +1,10 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-
-import css from "./Key.module.css";
 import { useState } from "react";
-import ModalContent from "./Modal/ModalContent";
 import { useSelector } from "react-redux";
+import css from "./Key.module.css";
+import ModalContent from "./Modal/ModalContent";
 import { selectRole } from "../../redux/auth/selectors";
 
 const style = {
@@ -13,14 +12,15 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: "80%",
   maxHeight: "90vh", // Ограничиваем высоту модального окна 90% высоты экрана
   overflowY: "auto", // Разрешаем вертикальную прокрутку
-  bgcolor: "background.paper",
-  // bgcolor: "#8ef9ef",
+  // bgcolor: "background.paper",
+  bgcolor: "lightgray",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 4,
+  p: 1,
+  m: 0,
 };
 
 export const Key = ({ item }) => {
@@ -43,7 +43,7 @@ export const Key = ({ item }) => {
           <strong>Year:</strong> {item.Year}
         </li>
         <li>
-          <strong>Maker:</strong> {item.Maker}
+          <strong>Make:</strong> {item.Maker}
         </li>
         <li>
           <strong>Model:</strong> {item.Model}
@@ -109,7 +109,7 @@ export const Key = ({ item }) => {
             aria-describedby='modal-modal-description'
           >
             <Box sx={style}>
-              <ModalContent item={item} handleClose={handleClose} />
+              <ModalContent item={item} onClose={handleClose} />
             </Box>
           </Modal>
         </div>

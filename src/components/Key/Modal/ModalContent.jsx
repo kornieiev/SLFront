@@ -24,7 +24,7 @@ import Link from "./components/Link";
 import Comments from "./components/Comments";
 import { editKeyValidationSchema } from "../../helpers/validationData";
 
-export default function ModalContent({ item, handleClose }) {
+export default function ModalContent({ item, onClose }) {
   const [yearStart, yearEnd] = item.Year.split("-");
   const dispatch = useDispatch();
 
@@ -55,7 +55,7 @@ export default function ModalContent({ item, handleClose }) {
     dispatch(editKeyById(updatedValues));
     dispatch(fetchKeys());
 
-    handleClose(true);
+    onClose(false);
   }
 
   return (
@@ -111,6 +111,15 @@ export default function ModalContent({ item, handleClose }) {
 
           <button className={css.btn} type='submit'>
             CHANGE DATA
+          </button>
+
+          <button
+            className={css.btnCancel}
+            onClick={() => {
+              onClose(false);
+            }}
+          >
+            Close without changes
           </button>
         </Form>
       </Formik>

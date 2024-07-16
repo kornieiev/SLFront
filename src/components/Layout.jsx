@@ -1,16 +1,32 @@
-import { Outlet } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import { AppBar } from './AppBar/AppBar';
-import { Suspense } from 'react';
+import { Outlet } from "react-router-dom";
+// import { DNA } from "react-loader-spinner";
+import { AppBar } from "./AppBar/AppBar";
+import { Suspense } from "react";
+import css from "./Layout.module.css";
+// import { useSelector } from "react-redux";
+// import { selectLoading } from "../redux/keys/selectors";
 
 export const Layout = () => {
+  // const isLoading = useSelector(selectLoading);
+
   return (
-    <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 16px' }}>
+    <div className={css.wrapper}>
       <AppBar />
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>
-      <Toaster position="top-right" reverseOrder={false} />
+      {/* {isLoading && (
+        <div className={css.loader}>
+          <DNA
+            visible={true}
+            height='80'
+            width='80'
+            ariaLabel='dna-loading'
+            wrapperStyle={{}}
+            wrapperClass='dna-wrapper'
+          />
+        </div>
+      )} */}
     </div>
   );
 };

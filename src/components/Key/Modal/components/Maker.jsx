@@ -9,7 +9,7 @@ export default function Maker({ item }) {
   return (
     <div className={css.fieldWrapper}>
       <label className={css.inputLabel} htmlFor='Maker'>
-        Maker: {item && <span className={css.oldName}>{item.Maker}</span>}
+        Make: {item && <span className={css.oldName}>{item.Maker}</span>}
       </label>
       <div className={css.yearWrapper}>
         <Field

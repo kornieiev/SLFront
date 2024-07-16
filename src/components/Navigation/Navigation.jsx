@@ -14,7 +14,7 @@ export const Navigation = () => {
         <>
           {role === "admin" ? (
             <NavLink className={css.link} to='/keys'>
-              Find & change key info
+              Find/Change
             </NavLink>
           ) : (
             <NavLink className={css.link} to='/keys'>

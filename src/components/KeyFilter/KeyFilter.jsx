@@ -54,7 +54,7 @@ export default function KeyFilter() {
       {/* Step one - Maker */}
       <li className={css.item}>
         <label className={css.label} htmlFor='Maker'>
-          Maker:{" "}
+          Make:{" "}
         </label>
         <select
           className={css.select}

@@ -4,6 +4,8 @@ import { fetchKeys } from "../redux/keys/operations";
 import { selectLoading } from "../redux/keys/selectors";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import KeyFilter from "../components/KeyFilter/KeyFilter";
+import { DNA } from "react-loader-spinner";
+import css from "./pages.module.css";
 
 export default function Keys() {
   const dispatch = useDispatch();
@@ -24,7 +26,18 @@ export default function Keys() {
       <h3>Choose needed key below:</h3>
       <KeyFilter />
 
-      <div>{isLoading && "Request in progress..."}</div>
+      {isLoading && (
+        <div className={css.loader}>
+          <DNA
+            visible={true}
+            height='80'
+            width='80'
+            ariaLabel='dna-loading'
+            wrapperStyle={{}}
+            wrapperClass='dna-wrapper'
+          />
+        </div>
+      )}
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-export const selectLoading = (state) => state.keys.loading;
+export const selectLoading = (state) => state.keys.isLoading;
 
 export const selectAllKeys = (state) => state.keys.allKeys;
 
