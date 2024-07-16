@@ -73,9 +73,7 @@ export default function AddNewKey() {
             Link: values.Link,
             Comments: values.Comments,
             isActive: values.isActive,
-            // _id: values.[_id],
           };
-          console.log("🚀 ~ onSubmit={ ~ credentials:", credentials);
           dispatch(createKey(credentials));
 
           resetForm();

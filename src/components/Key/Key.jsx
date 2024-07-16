@@ -40,82 +40,94 @@ export const Key = ({ item }) => {
 
   return (
     <div className={css.wrapper}>
-      <ul>
-        <li>
-          <strong>Year:</strong> {item.Year}
+      <ul className={css.itemsList}>
+        <li className={css.item}>
+          <strong className={css.itemName}>Make:</strong> {item.Maker}
         </li>
-        <li>
-          <strong>Make:</strong> {item.Maker}
+        <li className={css.item}>
+          <strong className={css.itemName}>Model:</strong> {item.Model}
         </li>
-        <li>
-          <strong>Model:</strong> {item.Model}
+        <li className={css.item}>
+          <strong className={css.itemName}>Year:</strong> {item.Year}
         </li>
-        <li>
-          <strong>Type of Ignition:</strong> {item["Type of Ignition"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>Type of Ignition:</strong>{" "}
+          {item["Type of Ignition"]}
         </li>
-        <li>
-          <strong>Type of Key:</strong> {item["Type of Key"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>Type of Key:</strong>{" "}
+          {item["Type of Key"]}
         </li>
-        <li>
-          <strong>No Buttons:</strong> {item["No Buttons"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>No Buttons:</strong>{" "}
+          {item["No Buttons"]}
         </li>
-        <li>
-          <strong>Price All Keys Lost:</strong> {item["Price All Keys Lost"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>Price All Keys Lost:</strong>{" "}
+          {item["Price All Keys Lost"]}
         </li>
-        <li>
-          <strong>Price Add a Key:</strong> {item["Price Add a Key"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>Price Add a Key:</strong>{" "}
+          {item["Price Add a Key"]}
         </li>
-        <li>
-          <strong>Price Program Only:</strong> {item["Price Program Only"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>Price Program Only:</strong>{" "}
+          {item["Price Program Only"]}
         </li>
-        <li>
-          <strong>Dealer Price:</strong> {item["Dealer Price"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>Dealer Price:</strong>{" "}
+          {item["Dealer Price"]}
         </li>
-        <li>
-          <strong>Dealer Program:</strong> {item["Dealer Program"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>Dealer Program:</strong>{" "}
+          {item["Dealer Program"]}
         </li>
-        <li>
-          <strong>Dealer Emergency Blade:</strong>{" "}
+        <li className={css.item}>
+          <strong className={css.itemName}>Dealer Emergency Blade:</strong>{" "}
           {item["Dealer Emergency Blade"]}
         </li>
-        <li>
-          <strong>Dealer Price Total:</strong> {item["Dealer Price Total"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>Dealer Price Total:</strong>{" "}
+          {item["Dealer Price Total"]}
         </li>
-        <li>
-          <strong>Dealer Location:</strong> {item["Dealer Location"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>Dealer Location:</strong>{" "}
+          {item["Dealer Location"]}
         </li>
-        <li>
-          <strong>Secure Locks Parts:</strong> {item["Secure Locks Parts"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>Secure Locks Parts:</strong>{" "}
+          {item["Secure Locks Parts"]}
         </li>
-        <li>
-          <strong>Part #:</strong> {item["Part #"]}
+        <li className={css.item}>
+          <strong className={css.itemName}>Part #:</strong> {item["Part #"]}
         </li>
-        <li>
-          <strong>Link:</strong> <a href={item["Link"]}>link...</a>
+        <li className={css.item}>
+          <strong className={css.itemName}>Link:</strong>{" "}
+          <a href={item["Link"]}>link...</a>
         </li>
-        <li>
-          <strong>Comments:</strong> {item.Comments}
+        <li className={css.item}>
+          <strong className={css.itemName}>Comments:</strong> {item.Comments}
         </li>
-        <li>
-          <strong>isActive:</strong> {item.isActive}
-        </li>
-      </ul>
+        {/* <li className={css.item}>
+          <strong className={css.itemName}>isActive:</strong> {item.isActive}
+        </li> */}
 
-      {role === "admin" && (
-        <div>
-          <Button onClick={handleOpen}>Edit information</Button>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby='modal-modal-title'
-            aria-describedby='modal-modal-description'
-          >
-            <Box sx={style}>
-              <ModalContent item={item} onClose={handleClose} />
-            </Box>
-          </Modal>
-        </div>
-      )}
+        {role === "admin" && (
+          <li className={css.editBtn}>
+            <Button onClick={handleOpen}>Edit information</Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby='modal-modal-title'
+              aria-describedby='modal-modal-description'
+            >
+              <Box sx={style}>
+                <ModalContent item={item} onClose={handleClose} />
+              </Box>
+            </Modal>
+          </li>
+        )}
+      </ul>
     </div>
   );
 };
