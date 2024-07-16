@@ -5,6 +5,8 @@ import Modal from "@mui/material/Modal";
 import css from "./Key.module.css";
 import { useState } from "react";
 import ModalContent from "./Modal/ModalContent";
+import { useSelector } from "react-redux";
+import { selectRole } from "../../redux/auth/selectors";
 
 const style = {
   position: "absolute",
@@ -25,6 +27,9 @@ export const Key = ({ item }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const role = useSelector(selectRole);
+  console.log("🚀 ~ Key ~ role:", role);
 
   // const dispatch = useDispatch();
   // const handleDelete = () => dispatch(deleteKey(item._id));
@@ -94,19 +99,21 @@ export const Key = ({ item }) => {
         </li>
       </ul>
 
-      <div>
-        <Button onClick={handleOpen}>Edit information</Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'
-        >
-          <Box sx={style}>
-            <ModalContent item={item} handleClose={handleClose} />
-          </Box>
-        </Modal>
-      </div>
+      {role === "admin" && (
+        <div>
+          <Button onClick={handleOpen}>Edit information</Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby='modal-modal-title'
+            aria-describedby='modal-modal-description'
+          >
+            <Box sx={style}>
+              <ModalContent item={item} handleClose={handleClose} />
+            </Box>
+          </Modal>
+        </div>
+      )}
     </div>
   );
 };

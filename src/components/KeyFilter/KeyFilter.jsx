@@ -14,8 +14,7 @@ import css from "./KeyFilter.module.css";
 import { setFilters } from "../../redux/keys/slice";
 import { KeyList } from "../KeyList/KeyList";
 
-import { makersList } from "../../constants/constants";
-console.log("🚀 ~ makersList:", makersList);
+// import { makersList } from "../../constants/constants";
 
 export default function KeyFilter() {
   const makersArr = useSelector(selectMakersArr);

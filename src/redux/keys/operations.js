@@ -32,11 +32,8 @@ export const editKeyById = createAsyncThunk(
 export const createKey = createAsyncThunk(
   "keys/createKey",
   async (credentials, thunkAPI) => {
-    console.log("🚀 ~ credentials:", credentials);
-
     try {
       const response = await axios.post("/keys", { ...credentials });
-      console.log("🚀 ~ response:", response);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

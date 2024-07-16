@@ -53,8 +53,6 @@ export default function AddNewKey() {
         }}
         validationSchema={addKeyValidationSchema}
         onSubmit={async (values, { resetForm }) => {
-          console.log("🚀 ~ onSubmit={ ~ values:", values);
-
           const credentials = {
             Maker: values.Maker,
             Model: values.Model,
@@ -81,9 +79,6 @@ export default function AddNewKey() {
           dispatch(createKey(credentials));
 
           resetForm();
-
-          // await new Promise((r) => setTimeout(r, 500));
-          // alert(JSON.stringify(values, null, 2));
         }}
       >
         <Form className={css.formWrap}>

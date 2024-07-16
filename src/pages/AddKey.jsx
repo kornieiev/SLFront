@@ -2,9 +2,13 @@ import { useSelector } from "react-redux";
 import { selectLoading } from "../redux/keys/selectors";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import AddNewKey from "../components/AddKey/AddNewKey";
+import { useAuth } from "../hooks/useAuth";
 
 export default function AddKey() {
+  const { role } = useAuth();
+
   const isLoading = useSelector(selectLoading);
+  console.log("🚀 ~ AddKey ~ role:", role);
 
   return (
     <>

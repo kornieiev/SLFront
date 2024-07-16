@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks";
 import css from "./Navigation.module.css";
 
 export const Navigation = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, role } = useAuth();
 
   return (
     <nav>
@@ -12,13 +12,21 @@ export const Navigation = () => {
       </NavLink>
       {isLoggedIn && (
         <>
-          <NavLink className={css.link} to='/keys'>
-            Find (change) key
-          </NavLink>
+          {role === "admin" ? (
+            <NavLink className={css.link} to='/keys'>
+              Find & change key info
+            </NavLink>
+          ) : (
+            <NavLink className={css.link} to='/keys'>
+              Find key
+            </NavLink>
+          )}
 
-          <NavLink className={css.link} to='/addKey'>
-            Add key
-          </NavLink>
+          {role === "admin" && (
+            <NavLink className={css.link} to='/addKey'>
+              Add key
+            </NavLink>
+          )}
         </>
       )}
     </nav>
