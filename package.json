@@ -28,6 +28,7 @@
     "redux-persist": "^6.0.0",
     "reselect": "^5.1.1",
     "styled-components": "^6.1.11",
+    "vite-plugin-svgr": "^4.2.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {
