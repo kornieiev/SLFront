@@ -22,7 +22,10 @@ const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <b>
+      Refreshing user... It may take about a minute as the server is hosted on a
+      free service.
+    </b>
   ) : (
     <Routes>
       <Route path='/' element={<Layout />}>

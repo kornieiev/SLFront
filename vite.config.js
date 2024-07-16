@@ -4,7 +4,6 @@ import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/slfront",
   plugins: [react(), svgr()],
   resolve: {
     alias: {
@@ -14,13 +13,5 @@ export default defineConfig({
       assets: "/src/assets",
     },
   },
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:3000/api/",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
-  },
+  base: "/slfront",
 });
