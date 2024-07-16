@@ -1,4 +1,4 @@
-import { Formik, Field, Form } from "formik";
+import { Formik, Form } from "formik";
 
 import css from "./ModalContent.module.css";
 import { useDispatch } from "react-redux";
@@ -22,8 +22,10 @@ import SecureLocksParts from "./components/SecureLocksParts";
 import PartNumber from "./components/PartNumber";
 import Link from "./components/Link";
 import Comments from "./components/Comments";
+import { editKeyValidationSchema } from "../../helpers/validationData";
 
 export default function ModalContent({ item, handleClose }) {
+  const [yearStart, yearEnd] = item.Year.split("-");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,8 +42,14 @@ export default function ModalContent({ item, handleClose }) {
       updatedValues[key] = keyData[key] || updatedValues[key];
     });
 
-    let date = `${keyData.YearStart}-${keyData.YearEnd}`;
+    if (!keyData.YearStart && updatedValues.YearStart === "no data") {
+      updatedValues.YearStart = yearStart;
+    }
+    if (!keyData.YearEnd && updatedValues.YearEnd === "no data") {
+      updatedValues.YearEnd = yearEnd;
+    }
 
+    let date = `${updatedValues.YearStart}-${updatedValues.YearEnd}`;
     updatedValues.Year = date;
 
     dispatch(editKeyById(updatedValues));
@@ -75,6 +83,7 @@ export default function ModalContent({ item, handleClose }) {
           Link: "",
           Comments: "",
         }}
+        validationSchema={editKeyValidationSchema}
         onSubmit={async (keyData, { resetForm }) => {
           checkKeyData(keyData);
           resetForm();

@@ -14,8 +14,8 @@ const style = {
   width: 400,
   maxHeight: "90vh", // Ограничиваем высоту модального окна 90% высоты экрана
   overflowY: "auto", // Разрешаем вертикальную прокрутку
-  // bgcolor: "background.paper",
-  bgcolor: "#8ef9ef",
+  bgcolor: "background.paper",
+  // bgcolor: "#8ef9ef",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,

@@ -1,4 +1,4 @@
-import { Field } from "formik";
+import { ErrorMessage, Field } from "formik";
 import css from "../ModalContent.module.css";
 
 export default function Maker({ item }) {
@@ -14,6 +14,7 @@ export default function Maker({ item }) {
           name='Model'
           placeholder='Model'
         />
+        <ErrorMessage name='Model' component='div' />
       </div>
     </div>
   );

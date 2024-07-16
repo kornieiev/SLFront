@@ -1,4 +1,4 @@
-import { Field } from "formik";
+import { ErrorMessage, Field } from "formik";
 import css from "../ModalContent.module.css";
 import { useSelector } from "react-redux";
 import { selectMakersArr } from "../../../../redux/keys/selectors";
@@ -26,6 +26,7 @@ export default function Maker({ item }) {
             </option>
           ))}
         </Field>
+        <ErrorMessage name='Maker' component='div' />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { logOut } from "../auth/operations";
 
-import { fetchKeys, addTask, deleteKey, editKeyById } from "./operations";
+import { fetchKeys, createKey, deleteKey, editKeyById } from "./operations";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -38,7 +38,7 @@ const keysSlice = createSlice({
         state.filteredKeys = action.payload;
       },
     },
-    setFilters2: {
+    setFilters: {
       reducer(state, action) {
         const [name, value] = action.payload;
 
@@ -80,6 +80,7 @@ const keysSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
       // fetchKeys
       .addCase(fetchKeys.pending, handlePending)
       .addCase(fetchKeys.fulfilled, (state, action) => {
@@ -88,6 +89,7 @@ const keysSlice = createSlice({
         state.allKeys = action.payload;
       })
       .addCase(fetchKeys.rejected, handleRejected)
+
       // editKeyById
       .addCase(editKeyById.pending, handlePending)
       .addCase(editKeyById.fulfilled, (state, action) => {
@@ -103,14 +105,17 @@ const keysSlice = createSlice({
         state.keysForRender = newArrToRender;
       })
       .addCase(editKeyById.rejected, handleRejected)
-      //
-      .addCase(addTask.pending, handlePending)
-      .addCase(addTask.fulfilled, (state, action) => {
+
+      // createKey
+      .addCase(createKey.pending, handlePending)
+      .addCase(createKey.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items.push(action.payload);
+        state.allKeys.push(action.payload);
       })
-      .addCase(addTask.rejected, handleRejected)
+      .addCase(createKey.rejected, handleRejected)
+
+      //
       .addCase(deleteKey.pending, handlePending)
       .addCase(deleteKey.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -121,6 +126,8 @@ const keysSlice = createSlice({
         state.items.splice(index, 1);
       })
       .addCase(deleteKey.rejected, handleRejected)
+
+      // logOut
       .addCase(logOut.fulfilled, (state) => {
         state.items = [];
         state.error = null;
@@ -131,4 +138,4 @@ const keysSlice = createSlice({
 
 export const keysReducer = keysSlice.reducer;
 
-export const { setFilteredKeys, setFilters2 } = keysSlice.actions;
+export const { setFilteredKeys, setFilters } = keysSlice.actions;

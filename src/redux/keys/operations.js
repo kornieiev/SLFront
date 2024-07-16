@@ -28,13 +28,16 @@ export const editKeyById = createAsyncThunk(
   }
 );
 
-// POST @ /tasks
-export const addTask = createAsyncThunk(
-  "tasks/addTask",
-  async (text, thunkAPI) => {
+// createKey - POST @ /keys
+export const createKey = createAsyncThunk(
+  "keys/createKey",
+  async (credentials, thunkAPI) => {
+    console.log("🚀 ~ credentials:", credentials);
+
     try {
-      // const response = await axios.post("/tasks", { text });
-      // return response.data;
+      const response = await axios.post("/keys", { ...credentials });
+      console.log("🚀 ~ response:", response);
+      return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

@@ -1,4 +1,4 @@
-import { Field } from "formik";
+import { ErrorMessage, Field } from "formik";
 import css from "../ModalContent.module.css";
 import { useSelector } from "react-redux";
 import { selectTypesOfKey } from "../../../../redux/keys/selectors";
@@ -27,6 +27,7 @@ export default function TypeOfKey({ item }) {
             </option>
           ))}
         </Field>
+        <ErrorMessage name='Type of Key' component='div' />
       </div>
     </div>
   );

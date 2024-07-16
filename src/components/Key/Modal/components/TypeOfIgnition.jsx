@@ -1,4 +1,4 @@
-import { Field } from "formik";
+import { ErrorMessage, Field } from "formik";
 import css from "../ModalContent.module.css";
 import { useSelector } from "react-redux";
 import { selectTypesOfIgnition } from "../../../../redux/keys/selectors";
@@ -29,6 +29,7 @@ export default function TypeOfIgnition({ item }) {
             </option>
           ))}
         </Field>
+        <ErrorMessage name='Type of Ignition' component='div' />
       </div>
     </div>
   );

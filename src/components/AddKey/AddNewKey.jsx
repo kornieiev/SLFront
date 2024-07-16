@@ -19,8 +19,13 @@ import SecureLocksParts from "../Key/Modal/components/SecureLocksParts";
 import Link from "../Key/Modal/components/Link";
 import Comments from "../Key/Modal/components/Comments";
 import PartNumber from "../Key/Modal/components/PartNumber";
+import { addKeyValidationSchema } from "../helpers/validationData";
+import { useDispatch } from "react-redux";
+import { createKey } from "../../redux/keys/operations";
 
 export default function AddNewKey() {
+  const dispatch = useDispatch();
+
   return (
     <div>
       <Formik
@@ -46,9 +51,39 @@ export default function AddNewKey() {
           Link: "",
           Comments: "",
         }}
-        onSubmit={async (values) => {
-          await new Promise((r) => setTimeout(r, 500));
-          alert(JSON.stringify(values, null, 2));
+        validationSchema={addKeyValidationSchema}
+        onSubmit={async (values, { resetForm }) => {
+          console.log("🚀 ~ onSubmit={ ~ values:", values);
+
+          const credentials = {
+            Maker: values.Maker,
+            Model: values.Model,
+            Year: `${values.YearStart}-${values.YearEnd}`,
+            "Type of Ignition": values["Type of Ignition"],
+            "Type of Key": values["Type of Key"],
+            "No Buttons": values["No Buttons"],
+            "Price All Keys Lost": values["Price All Keys Lost"],
+            "Price Add a Key": values["Price Add a Key"],
+            "Price Program Only": values["Price Program Only"],
+            "Dealer Price": values["Dealer Price"],
+            "Dealer Program": values["Dealer Program"],
+            "Dealer Emergency Blade": values["Dealer Emergency Blade"],
+            "Dealer Price Total": values["Dealer Price Total"],
+            "Dealer Location": values["Dealer Location"],
+            "Secure Locks Parts": values["Secure Locks Parts"],
+            "Part #": values["Part #"],
+            Link: values.Link,
+            Comments: values.Comments,
+            isActive: values.isActive,
+            // _id: values.[_id],
+          };
+          console.log("🚀 ~ onSubmit={ ~ credentials:", credentials);
+          dispatch(createKey(credentials));
+
+          resetForm();
+
+          // await new Promise((r) => setTimeout(r, 500));
+          // alert(JSON.stringify(values, null, 2));
         }}
       >
         <Form className={css.formWrap}>

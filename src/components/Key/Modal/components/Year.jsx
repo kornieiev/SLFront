@@ -1,4 +1,4 @@
-import { Field } from "formik";
+import { ErrorMessage, Field } from "formik";
 import css from "../ModalContent.module.css";
 
 export default function Year({ item }) {
@@ -16,6 +16,8 @@ export default function Year({ item }) {
           type='number'
           pattern='^(19[0-9]{2}|20[0-9]{2}|2100)$'
         />
+        <ErrorMessage name='YearStart' component='div' />
+
         <Field
           className={css.inputField}
           id='YearEnd'
@@ -24,6 +26,7 @@ export default function Year({ item }) {
           type='number'
           pattern='^(19[0-9]{2}|20[0-9]{2}|2100)$'
         />
+        <ErrorMessage name='YearEnd' component='div' />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Field } from "formik";
+import { ErrorMessage, Field } from "formik";
 import css from "../ModalContent.module.css";
 
 export default function NoButtons({ item }) {
@@ -16,6 +16,7 @@ export default function NoButtons({ item }) {
           placeholder='No Buttons'
           type='number'
         />
+        <ErrorMessage name='No Buttons' component='div' />
       </div>
     </div>
   );
