@@ -20,6 +20,8 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 1,
+  pt: 2,
+  pb: 3,
   m: 0,
 };
 
