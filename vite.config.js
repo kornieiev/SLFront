@@ -12,5 +12,5 @@ export default defineConfig({
       pages: "/src/pages",
     },
   },
-  base: "/slfront",
+  base: "/SLFront",
 });
