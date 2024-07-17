@@ -31,7 +31,6 @@ export const Key = ({ item }) => {
   const handleClose = () => setOpen(false);
 
   const role = useSelector(selectRole);
-  console.log("🚀 ~ Key ~ role:", role);
 
   // const dispatch = useDispatch();
   // const handleDelete = () => dispatch(deleteKey(item._id));

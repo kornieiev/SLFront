@@ -32,7 +32,15 @@ export default function ModalContent({ item, onClose }) {
     dispatch(fetchKeys());
   }, [dispatch]);
 
+  function capitalizeFirstLetter(str) {
+    return str
+      .toLowerCase() // Преобразуем всю строку в нижний регистр для консистентности
+      .replace(/\b\w/g, (char) => char.toUpperCase()) // Используем регулярное выражение для нахождения первых букв слов
+      .replace(/\B\w/g, (char) => char.toLowerCase()); // Преобразуем все остальные буквы в нижний регистр
+  }
+
   function checkKeyData(keyData) {
+    console.log("🚀 ~ checkKeyData ~ keyData:", keyData);
     const updatedValues = { ...item };
 
     Object.keys(keyData).forEach((key) => {
@@ -48,6 +56,8 @@ export default function ModalContent({ item, onClose }) {
     if (!keyData.YearEnd && updatedValues.YearEnd === "no data") {
       updatedValues.YearEnd = yearEnd;
     }
+
+    updatedValues.Model = capitalizeFirstLetter(updatedValues.Model);
 
     let date = `${updatedValues.YearStart}-${updatedValues.YearEnd}`;
     updatedValues.Year = date;

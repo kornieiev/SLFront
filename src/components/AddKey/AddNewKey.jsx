@@ -26,6 +26,13 @@ import { createKey } from "../../redux/keys/operations";
 export default function AddNewKey() {
   const dispatch = useDispatch();
 
+  function capitalizeFirstLetter(str) {
+    return str
+      .toLowerCase() // Преобразуем всю строку в нижний регистр для консистентности
+      .replace(/\b\w/g, (char) => char.toUpperCase()) // Используем регулярное выражение для нахождения первых букв слов
+      .replace(/\B\w/g, (char) => char.toLowerCase()); // Преобразуем все остальные буквы в нижний регистр
+  }
+
   return (
     <div>
       <Formik
@@ -55,7 +62,7 @@ export default function AddNewKey() {
         onSubmit={async (values, { resetForm }) => {
           const credentials = {
             Maker: values.Maker,
-            Model: values.Model,
+            Model: capitalizeFirstLetter(values.Model),
             Year: `${values.YearStart}-${values.YearEnd}`,
             "Type of Ignition": values["Type of Ignition"],
             "Type of Key": values["Type of Key"],
@@ -74,6 +81,7 @@ export default function AddNewKey() {
             Comments: values.Comments,
             isActive: values.isActive,
           };
+          console.log("🚀 ~ onSubmit={ ~ credentials:", credentials);
           dispatch(createKey(credentials));
 
           resetForm();

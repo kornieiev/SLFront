@@ -2,6 +2,8 @@ import { ErrorMessage, Field } from "formik";
 import css from "../ModalContent.module.css";
 import { useSelector } from "react-redux";
 import { selectMakersArr } from "../../../../redux/keys/selectors";
+import { nanoid } from "nanoid";
+
 
 export default function Maker({ item }) {
   const makersArr = useSelector(selectMakersArr);
@@ -21,7 +23,7 @@ export default function Maker({ item }) {
         >
           <option>- choose one -</option>
           {makersArr.map((item) => (
-            <option key={item} value={item}>
+            <option key={`${item}-${nanoid()}`} value={item}>
               {item}
             </option>
           ))}
