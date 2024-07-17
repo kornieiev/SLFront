@@ -3,7 +3,7 @@ import css from "../ModalContent.module.css";
 import { useSelector } from "react-redux";
 import { selectMakersArr } from "../../../../redux/keys/selectors";
 import { nanoid } from "nanoid";
-
+import { Toaster, toast } from "react-hot-toast";
 
 export default function Maker({ item }) {
   const makersArr = useSelector(selectMakersArr);
@@ -28,7 +28,13 @@ export default function Maker({ item }) {
             </option>
           ))}
         </Field>
-        <ErrorMessage name='Maker' component='div' />
+        <ErrorMessage name='Maker' component='div'>
+          {(msg) => {
+            toast.error(msg);
+            return null; // Не отображаем сообщение в div
+          }}
+        </ErrorMessage>
+        <Toaster position='top-center' reverseOrder={false} />
       </div>
     </div>
   );

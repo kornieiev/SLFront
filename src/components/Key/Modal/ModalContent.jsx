@@ -58,6 +58,10 @@ export default function ModalContent({ item, onClose }) {
     }
 
     updatedValues.Model = capitalizeFirstLetter(updatedValues.Model);
+    console.log(
+      "🚀 ~ checkKeyData ~ updatedValues.Model:",
+      updatedValues.Model
+    );
 
     let date = `${updatedValues.YearStart}-${updatedValues.YearEnd}`;
     updatedValues.Year = date;
