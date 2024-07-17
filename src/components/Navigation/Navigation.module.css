@@ -4,8 +4,12 @@
   padding: 12px;
   font-weight: 700;
   color: #2a363b;
+  @media (max-width: 430px) {
+    font-size: 12px;
+  }
 }
 
-.link.active {
+.activeLink {
   color: #e84a5f;
+  text-decoration: none;
 }

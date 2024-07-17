@@ -1,27 +1,11 @@
-const styles = {
-  container: {
-    minHeight: "calc(100vh - 50px)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontWeight: 500,
-    fontSize: 48,
-    textAlign: "center",
-  },
-};
+import css from "./pages.module.css";
 
 export default function Home() {
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>
-        SecureLocks key-manager welcome page
-        <span role='img' aria-label='Greeting icon'>
-          {" "}
-          🔑 🔐
-        </span>
-      </h1>
+    <div className={css.container}>
+      <h1 className={css.title}>Welcome to key-manager</h1>
+      <p className={css.text}>please register or login</p>
+      <div className={css.img}></div>
     </div>
   );
 }
