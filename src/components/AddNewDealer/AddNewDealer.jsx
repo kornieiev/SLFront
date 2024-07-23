@@ -7,9 +7,9 @@ import AddNewDealerForm from "../../components/AddNewKey/AddNewDealerForm/AddNew
 export default function AddNewDealer() {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchDealers());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchDealers());
+  }, [dispatch]);
 
   const allDealers = useSelector(selectAllDealers);
 
