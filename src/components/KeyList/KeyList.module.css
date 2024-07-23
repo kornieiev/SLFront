@@ -6,3 +6,8 @@
   grid-template-columns: 1fr;
   grid-gap: 12px;
 }
+
+.optionsWrapper {
+  display: flex;
+  justify-content: space-between;
+}

@@ -63,7 +63,7 @@ export default function KeyFilter() {
           value={filters2.Maker}
           onChange={handleChange}
         >
-          <option value=''>--Please choose maker--</option>
+          <option defaultValue>--Please choose maker--</option>
           {makersArr &&
             makersArr.map((item) => (
               <option key={item} value={item}>
@@ -86,7 +86,7 @@ export default function KeyFilter() {
             value={filters2.Model}
             onChange={handleChange}
           >
-            <option value=''>--Please choose model--</option>
+            <option defaultValue>--Please choose model--</option>
             {[...new Set(modelsArr.map((item) => item.Model))].map((item) => (
               <option key={item} value={item}>
                 {item}
@@ -109,7 +109,7 @@ export default function KeyFilter() {
             value={filters2.Year}
             onChange={handleChange}
           >
-            <option value=''>--Please choose year--</option>
+            <option defaultValue>--Please choose year--</option>
             {[...new Set(yearsArr.map((item) => item.Year))].map((item) => (
               <option key={item} value={item}>
                 {item}
@@ -132,7 +132,7 @@ export default function KeyFilter() {
             value={filters2.TypeOfKey}
             onChange={handleChange}
           >
-            <option value=''>--Please choose TypeOfKey--</option>
+            <option defaultValue>--Please choose TypeOfKey--</option>
             {[...new Set(typeOfKeyArr.map((item) => item["Type of Key"]))].map(
               (item) => (
                 <option key={item} value={item}>

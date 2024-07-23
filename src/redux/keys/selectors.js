@@ -41,3 +41,5 @@ export const selectTypesOfKey = createSelector(
     return uniqueTypesOfKey;
   }
 );
+
+export const selectDealer = (state) => state.keys.dealer;

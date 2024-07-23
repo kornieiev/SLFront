@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import { selectLoading } from "../redux/keys/selectors";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import AddNewKey from "../components/AddNewKey/AddNewKey";
 import css from "./pages.module.css";
 
 import { DNA } from "react-loader-spinner";
+import AddNewDealer from "../components/AddNewDealer/AddNewDealer";
 
-export default function AddKey() {
+export default function AddDealer() {
   const isLoading = useSelector(selectLoading);
 
   return (
@@ -17,8 +17,8 @@ export default function AddKey() {
         </Helmet>
       </HelmetProvider>
 
-      <h3>Here you can add new key</h3>
-      <AddNewKey />
+      <h3>Here you can add new Dealer</h3>
+      <AddNewDealer />
 
       {isLoading && (
         <div className={css.loader}>

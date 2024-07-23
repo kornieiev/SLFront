@@ -20,7 +20,7 @@ export default function TypeOfKey({ item }) {
           placeholder='Type of Key'
           component='select'
         >
-          <option>- choose one -</option>
+          <option defaultValue>- choose one -</option>
           {typesOfKey.map((item) => (
             <option key={item} value={item}>
               {item}

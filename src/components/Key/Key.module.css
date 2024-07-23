@@ -57,3 +57,25 @@
   list-style: none;
   padding: 0;
 }
+
+.itemPriceWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dealerPriceWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dealerPrice {
+  color: red;
+  margin-right: 10px;
+}
+
+.btnEditDealerPrice {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+}

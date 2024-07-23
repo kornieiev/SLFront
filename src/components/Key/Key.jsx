@@ -1,11 +1,14 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import css from "./Key.module.css";
 import ModalContent from "./Modal/ModalContent";
 import { selectRole } from "../../redux/auth/selectors";
+import SVG from "./SVG/SVG";
+import ModalEditDealerPrice from "./ModalEditDealerPrice/ModalEditDealerPrice";
+import { selectDealer } from "../../redux/keys/selectors";
 
 const style = {
   position: "absolute",
@@ -30,12 +33,22 @@ export const Key = ({ item }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [dealerModalOpen, setDealerModalOpen] = useState(false);
+  const handleDealerModalOpen = () => setDealerModalOpen(true);
+  const handleDealerModalClose = () => setDealerModalOpen(false);
+
   const role = useSelector(selectRole);
+  const dealerName = useSelector(selectDealer);
 
-  // const dispatch = useDispatch();
-  // const handleDelete = () => dispatch(deleteKey(item._id));
-
-  //
+  const [dealerPriceData, setDealersPriceData] = useState({});
+  useEffect(() => {
+    if (dealerName === "Choose Dealer") {
+      setDealersPriceData({});
+    }
+    if (item?.DealersPrice?.[dealerName]) {
+      setDealersPriceData(item?.DealersPrice?.[dealerName]);
+    }
+  }, [dealerName, item?.DealersPrice]);
 
   return (
     <div className={css.wrapper}>
@@ -62,16 +75,73 @@ export const Key = ({ item }) => {
           {item["No Buttons"]}
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Price All Keys Lost:</strong>{" "}
-          {item["Price All Keys Lost"]}
+          <div className={css.itemPriceWrapper}>
+            <div>
+              <strong className={css.itemName}>Price All Keys Lost:</strong>{" "}
+              {item["Price All Keys Lost"]}
+            </div>
+            <div className={css.dealerPriceWrapper}>
+              <p className={css.dealerPrice}>
+                {dealerPriceData["Price All Keys Lost"]
+                  ? `${dealerPriceData["Price All Keys Lost"]}`
+                  : "not available"}
+              </p>
+              {dealerName && (
+                <button
+                  className={css.btnEditDealerPrice}
+                  onClick={handleDealerModalOpen}
+                >
+                  <SVG />
+                </button>
+              )}
+            </div>
+          </div>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Price Add a Key:</strong>{" "}
-          {item["Price Add a Key"]}
+          <div className={css.itemPriceWrapper}>
+            <div>
+              <strong className={css.itemName}>Price Add a Key:</strong>{" "}
+              {item["Price Add a Key"]}
+            </div>
+            <div className={css.dealerPriceWrapper}>
+              <p className={css.dealerPrice}>
+                {dealerPriceData["Price Add a Key"]
+                  ? `${dealerPriceData["Price Add a Key"]}`
+                  : "not available"}
+              </p>
+              {dealerName && (
+                <button
+                  className={css.btnEditDealerPrice}
+                  onClick={handleDealerModalOpen}
+                >
+                  <SVG />
+                </button>
+              )}
+            </div>
+          </div>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Price Program Only:</strong>{" "}
-          {item["Price Program Only"]}
+          <div className={css.itemPriceWrapper}>
+            <div>
+              <strong className={css.itemName}>Price Program Only:</strong>{" "}
+              {item["Price Program Only"]}
+            </div>
+            <div className={css.dealerPriceWrapper}>
+              <p className={css.dealerPrice}>
+                {dealerPriceData["Price Program Only"]
+                  ? `${dealerPriceData["Price Program Only"]}`
+                  : "not available"}
+              </p>
+              {dealerName && (
+                <button
+                  className={css.btnEditDealerPrice}
+                  onClick={handleDealerModalOpen}
+                >
+                  <SVG />
+                </button>
+              )}
+            </div>
+          </div>
         </li>
         <li className={css.item}>
           <strong className={css.itemName}>Dealer Price:</strong>{" "}
@@ -107,9 +177,6 @@ export const Key = ({ item }) => {
         <li className={css.item}>
           <strong className={css.itemName}>Comments:</strong> {item.Comments}
         </li>
-        {/* <li className={css.item}>
-          <strong className={css.itemName}>isActive:</strong> {item.isActive}
-        </li> */}
 
         {role === "admin" && (
           <li className={css.editBtn}>
@@ -126,6 +193,21 @@ export const Key = ({ item }) => {
             </Modal>
           </li>
         )}
+
+        <Modal
+          open={dealerModalOpen}
+          onClose={handleDealerModalClose}
+          aria-labelledby='modal-dealer-title'
+          aria-describedby='modal-dealer-price-change'
+        >
+          <Box sx={style}>
+            <ModalEditDealerPrice
+              item={item}
+              dealerPriceData={dealerPriceData}
+              onClose={handleDealerModalClose}
+            />
+          </Box>
+        </Modal>
       </ul>
     </div>
   );

@@ -31,13 +31,9 @@ const keysSlice = createSlice({
       TypeOfKeyArr: [],
       TypeOfKey: "",
     },
+    dealer: "",
   },
   reducers: {
-    setFilteredKeys: {
-      reducer(state, action) {
-        state.filteredKeys = action.payload;
-      },
-    },
     setFilters: {
       reducer(state, action) {
         const [name, value] = action.payload;
@@ -52,6 +48,7 @@ const keysSlice = createSlice({
           state.filters.Year = "";
           state.filters.TypeOfKey = "";
           state.keysForRender = [];
+          state.dealer = "";
         }
 
         if (name === "Model") {
@@ -61,6 +58,7 @@ const keysSlice = createSlice({
           state.filters.TypeOfKey = "";
           state.filters.Year = "";
           state.keysForRender = [];
+          state.dealer = "";
         }
 
         if (name === "Year") {
@@ -69,12 +67,18 @@ const keysSlice = createSlice({
           );
           state.filters.TypeOfKey = "";
           state.keysForRender = [];
+          state.dealer = "";
         }
         if (name === "TypeOfKey") {
           state.keysForRender = state.filters.TypeOfKeyArr.filter(
             (item) => item["Type of Key"] === value
           );
         }
+      },
+    },
+    setDealer: {
+      reducer(state, action) {
+        state.dealer = action.payload;
       },
     },
   },
@@ -138,4 +142,4 @@ const keysSlice = createSlice({
 
 export const keysReducer = keysSlice.reducer;
 
-export const { setFilteredKeys, setFilters } = keysSlice.actions;
+export const { setFilters, setDealer } = keysSlice.actions;

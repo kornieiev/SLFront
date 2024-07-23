@@ -68,3 +68,5 @@ export const typeOfKeyList = [
   "Fobik Key",
   "Fobik Key (proximity)",
 ];
+
+export const DealerList = ["Ford", "Mercedes", "Audi", "1ZAZ"];

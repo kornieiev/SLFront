@@ -21,7 +21,7 @@ export default function Maker({ item }) {
           placeholder='Maker'
           component='select'
         >
-          <option>- choose one -</option>
+          <option defaultValue>- choose one -</option>
           {makersArr.map((item) => (
             <option key={`${item}-${nanoid()}`} value={item}>
               {item}

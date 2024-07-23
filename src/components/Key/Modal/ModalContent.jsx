@@ -1,13 +1,12 @@
 import { Formik, Form } from "formik";
-
 import css from "./ModalContent.module.css";
 import { useDispatch } from "react-redux";
 import { editKeyById, fetchKeys } from "../../../redux/keys/operations";
 import { useEffect } from "react";
-import TypeOfIgnition from "./components/TypeOfIgnition";
 import Maker from "./components/Maker";
 import Model from "./components/Model";
 import Year from "./components/Year";
+import TypeOfIgnition from "./components/TypeOfIgnition";
 import TypeOfKey from "./components/TypeOfKey";
 import NoButtons from "./components/NoButtons";
 import PriceAllKeysLost from "./components/PriceAllKeysLost";
@@ -40,7 +39,6 @@ export default function ModalContent({ item, onClose }) {
   }
 
   function checkKeyData(keyData) {
-    console.log("🚀 ~ checkKeyData ~ keyData:", keyData);
     const updatedValues = { ...item };
 
     Object.keys(keyData).forEach((key) => {
@@ -58,10 +56,6 @@ export default function ModalContent({ item, onClose }) {
     }
 
     updatedValues.Model = capitalizeFirstLetter(updatedValues.Model);
-    console.log(
-      "🚀 ~ checkKeyData ~ updatedValues.Model:",
-      updatedValues.Model
-    );
 
     let date = `${updatedValues.YearStart}-${updatedValues.YearEnd}`;
     updatedValues.Year = date;

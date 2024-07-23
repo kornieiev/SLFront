@@ -6,6 +6,7 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import KeyFilter from "../components/KeyFilter/KeyFilter";
 import { DNA } from "react-loader-spinner";
 import css from "./pages.module.css";
+import { fetchDealers } from "../redux/dealers/operations";
 
 export default function Keys() {
   const dispatch = useDispatch();
@@ -13,6 +14,10 @@ export default function Keys() {
 
   useEffect(() => {
     dispatch(fetchKeys());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchDealers());
   }, [dispatch]);
 
   return (

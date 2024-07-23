@@ -22,7 +22,7 @@ export default function TypeOfIgnition({ item }) {
           placeholder='Type of Ignition'
           component='select'
         >
-          <option>- choose one -</option>
+          <option defaultValue>- choose one -</option>
           {IgnitionTypes.map((item) => (
             <option key={item} value={item}>
               {item}

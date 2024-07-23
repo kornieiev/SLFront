@@ -12,6 +12,7 @@ const RegisterPage = lazy(() => import("./pages/Register"));
 const LoginPage = lazy(() => import("./pages/Login"));
 const FindKeysPage = lazy(() => import("./pages/Keys"));
 const AddKeyPage = lazy(() => import("./pages/AddKey"));
+const AddDealerPage = lazy(() => import("./pages/AddDealer"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -52,6 +53,12 @@ const App = () => {
           path='/addKey'
           element={
             <PrivateRoute redirectTo='/login' component={<AddKeyPage />} />
+          }
+        />
+        <Route
+          path='/addDealer'
+          element={
+            <PrivateRoute redirectTo='/login' component={<AddDealerPage />} />
           }
         />
       </Route>

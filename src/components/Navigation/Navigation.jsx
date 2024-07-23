@@ -52,6 +52,17 @@ export const Navigation = () => {
               Add key
             </NavLink>
           )}
+
+          {role === "admin" && (
+            <NavLink
+              className={({ isActive }) =>
+                classNames(css.link, { [css.activeLink]: isActive })
+              }
+              to='/addDealer'
+            >
+              Add Dealer
+            </NavLink>
+          )}
         </>
       )}
     </nav>
