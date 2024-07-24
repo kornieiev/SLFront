@@ -1,0 +1,15 @@
+.svg {
+  padding: 1px 10px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  fill: orange;
+  @media (max-width: 430px) {
+    padding: 1px 3px;
+  }
+
+  &:hover {
+    width: 14px;
+    transition: all linear 250ms;
+    border-color: orange;
+  }
+}

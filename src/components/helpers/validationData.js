@@ -7,7 +7,8 @@ import {
 } from "../../constants/constants";
 
 export const editKeyValidationSchema = Yup.object().shape({
-  Maker: Yup.string().oneOf(makersList, "Invalid Maker"),
+  Maker: Yup.string(),
+  // .oneOf(makersList, "Invalid Maker"),
   Model: Yup.string(),
   YearStart: Yup.number()
     .integer("Year must be an integer")

@@ -20,7 +20,8 @@ const style = {
   overflowY: "auto", // Разрешаем вертикальную прокрутку
   // bgcolor: "background.paper",
   bgcolor: "lightgray",
-  border: "2px solid #000",
+  border: "1px solid #000",
+  borderRadius: "10px",
   boxShadow: 24,
   p: 1,
   pt: 2,
@@ -54,128 +55,149 @@ export const Key = ({ item }) => {
     <div className={css.wrapper}>
       <ul className={css.itemsList}>
         <li className={css.item}>
-          <strong className={css.itemName}>Make:</strong> {item.Maker}
+          <strong className={css.itemName}>Make:</strong>
+          <span className={css.itemData}>{item.Maker}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Model:</strong> {item.Model}
+          <strong className={css.itemName}>Model:</strong>
+          <span className={css.itemData}>{item.Model}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Year:</strong> {item.Year}
+          <strong className={css.itemName}>Year:</strong>
+          <span className={css.itemData}>{item.Year}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Type of Ignition:</strong>{" "}
-          {item["Type of Ignition"]}
+          <strong className={css.itemName}>Type of Ignition:</strong>
+          <span className={css.itemData}>{item["Type of Ignition"]}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Type of Key:</strong>{" "}
-          {item["Type of Key"]}
+          <strong className={css.itemName}>Type of Key:</strong>
+          <span className={css.itemData}>{item["Type of Key"]}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>No Buttons:</strong>{" "}
-          {item["No Buttons"]}
+          <strong className={css.itemName}>No Buttons:</strong>
+          <span className={css.itemData}>{item["No Buttons"]}</span>
         </li>
         <li className={css.item}>
           <div className={css.itemPriceWrapper}>
             <div>
-              <strong className={css.itemName}>Price All Keys Lost:</strong>{" "}
-              {item["Price All Keys Lost"]}
+              <strong className={css.itemName}>Price All Keys Lost:</strong>
+              <span className={css.itemData}>
+                {item["Price All Keys Lost"]}
+              </span>
             </div>
             <div className={css.dealerPriceWrapper}>
               <p className={css.dealerPrice}>
-                {dealerPriceData["Price All Keys Lost"]
-                  ? `${dealerPriceData["Price All Keys Lost"]}`
-                  : "not available"}
+                {dealerName ? (
+                  `${dealerPriceData["Price All Keys Lost"]}`
+                ) : (
+                  <span className={css.dealerPriceText}>choose dealer</span>
+                )}
               </p>
-              {dealerName && (
-                <button
-                  className={css.btnEditDealerPrice}
-                  onClick={handleDealerModalOpen}
-                >
-                  <SVG />
-                </button>
-              )}
+              <div className={css.svgWrapper}>
+                {dealerName && (
+                  <button
+                    className={css.btnEditDealerPrice}
+                    onClick={handleDealerModalOpen}
+                  >
+                    <SVG />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </li>
         <li className={css.item}>
           <div className={css.itemPriceWrapper}>
             <div>
-              <strong className={css.itemName}>Price Add a Key:</strong>{" "}
-              {item["Price Add a Key"]}
+              <strong className={css.itemName}>Price Add a Key:</strong>
+              <span className={css.itemData}>{item["Price Add a Key"]}</span>
             </div>
             <div className={css.dealerPriceWrapper}>
               <p className={css.dealerPrice}>
-                {dealerPriceData["Price Add a Key"]
-                  ? `${dealerPriceData["Price Add a Key"]}`
-                  : "not available"}
+                {dealerName ? (
+                  `${dealerPriceData["Price Add a Key"]}`
+                ) : (
+                  <span className={css.dealerPriceText}>choose dealer</span>
+                )}
               </p>
-              {dealerName && (
-                <button
-                  className={css.btnEditDealerPrice}
-                  onClick={handleDealerModalOpen}
-                >
-                  <SVG />
-                </button>
-              )}
+              <div className={css.svgWrapper}>
+                {dealerName && (
+                  <button
+                    className={css.btnEditDealerPrice}
+                    onClick={handleDealerModalOpen}
+                  >
+                    <SVG />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </li>
         <li className={css.item}>
           <div className={css.itemPriceWrapper}>
             <div>
-              <strong className={css.itemName}>Price Program Only:</strong>{" "}
-              {item["Price Program Only"]}
+              <strong className={css.itemName}>Price Program Only:</strong>
+              <span className={css.itemData}>{item["Price Program Only"]}</span>
             </div>
             <div className={css.dealerPriceWrapper}>
               <p className={css.dealerPrice}>
-                {dealerPriceData["Price Program Only"]
-                  ? `${dealerPriceData["Price Program Only"]}`
-                  : "not available"}
+                {dealerName ? (
+                  `${dealerPriceData["Price Program Only"]}`
+                ) : (
+                  <span className={css.dealerPriceText}>choose dealer</span>
+                )}
               </p>
-              {dealerName && (
-                <button
-                  className={css.btnEditDealerPrice}
-                  onClick={handleDealerModalOpen}
-                >
-                  <SVG />
-                </button>
-              )}
+              <div className={css.svgWrapper}>
+                {dealerName && (
+                  <button
+                    className={css.btnEditDealerPrice}
+                    onClick={handleDealerModalOpen}
+                  >
+                    <SVG />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Dealer Price:</strong>{" "}
-          {item["Dealer Price"]}
+          <strong className={css.itemName}>Dealer Price:</strong>
+          <span className={css.itemData}>{item["Dealer Price"]}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Dealer Program:</strong>{" "}
-          {item["Dealer Program"]}
+          <strong className={css.itemName}>Dealer Program:</strong>
+          <span className={css.itemData}>{item["Dealer Program"]}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Dealer Emergency Blade:</strong>{" "}
-          {item["Dealer Emergency Blade"]}
+          <strong className={css.itemName}>Dealer Emergency Blade:</strong>
+          <span className={css.itemData}>{item["Dealer Emergency Blade"]}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Dealer Price Total:</strong>{" "}
-          {item["Dealer Price Total"]}
+          <strong className={css.itemName}>Dealer Price Total:</strong>
+          <span className={css.itemData}>{item["Dealer Price Total"]}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Dealer Location:</strong>{" "}
-          {item["Dealer Location"]}
+          <strong className={css.itemName}>Dealer Location:</strong>
+          <span className={css.itemData}>{item["Dealer Location"]}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Secure Locks Parts:</strong>{" "}
-          {item["Secure Locks Parts"]}
+          <strong className={css.itemName}>Secure Locks Parts:</strong>
+          <span className={css.itemData}>{item["Secure Locks Parts"]}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Part #:</strong> {item["Part #"]}
+          <strong className={css.itemName}>Part #:</strong>
+          <span className={css.itemData}>{item["Part #"]}</span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Link:</strong>{" "}
-          <a href={item["Link"]}>link...</a>
+          <strong className={css.itemName}>Link:</strong>
+          <span className={css.itemData}>
+            <a href={item["Link"]}>visit link...</a>
+          </span>
         </li>
         <li className={css.item}>
-          <strong className={css.itemName}>Comments:</strong> {item.Comments}
+          <strong className={css.itemName}>Comments:</strong>
+          <span className={css.itemData}>{item.Comments}</span>
         </li>
 
         {role === "admin" && (

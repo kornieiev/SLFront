@@ -7,6 +7,7 @@ import PriceProgramOnly from "../../../components/Key/Modal/components/PriceProg
 import { useState } from "react";
 import { selectDealer } from "../../../redux/keys/selectors";
 import { updateDealerPriceByKeyId } from "../../../redux/keys/operations";
+import { updateDealerPrice } from "../../../redux/keys/slice";
 
 export default function ModalEditDealerPrice({
   item,
@@ -16,12 +17,10 @@ export default function ModalEditDealerPrice({
   const dealerName = useSelector(selectDealer);
 
   const [newDealerPrice, setNewDealerPrice] = useState(dealerPriceData);
-  // console.log("🚀 ~ newDealerPrice:", newDealerPrice);
   const dispatch = useDispatch();
 
   function checkKeyData(price) {
     const newPrice = { ...newDealerPrice }; // price
-    // console.log("newPrice", newPrice);
 
     Object.keys(price).forEach((key) => {
       if (!newPrice[key]) {
@@ -40,6 +39,7 @@ export default function ModalEditDealerPrice({
     };
 
     dispatch(updateDealerPriceByKeyId(sendToDB));
+    dispatch(updateDealerPrice(sendToDB));
 
     onClose(false);
   }

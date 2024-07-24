@@ -7,7 +7,6 @@ import { selectAllDealers } from "../../redux/dealers/selectors";
 
 export const KeyList = () => {
   const DealerList = useSelector(selectAllDealers);
-  console.log("🚀 ~ KeyList ~ DealerList:", DealerList);
   const keysForRender = useSelector(selectkeysForRender);
 
   const dispatch = useDispatch();

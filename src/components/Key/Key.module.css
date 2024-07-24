@@ -36,6 +36,8 @@
 }
 
 .itemsList {
+  display: flex;
+  flex-direction: column;
   margin: 10px;
   padding: 0;
   width: 100%;
@@ -51,9 +53,12 @@
   margin-right: 10px;
   margin-top: 5px;
 }
+.itemData {
+  color: darkorange;
+}
 
 .editBtn {
-  margin-left: 150px;
+  margin-left: auto;
   list-style: none;
   padding: 0;
 }
@@ -69,8 +74,22 @@
 }
 
 .dealerPrice {
+  display: flex;
+  justify-content: center;
+  width: 90px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
   color: red;
-  margin-right: 10px;
+  margin-bottom: 4px;
+  @media (max-width: 430px) {
+    width: 70px;
+  }
+}
+
+.dealerPriceText {
+  margin-top: 3px;
+  font-size: 10px;
 }
 
 .btnEditDealerPrice {
@@ -78,4 +97,13 @@
   padding: 0;
   margin: 0;
   background-color: transparent;
+}
+
+.svgWrapper {
+  display: flex;
+  justify-content: center;
+  width: 50px;
+  @media (max-width: 430px) {
+    width: 25px;
+  }
 }

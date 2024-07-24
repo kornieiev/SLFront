@@ -17,9 +17,7 @@ const dealersSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {
-    setFilters: {},
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
 
@@ -45,4 +43,4 @@ const dealersSlice = createSlice({
 
 export const dealersReducer = dealersSlice.reducer;
 
-export const { setFilters, setDealer } = dealersSlice.actions;
+// export const { updateDealers } = dealersSlice.actions;

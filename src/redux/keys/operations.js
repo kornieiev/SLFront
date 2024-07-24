@@ -59,14 +59,12 @@ export const deleteKey = createAsyncThunk(
 export const updateDealerPriceByKeyId = createAsyncThunk(
   "keys/updateDealerPriceByKeyId",
   async (credentials, thunkAPI) => {
-    console.log("🚀 ~ credentials:", credentials);
     try {
       const response = await axios.put(
         `/keys/dealer/${credentials.id}`,
         credentials
       );
-      console.log("🚀 ~ response:", response);
-      // return response.data;
+      return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

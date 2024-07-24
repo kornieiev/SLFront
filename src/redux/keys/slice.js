@@ -78,7 +78,28 @@ const keysSlice = createSlice({
     },
     setDealer: {
       reducer(state, action) {
+        console.log("action.payload", action.payload);
         state.dealer = action.payload;
+      },
+    },
+    updateDealerPrice: {
+      reducer(state, action) {
+        const { id } = action.payload;
+        const dealerName = Object.keys(action.payload.DealersPrice)[0];
+        const dealerNewPrice = action.payload.DealersPrice[dealerName];
+
+        state.keysForRender = state.keysForRender.map((item) => {
+          if (item._id === id) {
+            return {
+              ...item,
+              DealersPrice: {
+                ...item.DealersPrice,
+                [dealerName]: dealerNewPrice,
+              },
+            };
+          }
+          return item;
+        });
       },
     },
   },
@@ -142,4 +163,4 @@ const keysSlice = createSlice({
 
 export const keysReducer = keysSlice.reducer;
 
-export const { setFilters, setDealer } = keysSlice.actions;
+export const { setFilters, setDealer, updateDealerPrice } = keysSlice.actions;
