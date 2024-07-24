@@ -95,7 +95,7 @@ export const Key = ({ item }) => {
                 )}
               </p>
               <div className={css.svgWrapper}>
-                {dealerName && (
+                {dealerName && role === "admin" && (
                   <button
                     className={css.btnEditDealerPrice}
                     onClick={handleDealerModalOpen}
@@ -122,7 +122,7 @@ export const Key = ({ item }) => {
                 )}
               </p>
               <div className={css.svgWrapper}>
-                {dealerName && (
+                {dealerName && role === "admin" && (
                   <button
                     className={css.btnEditDealerPrice}
                     onClick={handleDealerModalOpen}
@@ -149,7 +149,7 @@ export const Key = ({ item }) => {
                 )}
               </p>
               <div className={css.svgWrapper}>
-                {dealerName && (
+                {dealerName && role === "admin" && (
                   <button
                     className={css.btnEditDealerPrice}
                     onClick={handleDealerModalOpen}
