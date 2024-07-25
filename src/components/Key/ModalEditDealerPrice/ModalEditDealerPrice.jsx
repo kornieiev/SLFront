@@ -14,6 +14,7 @@ export default function ModalEditDealerPrice({
   onClose,
   dealerPriceData,
 }) {
+  console.log("🚀 ~ dealerPriceData:", dealerPriceData);
   const dealerName = useSelector(selectDealer);
 
   const [newDealerPrice, setNewDealerPrice] = useState(dealerPriceData);

@@ -41,15 +41,34 @@ export const Key = ({ item }) => {
   const role = useSelector(selectRole);
   const dealerName = useSelector(selectDealer);
 
-  const [dealerPriceData, setDealersPriceData] = useState({});
+  const [dealerPriceData, setDealersPriceData] = useState({
+    "Price All Keys Lost": "choose dealer",
+    "Price Add a Key": "choose dealer",
+    "Price Program Only": "choose dealer",
+  });
+
   useEffect(() => {
-    if (dealerName === "Choose Dealer") {
-      setDealersPriceData({});
+    if (dealerName === "") {
+      setDealersPriceData({
+        "Price All Keys Lost": "choose dealer",
+        "Price Add a Key": "choose dealer",
+        "Price Program Only": "choose dealer",
+      });
+      return;
     }
-    if (item?.DealersPrice?.[dealerName]) {
+    if (!item.DealersPrice[dealerName]) {
+      setDealersPriceData({
+        "Price All Keys Lost": "no data yet",
+        "Price Add a Key": "no data yet",
+        "Price Program Only": "no data yet",
+      });
+      return;
+    }
+    if (item.DealersPrice[dealerName]) {
       setDealersPriceData(item?.DealersPrice?.[dealerName]);
+      return;
     }
-  }, [dealerName, item?.DealersPrice]);
+  }, [dealerName, item.DealersPrice]);
 
   return (
     <div className={css.wrapper}>
@@ -88,11 +107,9 @@ export const Key = ({ item }) => {
             </div>
             <div className={css.dealerPriceWrapper}>
               <p className={css.dealerPrice}>
-                {dealerName ? (
-                  `${dealerPriceData["Price All Keys Lost"]}`
-                ) : (
-                  <span className={css.dealerPriceText}>choose dealer</span>
-                )}
+                <span className={css.dealerPriceText}>
+                  {dealerPriceData["Price All Keys Lost"]}
+                </span>
               </p>
               <div className={css.svgWrapper}>
                 {dealerName && role === "admin" && (
@@ -115,11 +132,9 @@ export const Key = ({ item }) => {
             </div>
             <div className={css.dealerPriceWrapper}>
               <p className={css.dealerPrice}>
-                {dealerName ? (
-                  `${dealerPriceData["Price Add a Key"]}`
-                ) : (
-                  <span className={css.dealerPriceText}>choose dealer</span>
-                )}
+                <span className={css.dealerPriceText}>
+                  {dealerPriceData["Price Add a Key"]}
+                </span>
               </p>
               <div className={css.svgWrapper}>
                 {dealerName && role === "admin" && (
@@ -142,11 +157,9 @@ export const Key = ({ item }) => {
             </div>
             <div className={css.dealerPriceWrapper}>
               <p className={css.dealerPrice}>
-                {dealerName ? (
-                  `${dealerPriceData["Price Program Only"]}`
-                ) : (
-                  <span className={css.dealerPriceText}>choose dealer</span>
-                )}
+                <span className={css.dealerPriceText}>
+                  {dealerPriceData["Price Program Only"]}
+                </span>
               </p>
               <div className={css.svgWrapper}>
                 {dealerName && role === "admin" && (

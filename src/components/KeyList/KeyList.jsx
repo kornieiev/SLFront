@@ -1,13 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Key } from "../Key/Key";
 import css from "./KeyList.module.css";
-import { selectkeysForRender } from "../../redux/keys/selectors";
+import { selectDealer, selectkeysForRender } from "../../redux/keys/selectors";
 import { setDealer } from "../../redux/keys/slice";
 import { selectAllDealers } from "../../redux/dealers/selectors";
 
 export const KeyList = () => {
   const DealerList = useSelector(selectAllDealers);
+  // console.log("🚀 ~ KeyList ~ DealerList:", DealerList);
   const keysForRender = useSelector(selectkeysForRender);
+  // console.log("🚀 ~ KeyList ~ keysForRender:", keysForRender);
+  const dealerName = useSelector(selectDealer);
+  // console.log("🚀 ~ handleChange ~ dealerName:", dealerName);
 
   const dispatch = useDispatch();
 
@@ -15,6 +19,9 @@ export const KeyList = () => {
     if (e.currentTarget.value === "Choose Dealer") {
       dispatch(setDealer(""));
       return;
+    }
+    if (e.currentTarget.value !== dealerName) {
+      console.log("not same");
     }
     dispatch(setDealer(e.currentTarget.value));
   }

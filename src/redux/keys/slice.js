@@ -78,7 +78,7 @@ const keysSlice = createSlice({
     },
     setDealer: {
       reducer(state, action) {
-        console.log("action.payload", action.payload);
+        // console.log("action.payload", action.payload);
         state.dealer = action.payload;
       },
     },
