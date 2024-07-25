@@ -19,7 +19,6 @@ export const fetchDealers = createAsyncThunk(
 export const createDealer = createAsyncThunk(
   "dealers/createDealer",
   async (credentials, thunkAPI) => {
-    console.log("🚀 ~ credentials:", credentials);
     try {
       const response = await axios.post("/dealers", {
         dealerName: credentials,

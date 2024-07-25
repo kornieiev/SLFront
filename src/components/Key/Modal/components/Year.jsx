@@ -1,7 +1,10 @@
-import { ErrorMessage, Field } from "formik";
+import { ErrorMessage, Field, useField } from "formik";
 import css from "../ModalContent.module.css";
 
 export default function Year({ item }) {
+  const [field, meta] = useField("YearStart");
+  const [field2, meta2] = useField("YearEnd");
+
   return (
     <div className={css.fieldWrapper}>
       <label className={css.inputLabel} htmlFor='Year'>
@@ -9,7 +12,9 @@ export default function Year({ item }) {
       </label>
       <div className={css.yearWrapper}>
         <Field
-          className={css.inputField}
+          className={`${css.inputField} ${
+            meta.touched && meta.error ? css.errorField : ""
+          }`}
           id='YearStart'
           name='YearStart'
           placeholder='YearStart'
@@ -19,7 +24,9 @@ export default function Year({ item }) {
         <ErrorMessage name='YearStart' component='div' />
 
         <Field
-          className={css.inputField}
+          className={`${css.inputField} ${
+            meta2.touched && meta2.error ? css.errorField : ""
+          }`}
           id='YearEnd'
           name='YearEnd'
           placeholder='YearEnd'

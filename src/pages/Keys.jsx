@@ -7,10 +7,12 @@ import KeyFilter from "../components/KeyFilter/KeyFilter";
 import { DNA } from "react-loader-spinner";
 import css from "./pages.module.css";
 import { fetchDealers } from "../redux/dealers/operations";
+import { useAuth } from "../hooks";
 
 export default function Keys() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
+  const { role } = useAuth();
 
   useEffect(() => {
     dispatch(fetchKeys());
@@ -28,8 +30,22 @@ export default function Keys() {
         </Helmet>
       </HelmetProvider>
 
-      <h3>Choose needed key below:</h3>
-      <KeyFilter />
+      {role !== "user" && (
+        <>
+          <h3>Choose needed key below:</h3>
+
+          <KeyFilter />
+        </>
+      )}
+
+      {role === "user" && (
+        <p>
+          You do not have permission to view this content. If you want to gain
+          access, please send an email to: mail.korneev@gmail.com. In the body
+          of the email, be sure to include the email address you registered
+          with.
+        </p>
+      )}
 
       {isLoading && (
         <div className={css.loader}>

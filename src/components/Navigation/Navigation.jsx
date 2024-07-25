@@ -2,22 +2,21 @@ import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 import { useAuth } from "../../hooks";
 import css from "./Navigation.module.css";
+import HomeLogo from "../../components/HomeLogo/HomeLogo";
 
 export const Navigation = () => {
   const { isLoggedIn, role } = useAuth();
 
   return (
-    <nav>
+    <nav className={css.nav}>
       <NavLink
         className={({ isActive }) =>
           classNames(css.link, { [css.activeLink]: isActive })
         }
         to='/'
       >
-        Home
-        <span role='img' aria-label='Greeting icon'>
-          {" "}
-          🔐
+        <span>
+          <HomeLogo />
         </span>
       </NavLink>
       {isLoggedIn && (
@@ -60,7 +59,7 @@ export const Navigation = () => {
               }
               to='/addDealer'
             >
-              Add Dealer
+              Dealers
             </NavLink>
           )}
         </>

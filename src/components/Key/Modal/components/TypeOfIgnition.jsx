@@ -1,10 +1,11 @@
-import { ErrorMessage, Field } from "formik";
+import { ErrorMessage, Field, useField } from "formik";
 import css from "../ModalContent.module.css";
 import { useSelector } from "react-redux";
 import { selectTypesOfIgnition } from "../../../../redux/keys/selectors";
 
 export default function TypeOfIgnition({ item }) {
   const IgnitionTypes = useSelector(selectTypesOfIgnition);
+  const [field, meta] = useField("Type of Ignition");
 
   return (
     <div className={css.fieldWrapper}>
@@ -16,7 +17,9 @@ export default function TypeOfIgnition({ item }) {
       </label>
       <div className={css.yearWrapper}>
         <Field
-          className={css.inputField}
+          className={`${css.inputField} ${
+            meta.touched && meta.error ? css.errorField : ""
+          }`}
           id='Type of Ignition'
           name='Type of Ignition'
           placeholder='Type of Ignition'

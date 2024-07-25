@@ -1,12 +1,12 @@
-import { ErrorMessage, Field } from "formik";
-import css from "../ModalContent.module.css";
-import { useSelector } from "react-redux";
-import { selectMakersArr } from "../../../../redux/keys/selectors";
+import { ErrorMessage, Field, useField } from "formik";
 import { nanoid } from "nanoid";
-import { Toaster, toast } from "react-hot-toast";
+import { useSelector } from "react-redux";
+import css from "../ModalContent.module.css";
+import { selectMakersArr } from "../../../../redux/keys/selectors";
 
 export default function Maker({ item }) {
   const makersArr = useSelector(selectMakersArr);
+  const [field, meta] = useField("Maker"); // Получение метаданных поля
 
   return (
     <div className={css.fieldWrapper}>
@@ -15,26 +15,22 @@ export default function Maker({ item }) {
       </label>
       <div className={css.yearWrapper}>
         <Field
-          className={css.inputField}
+          className={`${css.inputField} ${
+            meta.touched && meta.error ? css.errorField : ""
+          }`}
           id='Maker'
           name='Maker'
           placeholder='Maker'
           component='select'
         >
-          <option defaultValue>- choose one -</option>
+          <option value=''>- choose one -</option>
           {makersArr.map((item) => (
             <option key={`${item}-${nanoid()}`} value={item}>
               {item}
             </option>
           ))}
         </Field>
-        <ErrorMessage name='Maker' component='div'>
-          {(msg) => {
-            toast.error(msg);
-            return null; // Не отображаем сообщение в div
-          }}
-        </ErrorMessage>
-        <Toaster position='top-center' reverseOrder={false} />
+        <ErrorMessage name='Maker' component='div' />
       </div>
     </div>
   );

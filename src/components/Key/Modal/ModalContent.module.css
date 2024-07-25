@@ -77,3 +77,8 @@
   border: 1px solid gray;
   border-radius: 8px;
 }
+
+.errorField {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+}

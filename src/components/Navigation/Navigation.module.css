@@ -13,3 +13,8 @@
   color: #e84a5f;
   text-decoration: none;
 }
+
+.nav {
+  display: flex;
+  align-items: center;
+}

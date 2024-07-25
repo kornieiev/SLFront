@@ -17,7 +17,12 @@ export default function AddNewDealer() {
     <div>
       <AddNewDealerForm />
       <div>
-        <h3>Current Dealers List:</h3>
+        {allDealers.length > 0 ? (
+          <h3>Current Dealers List:</h3>
+        ) : (
+          <h5>You do not have any dealers yet. Please add one</h5>
+        )}
+
         <ul>
           {allDealers &&
             allDealers.map((item) => (

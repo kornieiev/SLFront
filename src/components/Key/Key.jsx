@@ -56,7 +56,7 @@ export const Key = ({ item }) => {
       });
       return;
     }
-    if (!item.DealersPrice[dealerName]) {
+    if (!item?.DealersPrice?.[dealerName]) {
       setDealersPriceData({
         "Price All Keys Lost": "no data yet",
         "Price Add a Key": "no data yet",
@@ -64,7 +64,7 @@ export const Key = ({ item }) => {
       });
       return;
     }
-    if (item.DealersPrice[dealerName]) {
+    if (item?.DealersPrice?.[dealerName]) {
       setDealersPriceData(item?.DealersPrice?.[dealerName]);
       return;
     }

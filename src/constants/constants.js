@@ -45,6 +45,7 @@ export const makersList = [
   "Toyota",
   "Volkswagen",
   "Volvo",
+  "TestMaker",
 ];
 
 export const typeOfIgnitionList = [

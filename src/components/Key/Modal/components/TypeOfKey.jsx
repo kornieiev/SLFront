@@ -1,10 +1,11 @@
-import { ErrorMessage, Field } from "formik";
+import { ErrorMessage, Field, useField } from "formik";
 import css from "../ModalContent.module.css";
 import { useSelector } from "react-redux";
 import { selectTypesOfKey } from "../../../../redux/keys/selectors";
 
 export default function TypeOfKey({ item }) {
   const typesOfKey = useSelector(selectTypesOfKey);
+  const [field, meta] = useField("Type of Key"); // Получение метаданных поля
 
   return (
     <div className={css.fieldWrapper}>
@@ -14,7 +15,9 @@ export default function TypeOfKey({ item }) {
       </label>
       <div className={css.yearWrapper}>
         <Field
-          className={css.inputField}
+          className={`${css.inputField} ${
+            meta.touched && meta.error ? css.errorField : ""
+          }`}
           id='Type of Key'
           name='Type of Key'
           placeholder='Type of Key'

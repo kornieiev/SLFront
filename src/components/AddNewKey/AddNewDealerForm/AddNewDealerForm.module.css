@@ -1,0 +1,31 @@
+.mainWrapper {
+  width: 300px;
+  border: 1px solid orange;
+  border-radius: 10px;
+  padding: 20px 0;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  margin: auto;
+  gap: 10px;
+}
+
+.nameField {
+  width: 100%;
+}
+
+.btn {
+  width: 100%;
+  margin-top: 5px;
+  padding: 8px 0;
+  background-color: #f9ef8e;
+  border: 1px solid gray;
+  border-radius: 8px;
+}

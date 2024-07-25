@@ -1,8 +1,9 @@
-import { ErrorMessage, Field } from "formik";
+import { ErrorMessage, Field, useField } from "formik";
 import css from "../ModalContent.module.css";
-import { Toaster, toast } from "react-hot-toast";
 
 export default function Maker({ item }) {
+  const [field, meta] = useField("Model"); // Получение метаданных поля
+
   return (
     <div className={css.fieldWrapper}>
       <label className={css.inputLabel} htmlFor='Model'>
@@ -10,18 +11,14 @@ export default function Maker({ item }) {
       </label>
       <div className={css.yearWrapper}>
         <Field
-          className={css.inputField}
+          className={`${css.inputField} ${
+            meta.touched && meta.error ? css.errorField : ""
+          }`}
           id='Model'
           name='Model'
           placeholder='Model'
         />
-        <ErrorMessage name='Model' component='div'>
-          {(msg) => {
-            toast.error(msg);
-            return null; // Не отображаем сообщение в div
-          }}
-        </ErrorMessage>
-        <Toaster position='top-center' reverseOrder={false} />
+        <ErrorMessage name='Model' component='div' />
       </div>
     </div>
   );
