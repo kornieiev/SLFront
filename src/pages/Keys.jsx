@@ -12,15 +12,25 @@ import { useAuth } from "../hooks";
 export default function Keys() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
-  const { role } = useAuth();
+  const { isLoggedIn, role } = useAuth();
 
   useEffect(() => {
-    dispatch(fetchKeys());
-  }, [dispatch]);
+    if (
+      (isLoggedIn && role === "admin") ||
+      (isLoggedIn && role === "manager")
+    ) {
+      dispatch(fetchKeys());
+    }
+  }, [dispatch, isLoggedIn, role]);
 
   useEffect(() => {
-    dispatch(fetchDealers());
-  }, [dispatch]);
+    if (
+      (isLoggedIn && role === "admin") ||
+      (isLoggedIn && role === "manager")
+    ) {
+      dispatch(fetchDealers());
+    }
+  }, [dispatch, isLoggedIn, role]);
 
   return (
     <>
