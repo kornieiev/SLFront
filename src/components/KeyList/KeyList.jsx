@@ -31,7 +31,7 @@ export const KeyList = () => {
           <option defaultValue=''>Choose Dealer</option>
           {DealerList.map((item) => (
             <option key={item._id} value={item.dealerName}>
-              {item.dealerName}
+              {item.dealerName.toUpperCase()}
             </option>
           ))}
         </select>

@@ -1,0 +1,12 @@
+.homeLogo {
+  width: 60%;
+  @media (max-width: 430px) {
+    width: 60px;
+  }
+}
+
+.logoWrapper {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+}

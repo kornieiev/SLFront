@@ -27,7 +27,7 @@ export default function AddNewDealer() {
           {allDealers &&
             allDealers.map((item) => (
               <li key={item._id}>
-                <p>{item.dealerName}</p>
+                <p>{item.dealerName.toUpperCase()}</p>
               </li>
             ))}
         </ul>

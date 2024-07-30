@@ -1,5 +1,6 @@
 import css from "./pages.module.css";
 import { useAuth } from "../hooks";
+import Logo from "components/Logo/Logo";
 
 export default function Home() {
   const { isLoggedIn, role } = useAuth();
@@ -20,7 +21,8 @@ export default function Home() {
 
       {!isLoggedIn && <p className={css.text}>Please register or login</p>}
 
-      <div className={css.img}></div>
+      {/* <div className={css.img}></div> */}
+      <Logo />
     </div>
   );
 }
