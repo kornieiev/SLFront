@@ -7,7 +7,10 @@ export default function Home() {
 
   return (
     <div className={css.container}>
-      <h1 className={css.title}>Welcome to key-manager</h1>
+      {/* <h1 className={css.title}>Welcome!</h1> */}
+
+      <Logo />
+
       {role === "admin" && isLoggedIn && (
         <p className={css.text}>
           You have full access. You can view, add, and modify data.
@@ -22,7 +25,6 @@ export default function Home() {
       {!isLoggedIn && <p className={css.text}>Please register or login</p>}
 
       {/* <div className={css.img}></div> */}
-      <Logo />
     </div>
   );
 }
