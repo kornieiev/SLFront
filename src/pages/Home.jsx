@@ -25,6 +25,8 @@ export default function Home() {
       {!isLoggedIn && <p className={css.text}>Please register or login</p>}
 
       {/* <div className={css.img}></div> */}
+
+      <div className={css.createdBy}>Created by mail.korneev@gmail.com</div>
     </div>
   );
 }

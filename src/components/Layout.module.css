@@ -1,6 +1,6 @@
 .wrapper {
   max-width: 400px;
-  min-height: 100%;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 0 16px 16px 16px;
   background-color: lightcyan;
