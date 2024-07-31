@@ -1,0 +1,1 @@
+const t="_loader_1bxh2_1",e="_container_1bxh2_8",_="_title_1bxh2_17",c="_img_1bxh2_25",o="_text_1bxh2_35",n="_createdBy_1bxh2_44",a={loader:t,container:e,title:_,img:c,text:o,createdBy:n};export{a as c};
