@@ -1,0 +1,1 @@
+const t="_loader_xw1hc_1",e="_container_xw1hc_8",c="_title_xw1hc_17",_="_img_xw1hc_25",r="_text_xw1hc_35",o="_createdBy_xw1hc_44",n="_clienCategoryWrapper_xw1hc_53",a={loader:t,container:e,title:c,img:_,text:r,createdBy:o,clienCategoryWrapper:n};export{a as c};
