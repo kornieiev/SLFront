@@ -14,10 +14,24 @@ const dealersSlice = createSlice({
   name: "dealers",
   initialState: {
     allDealers: [],
+    // choosedDealerCategory: "",
+    // choosedDealer: "",
     isLoading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    // chooseDealerCategory: {
+    //   reducer(state, action) {
+    //     state.choosedDealer = "";
+    //     state.choosedDealerCategory = action.payload;
+    //   },
+    // },
+    // chooseDealerName: {
+    //   reducer(state, action) {
+    //     state.choosedDealer = action.payload;
+    //   },
+    // },
+  },
   extraReducers: (builder) => {
     builder
 
@@ -33,6 +47,7 @@ const dealersSlice = createSlice({
       // createDealer
       .addCase(createDealer.pending, handlePending)
       .addCase(createDealer.fulfilled, (state, action) => {
+        console.log("action.payload-slice", action.payload);
         state.isLoading = false;
         state.error = null;
         state.allDealers.push(action.payload.result);
@@ -43,4 +58,4 @@ const dealersSlice = createSlice({
 
 export const dealersReducer = dealersSlice.reducer;
 
-// export const { updateDealers } = dealersSlice.actions;
+export const { chooseDealerCategory, chooseDealerName } = dealersSlice.actions;

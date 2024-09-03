@@ -8,10 +8,19 @@ import { DNA } from "react-loader-spinner";
 import css from "./pages.module.css";
 import { fetchDealers } from "../redux/dealers/operations";
 import { useAuth } from "../hooks";
+import { ClientCategorySelector } from "components/ClientCategorySelector/ClientCategorySelector";
+import { ClientNameSelector } from "components/ClientNameSelector/ClientNameSelector";
+import {
+  selectChoosedDealer,
+  selectChoosedDealerCategory,
+} from "../redux/keys/selectors";
 
 export default function Keys() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
+  const choosedDealerCategory = useSelector(selectChoosedDealerCategory);
+  const choosedDealerName = useSelector(selectChoosedDealer);
+
   const { isLoggedIn, role } = useAuth();
 
   useEffect(() => {
@@ -42,9 +51,16 @@ export default function Keys() {
 
       {role !== "user" && (
         <>
-          <h3>Choose needed key below:</h3>
+          <div className={css.clienCategoryWrapper}>
+            <ClientCategorySelector />
+            {choosedDealerCategory && choosedDealerCategory !== "regular" && (
+              <ClientNameSelector />
+            )}
+          </div>
+          {choosedDealerCategory === "regular" && <KeyFilter />}
+          {choosedDealerName && <KeyFilter />}
 
-          <KeyFilter />
+          {/* {choosedDealerName && <KeyFilter />} */}
         </>
       )}
 

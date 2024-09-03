@@ -49,3 +49,8 @@
   color: burlywood;
   text-align: center;
 }
+
+.clienCategoryWrapper {
+  display: flex;
+  justify-content: space-around;
+}

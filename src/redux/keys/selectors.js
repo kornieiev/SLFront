@@ -43,3 +43,8 @@ export const selectTypesOfKey = createSelector(
 );
 
 export const selectDealer = (state) => state.keys.dealer;
+
+export const selectChoosedDealerCategory = (state) =>
+  state.keys.choosedDealerCategory;
+
+export const selectChoosedDealer = (state) => state.keys.choosedDealer;

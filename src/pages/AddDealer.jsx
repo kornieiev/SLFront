@@ -17,7 +17,7 @@ export default function AddDealer() {
         </Helmet>
       </HelmetProvider>
 
-      <h3 className={css.title}>Here you can add new Dealer</h3>
+      <h3 className={css.title}>Here you can add new Client</h3>
       <AddNewDealer />
 
       {isLoading && (

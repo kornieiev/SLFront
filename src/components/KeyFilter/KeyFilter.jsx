@@ -74,123 +74,113 @@ export default function KeyFilter() {
   );
 
   return (
-    <ul className={css.list}>
-      {/* Step one - Maker */}
-      <li className={css.item}>
-        <label className={css.label} htmlFor='Maker'>
-          Make:{" "}
-        </label>
-        <select
-          className={css.select}
-          type='text'
-          name='Maker'
-          value={filters2.Maker}
-          onChange={handleChange}
-        >
-          <option defaultValue>--Please choose maker--</option>
-          {makersArr &&
-            makersArr.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-        </select>
-      </li>
-      {/* Step two - Model */}
-      {filters2.Maker && (
-        <li className={css.item}>
-          <label className={css.label} htmlFor='Model'>
-            Model:{" "}
-          </label>
-          <select
-            className={css.select}
-            type='text'
-            name='Model'
-            placeholder='Model'
-            value={filters2.Model}
-            onChange={handleChange}
-          >
-            <option defaultValue>--Please choose model--</option>
-            {[...new Set(modelsArr.map((item) => item.Model))].map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </li>
-      )}
-      {/* Step three - Year */}
-      {filters2.Model && (
-        <li className={css.item}>
-          <label className={css.label} htmlFor='Year'>
-            Year:{" "}
-          </label>
-          <select
-            className={css.select}
-            type='text'
-            name='Year'
-            placeholder='Year'
-            value={filters2.Year}
-            onChange={handleChange}
-          >
-            <option defaultValue>--Please choose year--</option>
-            {sortedARR.map((item) => {
-              {
-                /* console.log(item);
-              console.log(Object.keys(item));
-              console.log(Object.values(item)); */
-              }
+    <>
+      <h3>Choose needed key below:</h3>
 
-              return (
-                <option
-                  key={`${Object.keys(item)}-${nanoid()}`}
-                  value={Object.values(item)}
-                >
-                  {Object.values(item)}
-                </option>
-              );
-            })}
-            {/* {[...new Set(yearsArr.map((item) => item.Year))].map((item) => {
-              console.log(item);
-              return (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              );
-            })} */}
-          </select>
-        </li>
-      )}
-      {/* Step four - TypeOfKey */}
-      {filters2.Year && (
+      <ul className={css.list}>
+        {/* Step one - Maker */}
         <li className={css.item}>
-          <label className={css.label} htmlFor='TypeOfKey'>
-            TypeOfKey:{" "}
+          <label className={css.label} htmlFor='Maker'>
+            Make:{" "}
           </label>
           <select
             className={css.select}
             type='text'
-            name='TypeOfKey'
-            placeholder='TypeOfKey'
-            value={filters2.TypeOfKey}
+            name='Maker'
+            value={filters2.Maker}
             onChange={handleChange}
           >
-            <option defaultValue>--Please choose TypeOfKey--</option>
-            {[...new Set(typeOfKeyArr.map((item) => item["Type of Key"]))].map(
-              (item) => (
+            <option defaultValue>--Please choose maker--</option>
+            {makersArr &&
+              makersArr.map((item) => (
                 <option key={item} value={item}>
                   {item}
                 </option>
-              )
-            )}
+              ))}
           </select>
         </li>
-      )}
-      {keysForRender?.length > 0 && (
-        <>
-          <KeyList />
-        </>
-      )}
-    </ul>
+        {/* Step two - Model */}
+        {filters2.Maker && (
+          <li className={css.item}>
+            <label className={css.label} htmlFor='Model'>
+              Model:{" "}
+            </label>
+            <select
+              className={css.select}
+              type='text'
+              name='Model'
+              placeholder='Model'
+              value={filters2.Model}
+              onChange={handleChange}
+            >
+              <option defaultValue>--Please choose model--</option>
+              {[...new Set(modelsArr.map((item) => item.Model))].map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </li>
+        )}
+        {/* Step three - Year */}
+        {filters2.Model && (
+          <li className={css.item}>
+            <label className={css.label} htmlFor='Year'>
+              Year:{" "}
+            </label>
+            <select
+              className={css.select}
+              type='text'
+              name='Year'
+              placeholder='Year'
+              value={filters2.Year}
+              onChange={handleChange}
+            >
+              <option defaultValue>--Please choose year--</option>
+              {sortedARR.map((item) => {
+                return (
+                  <option
+                    key={`${Object.keys(item)}-${nanoid()}`}
+                    value={Object.values(item)}
+                  >
+                    {Object.values(item)}
+                  </option>
+                );
+              })}
+            </select>
+          </li>
+        )}
+        {/* Step four - TypeOfKey */}
+        {filters2.Year && (
+          <li className={css.item}>
+            <label className={css.label} htmlFor='TypeOfKey'>
+              TypeOfKey:{" "}
+            </label>
+            <select
+              className={css.select}
+              type='text'
+              name='TypeOfKey'
+              placeholder='TypeOfKey'
+              value={filters2.TypeOfKey}
+              onChange={handleChange}
+            >
+              <option defaultValue>--Please choose TypeOfKey--</option>
+              {[
+                ...new Set(typeOfKeyArr.map((item) => item["Type of Key"])),
+              ].map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </li>
+        )}
+        {keysForRender?.length > 0 && (
+          <>
+            <KeyList />
+          </>
+        )}
+      </ul>
+    </>
   );
 }

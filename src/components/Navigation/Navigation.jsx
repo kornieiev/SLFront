@@ -59,7 +59,7 @@ export const Navigation = () => {
               }
               to='/addDealer'
             >
-              Dealers
+              Clients
             </NavLink>
           )}
         </>

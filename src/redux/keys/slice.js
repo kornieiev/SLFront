@@ -21,17 +21,16 @@ const keysSlice = createSlice({
     error: null,
     filters: {
       Maker: "",
-
       ModelsArr: [],
       Model: "",
-
       YearsArr: [],
       Year: "",
-
       TypeOfKeyArr: [],
       TypeOfKey: "",
     },
-    dealer: "",
+    choosedDealerCategory: "",
+    choosedDealer: "",
+    // dealer: "",
   },
   reducers: {
     setFilters: {
@@ -48,7 +47,7 @@ const keysSlice = createSlice({
           state.filters.Year = "";
           state.filters.TypeOfKey = "";
           state.keysForRender = [];
-          state.dealer = "";
+          // state.dealer = "";
         }
 
         if (name === "Model") {
@@ -58,7 +57,7 @@ const keysSlice = createSlice({
           state.filters.TypeOfKey = "";
           state.filters.Year = "";
           state.keysForRender = [];
-          state.dealer = "";
+          // state.dealer = "";
         }
 
         if (name === "Year") {
@@ -67,20 +66,42 @@ const keysSlice = createSlice({
           );
           state.filters.TypeOfKey = "";
           state.keysForRender = [];
-          state.dealer = "";
+          // state.dealer = "";
         }
         if (name === "TypeOfKey") {
-          state.keysForRender = state.filters.TypeOfKeyArr.filter(
-            (item) => item["Type of Key"] === value
-          );
+          state.keysForRender = state.filters.TypeOfKeyArr.filter((item) => {
+            return item["Type of Key"] === value;
+          });
         }
       },
     },
-    setDealer: {
+    chooseDealerCategory: {
       reducer(state, action) {
-        state.dealer = action.payload;
+        state.choosedDealer = "";
+        state.filters.Maker = "";
+        state.filters.Model = "";
+        state.filters.TypeOfKey = "";
+        state.filters.Year = "";
+        state.keysForRender = [];
+        state.choosedDealerCategory = action.payload;
       },
     },
+    chooseDealerName: {
+      reducer(state, action) {
+        state.choosedDealer = "";
+        state.filters.Maker = "";
+        state.filters.Model = "";
+        state.filters.TypeOfKey = "";
+        state.filters.Year = "";
+        state.keysForRender = [];
+        state.choosedDealer = action.payload;
+      },
+    },
+    // setDealer: {
+    //   reducer(state, action) {
+    //     state.dealer = action.payload;
+    //   },
+    // },
     updateDealerPrice: {
       reducer(state, action) {
         const { id } = action.payload;
@@ -162,4 +183,10 @@ const keysSlice = createSlice({
 
 export const keysReducer = keysSlice.reducer;
 
-export const { setFilters, setDealer, updateDealerPrice } = keysSlice.actions;
+export const {
+  setFilters,
+  chooseDealerCategory,
+  chooseDealerName,
+  setDealer,
+  updateDealerPrice,
+} = keysSlice.actions;

@@ -19,10 +19,16 @@ export const fetchDealers = createAsyncThunk(
 export const createDealer = createAsyncThunk(
   "dealers/createDealer",
   async (credentials, thunkAPI) => {
+    console.log("credentials:", credentials);
+
+    const { dealerName, dealerCategory } = credentials;
+
     try {
       const response = await axios.post("/dealers", {
-        dealerName: credentials,
+        dealerName,
+        dealerCategory,
       });
+      console.log("response", response);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

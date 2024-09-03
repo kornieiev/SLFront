@@ -6,9 +6,11 @@ import { useSelector } from "react-redux";
 import css from "./Key.module.css";
 import ModalContent from "./Modal/ModalContent";
 import { selectRole } from "../../redux/auth/selectors";
-import SVG from "./SVG/SVG";
 import ModalEditDealerPrice from "./ModalEditDealerPrice/ModalEditDealerPrice";
-import { selectDealer } from "../../redux/keys/selectors";
+import {
+  selectChoosedDealerCategory,
+  selectChoosedDealer,
+} from "../../redux/keys/selectors";
 
 const style = {
   position: "absolute",
@@ -34,29 +36,26 @@ export const Key = ({ item }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [dealerModalOpen, setDealerModalOpen] = useState(false);
-  const handleDealerModalOpen = () => setDealerModalOpen(true);
-  const handleDealerModalClose = () => setDealerModalOpen(false);
-
   const role = useSelector(selectRole);
-  const dealerName = useSelector(selectDealer);
+  const choosedDealerCategory = useSelector(selectChoosedDealerCategory);
+  const choosedDealer = useSelector(selectChoosedDealer);
 
   const [dealerPriceData, setDealersPriceData] = useState({
-    "Price All Keys Lost": "choose dealer",
-    "Price Add a Key": "choose dealer",
-    "Price Program Only": "choose dealer",
+    "Price All Keys Lost": "no data yet",
+    "Price Add a Key": "no data yet",
+    "Price Program Only": "no data yet",
   });
 
   useEffect(() => {
-    if (dealerName === "") {
+    if (choosedDealerCategory === "regular") {
       setDealersPriceData({
-        "Price All Keys Lost": "choose dealer",
-        "Price Add a Key": "choose dealer",
-        "Price Program Only": "choose dealer",
+        "Price All Keys Lost": item["Price All Keys Lost"],
+        "Price Add a Key": item["Price Add a Key"],
+        "Price Program Only": item["Price Program Only"],
       });
       return;
     }
-    if (!item?.DealersPrice?.[dealerName]) {
+    if (!item?.DealersPrice?.[choosedDealer]) {
       setDealersPriceData({
         "Price All Keys Lost": "no data yet",
         "Price Add a Key": "no data yet",
@@ -64,11 +63,11 @@ export const Key = ({ item }) => {
       });
       return;
     }
-    if (item?.DealersPrice?.[dealerName]) {
-      setDealersPriceData(item?.DealersPrice?.[dealerName]);
+    if (choosedDealer && item?.DealersPrice?.[choosedDealer]) {
+      setDealersPriceData(item?.DealersPrice?.[choosedDealer]);
       return;
     }
-  }, [dealerName, item.DealersPrice]);
+  }, [choosedDealer, choosedDealerCategory, item, item?.DealersPrice]);
 
   return (
     <div className={css.wrapper}>
@@ -98,81 +97,34 @@ export const Key = ({ item }) => {
           <span className={css.itemData}>{item["No Buttons"]}</span>
         </li>
         <li className={css.item}>
-          <div className={css.itemPriceWrapper}>
-            <div>
-              <strong className={css.itemName}>Price All Keys Lost:</strong>
-              <span className={css.itemData}>
-                {item["Price All Keys Lost"]}
-              </span>
-            </div>
-            <div className={css.dealerPriceWrapper}>
-              <p className={css.dealerPrice}>
-                <span className={css.dealerPriceText}>
-                  {dealerPriceData["Price All Keys Lost"]}
-                </span>
-              </p>
-              <div className={css.svgWrapper}>
-                {dealerName && role === "admin" && (
-                  <button
-                    className={css.btnEditDealerPrice}
-                    onClick={handleDealerModalOpen}
-                  >
-                    <SVG />
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
+          <strong className={css.itemName}>Price All Keys Lost:</strong>
+          <span className={css.itemData}>
+            {dealerPriceData["Price All Keys Lost"]}
+            {choosedDealer &&
+              dealerPriceData["Price All Keys Lost"] !== "no data yet" &&
+              ` - price for ${choosedDealer}`}
+            {choosedDealerCategory === "regular" && ` - regular price`}
+          </span>
         </li>
         <li className={css.item}>
-          <div className={css.itemPriceWrapper}>
-            <div>
-              <strong className={css.itemName}>Price Add a Key:</strong>
-              <span className={css.itemData}>{item["Price Add a Key"]}</span>
-            </div>
-            <div className={css.dealerPriceWrapper}>
-              <p className={css.dealerPrice}>
-                <span className={css.dealerPriceText}>
-                  {dealerPriceData["Price Add a Key"]}
-                </span>
-              </p>
-              <div className={css.svgWrapper}>
-                {dealerName && role === "admin" && (
-                  <button
-                    className={css.btnEditDealerPrice}
-                    onClick={handleDealerModalOpen}
-                  >
-                    <SVG />
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
+          <strong className={css.itemName}>Price Add a Key:</strong>
+          <span className={css.itemData}>
+            {dealerPriceData["Price Add a Key"]}
+            {choosedDealer &&
+              dealerPriceData["Price All Keys Lost"] !== "no data yet" &&
+              ` - price for ${choosedDealer}`}
+            {choosedDealerCategory === "regular" && ` - regular price`}
+          </span>
         </li>
         <li className={css.item}>
-          <div className={css.itemPriceWrapper}>
-            <div>
-              <strong className={css.itemName}>Price Program Only:</strong>
-              <span className={css.itemData}>{item["Price Program Only"]}</span>
-            </div>
-            <div className={css.dealerPriceWrapper}>
-              <p className={css.dealerPrice}>
-                <span className={css.dealerPriceText}>
-                  {dealerPriceData["Price Program Only"]}
-                </span>
-              </p>
-              <div className={css.svgWrapper}>
-                {dealerName && role === "admin" && (
-                  <button
-                    className={css.btnEditDealerPrice}
-                    onClick={handleDealerModalOpen}
-                  >
-                    <SVG />
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
+          <strong className={css.itemName}>Price Program Only:</strong>
+          <span className={css.itemData}>
+            {dealerPriceData["Price Program Only"]}
+            {choosedDealer &&
+              dealerPriceData["Price All Keys Lost"] !== "no data yet" &&
+              ` - price for ${choosedDealer}`}
+            {choosedDealerCategory === "regular" && ` - regular price`}
+          </span>
         </li>
         <li className={css.item}>
           <strong className={css.itemName}>Dealer Price:</strong>
@@ -212,38 +164,42 @@ export const Key = ({ item }) => {
           <strong className={css.itemName}>Comments:</strong>
           <span className={css.itemData}>{item.Comments}</span>
         </li>
-
-        {role === "admin" && (
-          <li className={css.editBtn}>
-            <Button onClick={handleOpen}>Edit information</Button>
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby='modal-modal-title'
-              aria-describedby='modal-modal-description'
-            >
-              <Box sx={style}>
-                <ModalContent item={item} onClose={handleClose} />
-              </Box>
-            </Modal>
-          </li>
-        )}
-
-        <Modal
-          open={dealerModalOpen}
-          onClose={handleDealerModalClose}
-          aria-labelledby='modal-dealer-title'
-          aria-describedby='modal-dealer-price-change'
-        >
-          <Box sx={style}>
-            <ModalEditDealerPrice
-              item={item}
-              dealerPriceData={dealerPriceData}
-              onClose={handleDealerModalClose}
-            />
-          </Box>
-        </Modal>
       </ul>
+      {role === "admin" && choosedDealerCategory === "regular" && (
+        <div className={css.editBtn}>
+          <Button onClick={handleOpen}>Edit information</Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby='modal-modal-title'
+            aria-describedby='modal-modal-description'
+          >
+            <Box sx={style}>
+              <ModalContent item={item} onClose={handleClose} />
+            </Box>
+          </Modal>
+        </div>
+      )}
+
+      {role === "admin" && choosedDealer && (
+        <div className={css.editBtn}>
+          <Button onClick={handleOpen}>Edit information</Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby='modal-modal-title'
+            aria-describedby='modal-modal-description'
+          >
+            <Box sx={style}>
+              <ModalEditDealerPrice
+                item={item}
+                onClose={handleClose}
+                dealerPriceData={dealerPriceData}
+              />
+            </Box>
+          </Modal>
+        </div>
+      )}
     </div>
   );
 };
