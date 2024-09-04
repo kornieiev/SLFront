@@ -1,6 +1,7 @@
 # React + Vite SPA for company [SecureLocks](https://securelocks.net/)
 
 The application was created for the company “SecureLocks” based in Chicago, USA.
+
 It is designed to manage an internal database with the ability to add, modify, and delete data.
 
 MongoDB was chosen for data storage.
@@ -8,7 +9,10 @@ MongoDB was chosen for data storage.
 To access the data, you need to register and obtain administrator rights (full access to modify/add data) or user rights (view-only access).
 
 The backend is written in Node.js and hosted on render.com. It also uses Express, Mongoose, Jsonwebtoken, Joi, Bcrypt, Cors, etc.
+
 The frontend is written in React + React-Router-Dom + Redux. It also uses Axios, MUI, Formik, Styled-components, etc.
+
+The primary device for using the app is a smartphone. Therefore, it is designed in a mobile-first format.
 
 <img width="303" alt="image" src="https://github.com/user-attachments/assets/9f86c91c-6c3d-424b-a2a3-553972b173b8">
 <img width="303" alt="image" src="https://github.com/user-attachments/assets/c8b9d696-a88d-4af0-9273-0573ee4d12cb">
