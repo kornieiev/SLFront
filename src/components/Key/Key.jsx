@@ -120,7 +120,11 @@ export const Key = ({ item }) => {
                     {`(for ${choosedDealer})`}
                   </span>
                 )}
-              {choosedDealerCategory === "regular" && ` - regular price`}
+              {choosedDealerCategory === "regular" && (
+                <span
+                  className={css.dealerSpecifying}
+                >{`(regular price)`}</span>
+              )}
             </td>
           </tr>
           <tr>
@@ -135,7 +139,11 @@ export const Key = ({ item }) => {
                     {`(for ${choosedDealer})`}
                   </span>
                 )}
-              {choosedDealerCategory === "regular" && ` - regular price`}
+              {choosedDealerCategory === "regular" && (
+                <span
+                  className={css.dealerSpecifying}
+                >{`(regular price)`}</span>
+              )}
             </td>
           </tr>
           <tr>
@@ -150,7 +158,11 @@ export const Key = ({ item }) => {
                     {`(for ${choosedDealer})`}
                   </span>
                 )}
-              {choosedDealerCategory === "regular" && ` - regular price`}
+              {choosedDealerCategory === "regular" && (
+                <span
+                  className={css.dealerSpecifying}
+                >{`(regular price)`}</span>
+              )}
             </td>
           </tr>
           <tr>
