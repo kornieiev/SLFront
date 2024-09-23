@@ -26,11 +26,16 @@ export default function TypeOfIgnition({ item }) {
           component='select'
         >
           <option defaultValue>- choose one -</option>
-          {IgnitionTypes.map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
+          {IgnitionTypes.map((item, index) => {
+            if (typeof item === "undefined") {
+              return;
+            }
+            return (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            );
+          })}
         </Field>
         <ErrorMessage name='Type of Ignition' component='div' />
       </div>

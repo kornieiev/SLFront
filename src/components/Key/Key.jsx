@@ -101,8 +101,11 @@ export const Key = ({ item }) => {
           <span className={css.itemData}>
             {dealerPriceData["Price All Keys Lost"]}
             {choosedDealer &&
-              dealerPriceData["Price All Keys Lost"] !== "no data yet" &&
-              ` - price for ${choosedDealer}`}
+              dealerPriceData["Price All Keys Lost"] !== "no data yet" && (
+                <span
+                  className={css.dealerSpecifying}
+                >{`(for ${choosedDealer})`}</span>
+              )}
             {choosedDealerCategory === "regular" && ` - regular price`}
           </span>
         </li>
@@ -111,8 +114,11 @@ export const Key = ({ item }) => {
           <span className={css.itemData}>
             {dealerPriceData["Price Add a Key"]}
             {choosedDealer &&
-              dealerPriceData["Price All Keys Lost"] !== "no data yet" &&
-              ` - price for ${choosedDealer}`}
+              dealerPriceData["Price All Keys Lost"] !== "no data yet" && (
+                <span
+                  className={css.dealerSpecifying}
+                >{`(for ${choosedDealer})`}</span>
+              )}
             {choosedDealerCategory === "regular" && ` - regular price`}
           </span>
         </li>
@@ -121,8 +127,11 @@ export const Key = ({ item }) => {
           <span className={css.itemData}>
             {dealerPriceData["Price Program Only"]}
             {choosedDealer &&
-              dealerPriceData["Price All Keys Lost"] !== "no data yet" &&
-              ` - price for ${choosedDealer}`}
+              dealerPriceData["Price All Keys Lost"] !== "no data yet" && (
+                <span
+                  className={css.dealerSpecifying}
+                >{`(for ${choosedDealer})`}</span>
+              )}
             {choosedDealerCategory === "regular" && ` - regular price`}
           </span>
         </li>

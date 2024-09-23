@@ -50,13 +50,24 @@
 .itemName {
   margin-right: 10px;
   margin-top: 5px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .itemData {
-  color: darkorange;
+  color: red;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .editBtn {
   margin-left: auto;
   list-style: none;
   padding: 0;
+}
+
+.dealerSpecifying {
+  display: inline-block;
+  color: green;
+  font-size: 0.6rem;
+  padding-left: 5px;
 }

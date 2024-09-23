@@ -22,6 +22,9 @@ import PartNumber from "../Key/Modal/components/PartNumber";
 import { addKeyValidationSchema } from "../helpers/validationData";
 import { useDispatch } from "react-redux";
 import { createKey } from "../../redux/keys/operations";
+import toast, { Toaster } from "react-hot-toast";
+
+const notify = () => toast.success("New key added!");
 
 export default function AddNewKey() {
   const dispatch = useDispatch();
@@ -38,12 +41,12 @@ export default function AddNewKey() {
       <Formik
         className={css.formWrap}
         initialValues={{
-          Maker: "",
+          Maker: "- choose one -",
           Model: "",
           YearStart: "",
           YearEnd: "",
-          "Type of Ignition": "",
-          "Type of Key": "",
+          "Type of Ignition": "- choose one -",
+          "Type of Key": "- choose one -",
           "No Buttons": "",
           "Price All Keys Lost": "",
           "Price Add a Key": "",
@@ -82,35 +85,44 @@ export default function AddNewKey() {
             isActive: values.isActive,
           };
           dispatch(createKey(credentials));
+          notify();
 
           resetForm();
         }}
       >
         <Form className={css.formWrap}>
-          <Maker />
-          <Model />
-          <Year />
-          <TypeOfIgnition />
-          <TypeOfKey />
-          <NoButtons />
-          <PriceAllKeysLost />
-          <PriceAddaKey />
-          <PriceProgramOnly />
-          <DealerPrice />
-          <DealerPriceTotal />
-          <DealerLocation />
-          <DealerProgram />
-          <DealerEmergencyBlade />
-          <SecureLocksParts />
-          <PartNumber />
-          <Link />
-          <Comments />
-
-          <button className={css.btn} type='submit'>
-            Submit
-          </button>
+          <div className={css.fieldsWrapper}>
+            <div className={css.fieldsBlock}>
+              <Maker />
+              <Model />
+              <Year />
+              <TypeOfIgnition />
+              <TypeOfKey />
+              <NoButtons />
+              <PriceAllKeysLost />
+              <PriceAddaKey />
+              <PriceProgramOnly />
+            </div>
+            <div className={css.fieldsBlock}>
+              <DealerPrice />
+              <DealerPriceTotal />
+              <DealerLocation />
+              <DealerProgram />
+              <DealerEmergencyBlade />
+              <SecureLocksParts />
+              <PartNumber />
+              <Link />
+              <Comments />
+            </div>
+          </div>
+          <div>
+            <button className={css.btn} type='submit'>
+              Submit
+            </button>
+          </div>
         </Form>
       </Formik>
+      <Toaster position='top-right' reverseOrder={false} />
     </div>
   );
 }

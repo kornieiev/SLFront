@@ -23,12 +23,19 @@ export default function TypeOfKey({ item }) {
           placeholder='Type of Key'
           component='select'
         >
-          <option defaultValue>- choose one -</option>
-          {typesOfKey.map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
+          {/* <option defaultValue>- choose one -</option> */}
+          <option value=''>- choose one -</option>
+
+          {typesOfKey.map((item, index) => {
+            if (typeof item === "undefined") {
+              return;
+            }
+            return (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            );
+          })}
         </Field>
         <ErrorMessage name='Type of Key' component='div' />
       </div>

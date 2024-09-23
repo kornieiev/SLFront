@@ -68,6 +68,7 @@
   background-color: #f9ef8e;
   border: 1px solid gray;
   border-radius: 8px;
+  width: 100%;
 }
 
 .btnCancel {
@@ -81,4 +82,20 @@
 .errorField {
   border: 1px solid red;
   background-color: #ffe6e6;
+}
+
+.fieldsWrapper {
+  display: flex;
+  gap: 5px;
+  @media (max-width: 767px) {
+    display: block;
+  }
+}
+
+.fieldsBlock {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
 }

@@ -24,11 +24,16 @@ export default function Maker({ item }) {
           component='select'
         >
           <option value=''>- choose one -</option>
-          {makersArr.map((item) => (
-            <option key={`${item}-${nanoid()}`} value={item}>
-              {item}
-            </option>
-          ))}
+          {makersArr.map((item) => {
+            if (typeof item === "undefined") {
+              return;
+            }
+            return (
+              <option key={`${item}-${nanoid()}`} value={item}>
+                {item}
+              </option>
+            );
+          })}
         </Field>
         <ErrorMessage name='Maker' component='div' />
       </div>
