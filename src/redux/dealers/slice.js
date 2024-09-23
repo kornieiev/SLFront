@@ -47,7 +47,6 @@ const dealersSlice = createSlice({
       // createDealer
       .addCase(createDealer.pending, handlePending)
       .addCase(createDealer.fulfilled, (state, action) => {
-        console.log("action.payload-slice", action.payload);
         state.isLoading = false;
         state.error = null;
         state.allDealers.push(action.payload.result);

@@ -3,6 +3,12 @@ import { useDispatch } from "react-redux";
 import { createDealer } from "../../../redux/dealers/operations";
 import css from "./AddNewDealerForm.module.css";
 
+import toast, { Toaster } from "react-hot-toast";
+const notify = (client) =>
+  toast.success(
+    `${client.dealerCategory} ${client.dealerName} added as new client`
+  );
+
 export default function AddNewDealerForm() {
   const dispatch = useDispatch();
   return (
@@ -16,10 +22,10 @@ export default function AddNewDealerForm() {
           if (!values.dealerName.trim() || values.dealerCategory === "") {
             return;
           }
-          console.log("values", values);
 
           // dispatch(createDealer(values.dealerName.trim().toLocaleLowerCase()));
           dispatch(createDealer(values));
+          notify(values);
 
           resetForm();
         }}
@@ -50,6 +56,7 @@ export default function AddNewDealerForm() {
           </button>
         </Form>
       </Formik>
+      <Toaster position='top-right' reverseOrder={false} />
     </div>
   );
 }

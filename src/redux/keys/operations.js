@@ -7,7 +7,6 @@ export const fetchKeys = createAsyncThunk("/api/keys", async (_, thunkAPI) => {
     const res = await axios.get("/keys");
 
     // const filteredData = res.data.filter((item) => item.DealersPrice);
-    // console.log(">>filteredData:", filteredData);
 
     return res.data;
   } catch (error) {

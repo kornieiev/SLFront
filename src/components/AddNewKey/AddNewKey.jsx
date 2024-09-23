@@ -22,8 +22,8 @@ import PartNumber from "../Key/Modal/components/PartNumber";
 import { addKeyValidationSchema } from "../helpers/validationData";
 import { useDispatch } from "react-redux";
 import { createKey } from "../../redux/keys/operations";
-import toast, { Toaster } from "react-hot-toast";
 
+import toast, { Toaster } from "react-hot-toast";
 const notify = () => toast.success("New key added!");
 
 export default function AddNewKey() {

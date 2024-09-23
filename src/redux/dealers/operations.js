@@ -19,8 +19,6 @@ export const fetchDealers = createAsyncThunk(
 export const createDealer = createAsyncThunk(
   "dealers/createDealer",
   async (credentials, thunkAPI) => {
-    console.log("credentials:", credentials);
-
     const { dealerName, dealerCategory } = credentials;
 
     try {
@@ -28,7 +26,6 @@ export const createDealer = createAsyncThunk(
         dealerName,
         dealerCategory,
       });
-      console.log("response", response);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

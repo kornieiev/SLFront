@@ -84,6 +84,7 @@ export default function KeyFilter() {
             Make:{" "}
           </label>
           <select
+            key={filters2.Maker}
             className={css.select}
             type='text'
             name='Maker'
@@ -106,6 +107,7 @@ export default function KeyFilter() {
               Model:{" "}
             </label>
             <select
+              key={filters2.Model}
               className={css.select}
               type='text'
               name='Model'
@@ -129,6 +131,7 @@ export default function KeyFilter() {
               Year:{" "}
             </label>
             <select
+              key={filters2.Year}
               className={css.select}
               type='text'
               name='Year'
@@ -138,12 +141,16 @@ export default function KeyFilter() {
             >
               <option defaultValue>--Please choose year--</option>
               {sortedARR.map((item) => {
+                const year = Object.values(item)[0];
                 return (
                   <option
-                    key={`${Object.keys(item)}-${nanoid()}`}
-                    value={Object.values(item)}
+                    // key={`${Object.keys(item)}-${nanoid()}`}
+                    key={year}
+                    // value={Object.values(item)}
+                    value={year}
                   >
-                    {Object.values(item)}
+                    {/* {Object.values(item)} */}
+                    {year}
                   </option>
                 );
               })}
@@ -157,6 +164,7 @@ export default function KeyFilter() {
               TypeOfKey:{" "}
             </label>
             <select
+              key={filters2.TypeOfKey}
               className={css.select}
               type='text'
               name='TypeOfKey'

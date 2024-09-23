@@ -15,7 +15,6 @@ export default function ModalEditDealerPrice({
   dealerPriceData,
 }) {
   const choosedDealer = useSelector(selectChoosedDealer);
-  console.log("🚀 ~ choosedDealer:", choosedDealer);
 
   const [newDealerPrice, setNewDealerPrice] = useState(dealerPriceData);
   const dispatch = useDispatch();

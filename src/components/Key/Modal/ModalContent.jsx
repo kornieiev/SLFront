@@ -63,15 +63,13 @@ export default function ModalContent({ item, onClose }) {
       updatedValues.YearEnd = yearEnd;
     }
 
-    updatedValues.Model = capitalizeFirstLetter(updatedValues.Model);
+    // updatedValues.Model = capitalizeFirstLetter(updatedValues.Model);
 
     let date = `${updatedValues.YearStart}-${updatedValues.YearEnd}`;
     updatedValues.Year = date;
 
     dispatch(editKeyById(updatedValues));
     dispatch(fetchKeys());
-
-    console.log("CHANGED!");
 
     onClose(false);
   }
