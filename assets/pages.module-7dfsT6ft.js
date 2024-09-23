@@ -1,1 +1,0 @@
-const t="_loader_1m21t_1",e="_container_1m21t_8",_="_title_1m21t_17",c="_img_1m21t_25",r="_text_1m21t_35",o="_createdBy_1m21t_44",n="_clienCategoryWrapper_1m21t_53",a={loader:t,container:e,title:_,img:c,text:r,createdBy:o,clienCategoryWrapper:n};export{a as c};
