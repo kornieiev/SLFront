@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 import { useAuth } from "../../hooks";
-import css from "./Navigation.module.css";
 import HomeLogo from "../../components/HomeLogo/HomeLogo";
+
+import css from "./Navigation.module.css";
+import HomeLogoShort from "components/HomeLogo/HomeLogoShort";
 
 export const Navigation = () => {
   const { isLoggedIn, role } = useAuth();
@@ -16,6 +18,7 @@ export const Navigation = () => {
         to='/'
       >
         <span>
+          <HomeLogoShort />
           <HomeLogo />
         </span>
       </NavLink>

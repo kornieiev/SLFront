@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Field, Formik, Form } from "formik";
-// import css from "./ClientNameSelector.module.css";
+import css from "./ClientNameSelector.module.css";
 import { chooseDealerName } from "../../redux/keys/slice";
 import { selectAllDealers } from "../../redux/dealers/selectors";
 
@@ -26,6 +26,7 @@ export const ClientNameSelector = () => {
           <Form>
             <div>
               <Field
+                className={css.selector}
                 as='select'
                 name='clientType'
                 onChange={(e) => {

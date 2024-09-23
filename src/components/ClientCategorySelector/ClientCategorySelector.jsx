@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Field, Formik, Form } from "formik";
 import { chooseDealerCategory } from "../../redux/keys/slice";
-// import css from "./ClientCategorySelector.module.css";
+import css from "./ClientCategorySelector.module.css";
 
 export const ClientCategorySelector = () => {
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ export const ClientCategorySelector = () => {
           <Form>
             <div>
               <Field
+                className={css.selector}
                 as='select'
                 name='category'
                 onChange={(e) => {

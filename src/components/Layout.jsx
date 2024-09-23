@@ -12,9 +12,12 @@ export const Layout = () => {
   return (
     <div className={css.wrapper}>
       <AppBar />
-      <Suspense fallback={null}>
-        <Outlet />
-      </Suspense>
+      <main>
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
+      </main>
+
       {/* {isLoading && (
         <div className={css.loader}>
           <DNA

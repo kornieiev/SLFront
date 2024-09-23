@@ -75,7 +75,7 @@ export default function KeyFilter() {
 
   return (
     <>
-      <h3>Choose needed key below:</h3>
+      <h3 className={css.title}>Choose needed key below:</h3>
 
       <ul className={css.list}>
         {/* Step one - Maker */}

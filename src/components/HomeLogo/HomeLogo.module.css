@@ -1,6 +1,6 @@
 .homeLogo {
-  width: 100px;
-  @media (max-width: 430px) {
-    width: 60px;
+  width: 120px;
+  @media (max-width: 767px) {
+    display: none;
   }
 }

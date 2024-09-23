@@ -19,6 +19,18 @@
 
 .nameField {
   width: 100%;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: lightyellow;
+  padding: 2px 4px;
+  font-size: 0.8rem;
+
+  @media (min-width: 768px) {
+    padding: 8px 12px;
+    font-size: 1rem;
+  }
 }
 
 .btn {

@@ -4,10 +4,12 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
+  width: 600px;
 
-  /* grid-template-columns: 1fr; */
-  /* grid-gap: 12px; */
+  @media (max-width: 767px) {
+    width: calc(100%);
+  }
 }
 
 .item {
@@ -16,7 +18,7 @@
   padding: 5px;
 
   border: 1px solid gray;
-  border-radius: 3px;
+  border-radius: 8px;
 
   background-color: lightblue;
 }
@@ -33,4 +35,20 @@ p {
   margin-right: auto;
 
   width: 100%;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: lightyellow;
+  padding: 2px 4px;
+  font-size: 0.8rem;
+
+  @media (min-width: 768px) {
+    padding: 4px 6px;
+    font-size: 1rem;
+  }
+}
+
+.title {
+  margin: 10px 0;
 }

@@ -52,5 +52,10 @@
 
 .clienCategoryWrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 50px;
+
+  @media (max-width: 768px) {
+    gap: 20px;
+  }
 }
