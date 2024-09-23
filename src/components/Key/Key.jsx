@@ -18,9 +18,8 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "80%",
-  maxHeight: "90vh", // Ограничиваем высоту модального окна 90% высоты экрана
-  overflowY: "auto", // Разрешаем вертикальную прокрутку
-  // bgcolor: "background.paper",
+  maxHeight: "90vh",
+  overflowY: "auto",
   bgcolor: "lightgray",
   border: "1px solid #000",
   borderRadius: "10px",
@@ -71,109 +70,147 @@ export const Key = ({ item }) => {
 
   return (
     <div className={css.wrapper}>
-      <ul className={css.itemsList}>
-        <li className={css.item}>
-          <strong className={css.itemName}>Make:</strong>
-          <span className={css.itemData}>{item.Maker}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Model:</strong>
-          <span className={css.itemData}>{item.Model}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Year:</strong>
-          <span className={css.itemData}>{item.Year}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Type of Ignition:</strong>
-          <span className={css.itemData}>{item["Type of Ignition"]}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Type of Key:</strong>
-          <span className={css.itemData}>{item["Type of Key"]}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>No Buttons:</strong>
-          <span className={css.itemData}>{item["No Buttons"]}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Price All Keys Lost:</strong>
-          <span className={css.itemData}>
-            {dealerPriceData["Price All Keys Lost"]}
-            {choosedDealer &&
-              dealerPriceData["Price All Keys Lost"] !== "no data yet" && (
-                <span
-                  className={css.dealerSpecifying}
-                >{`(for ${choosedDealer})`}</span>
-              )}
-            {choosedDealerCategory === "regular" && ` - regular price`}
-          </span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Price Add a Key:</strong>
-          <span className={css.itemData}>
-            {dealerPriceData["Price Add a Key"]}
-            {choosedDealer &&
-              dealerPriceData["Price All Keys Lost"] !== "no data yet" && (
-                <span
-                  className={css.dealerSpecifying}
-                >{`(for ${choosedDealer})`}</span>
-              )}
-            {choosedDealerCategory === "regular" && ` - regular price`}
-          </span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Price Program Only:</strong>
-          <span className={css.itemData}>
-            {dealerPriceData["Price Program Only"]}
-            {choosedDealer &&
-              dealerPriceData["Price All Keys Lost"] !== "no data yet" && (
-                <span
-                  className={css.dealerSpecifying}
-                >{`(for ${choosedDealer})`}</span>
-              )}
-            {choosedDealerCategory === "regular" && ` - regular price`}
-          </span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Dealer Price:</strong>
-          <span className={css.itemData}>{item["Dealer Price"]}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Dealer Program:</strong>
-          <span className={css.itemData}>{item["Dealer Program"]}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Dealer Emergency Blade:</strong>
-          <span className={css.itemData}>{item["Dealer Emergency Blade"]}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Dealer Price Total:</strong>
-          <span className={css.itemData}>{item["Dealer Price Total"]}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Dealer Location:</strong>
-          <span className={css.itemData}>{item["Dealer Location"]}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Secure Locks Parts:</strong>
-          <span className={css.itemData}>{item["Secure Locks Parts"]}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Part #:</strong>
-          <span className={css.itemData}>{item["Part #"]}</span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Link:</strong>
-          <span className={css.itemData}>
-            <a href={item["Link"]}>visit link...</a>
-          </span>
-        </li>
-        <li className={css.item}>
-          <strong className={css.itemName}>Comments:</strong>
-          <span className={css.itemData}>{item.Comments}</span>
-        </li>
-      </ul>
+      <table className={css.table}>
+        <tbody>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Make:</strong>
+            </td>
+            <td className={css.itemData}>{item.Maker}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Model:</strong>
+            </td>
+            <td className={css.itemData}>{item.Model}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Year:</strong>
+            </td>
+            <td className={css.itemData}>{item.Year}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Type of Ignition:</strong>
+            </td>
+            <td className={css.itemData}>{item["Type of Ignition"]}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Type of Key:</strong>
+            </td>
+            <td className={css.itemData}>{item["Type of Key"]}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>No Buttons:</strong>
+            </td>
+            <td className={css.itemData}>{item["No Buttons"]}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Price All Keys Lost:</strong>
+            </td>
+            <td className={css.itemData}>
+              {dealerPriceData["Price All Keys Lost"]}
+              {choosedDealer &&
+                dealerPriceData["Price All Keys Lost"] !== "no data yet" && (
+                  <span className={css.dealerSpecifying}>
+                    {`(for ${choosedDealer})`}
+                  </span>
+                )}
+              {choosedDealerCategory === "regular" && ` - regular price`}
+            </td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Price Add a Key:</strong>
+            </td>
+            <td className={css.itemData}>
+              {dealerPriceData["Price Add a Key"]}
+              {choosedDealer &&
+                dealerPriceData["Price All Keys Lost"] !== "no data yet" && (
+                  <span className={css.dealerSpecifying}>
+                    {`(for ${choosedDealer})`}
+                  </span>
+                )}
+              {choosedDealerCategory === "regular" && ` - regular price`}
+            </td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Price Program Only:</strong>
+            </td>
+            <td className={css.itemData}>
+              {dealerPriceData["Price Program Only"]}
+              {choosedDealer &&
+                dealerPriceData["Price All Keys Lost"] !== "no data yet" && (
+                  <span className={css.dealerSpecifying}>
+                    {`(for ${choosedDealer})`}
+                  </span>
+                )}
+              {choosedDealerCategory === "regular" && ` - regular price`}
+            </td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Dealer Price:</strong>
+            </td>
+            <td className={css.itemData}>{item["Dealer Price"]}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Dealer Program:</strong>
+            </td>
+            <td className={css.itemData}>{item["Dealer Program"]}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Dealer Emergency Blade:</strong>
+            </td>
+            <td className={css.itemData}>{item["Dealer Emergency Blade"]}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Dealer Price Total:</strong>
+            </td>
+            <td className={css.itemData}>{item["Dealer Price Total"]}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Dealer Location:</strong>
+            </td>
+            <td className={css.itemData}>{item["Dealer Location"]}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Secure Locks Parts:</strong>
+            </td>
+            <td className={css.itemData}>{item["Secure Locks Parts"]}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Part #:</strong>
+            </td>
+            <td className={css.itemData}>{item["Part #"]}</td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Link:</strong>
+            </td>
+            <td className={css.itemData}>
+              <a href={item["Link"]}>visit link...</a>
+            </td>
+          </tr>
+          <tr>
+            <td className={css.itemName}>
+              <strong>Comments:</strong>
+            </td>
+            <td className={css.itemData}>{item.Comments}</td>
+          </tr>
+        </tbody>
+      </table>
       {role === "admin" && choosedDealerCategory === "regular" && (
         <div className={css.editBtn}>
           <Button onClick={handleOpen}>Edit information</Button>

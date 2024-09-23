@@ -23,6 +23,14 @@ import Link from "./components/Link";
 import Comments from "./components/Comments";
 import { editKeyValidationSchema } from "../../helpers/validationData";
 
+// import toast, { Toaster } from "react-hot-toast";
+// const notify = () => toast("Key is updated!");
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const notify = () => toast("Wow so easy!");
+
 export default function ModalContent({ item, onClose }) {
   const [yearStart, yearEnd] = item.Year.split("-");
   const dispatch = useDispatch();
@@ -63,11 +71,13 @@ export default function ModalContent({ item, onClose }) {
     dispatch(editKeyById(updatedValues));
     dispatch(fetchKeys());
 
+    console.log("CHANGED!");
+
     onClose(false);
   }
 
   return (
-    <div>
+    <>
       <Formik
         className={css.formWrap}
         initialValues={{
@@ -93,6 +103,10 @@ export default function ModalContent({ item, onClose }) {
         }}
         validationSchema={editKeyValidationSchema}
         onSubmit={async (keyData, { resetForm }) => {
+          notify();
+          // toast("Key is updated!");
+          // toast("Wow so easy!");
+          // notify;
           checkKeyData(keyData);
           resetForm();
         }}
@@ -131,6 +145,8 @@ export default function ModalContent({ item, onClose }) {
           </button>
         </Form>
       </Formik>
-    </div>
+      {/* <Toaster position='top-right' reverseOrder={false} /> */}
+      <ToastContainer />
+    </>
   );
 }

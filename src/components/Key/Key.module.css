@@ -52,11 +52,19 @@
   margin-top: 5px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border-bottom: 1px solid grey;
+  @media (max-width: 767px) {
+    font-size: 0.8rem;
+  }
 }
 .itemData {
   color: red;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border-bottom: 1px solid grey;
+  @media (max-width: 767px) {
+    font-size: 0.8rem;
+  }
 }
 
 .editBtn {
