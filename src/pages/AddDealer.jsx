@@ -13,7 +13,7 @@ export default function AddDealer() {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>Add new key</title>
+          <title>Add new Dealer</title>
         </Helmet>
       </HelmetProvider>
 
