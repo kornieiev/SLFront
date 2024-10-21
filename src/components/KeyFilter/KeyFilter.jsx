@@ -1,6 +1,5 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { nanoid } from "nanoid";
 import {
   selectFilters,
   selectMakersArr,
@@ -21,7 +20,6 @@ export default function KeyFilter() {
   const modelsArr = useSelector(selectModelsArr);
   const yearsArr = useSelector(selectYearsArr);
   const typeOfKeyArr = useSelector(selectTypeOfKeyArr);
-  console.log("🚀 ~ KeyFilter ~ typeOfKeyArr:", typeOfKeyArr);
   const keysForRender = useSelector(selectkeysForRender);
 
   // Мемозированное вычисление sortedYearsArr
@@ -146,13 +144,7 @@ export default function KeyFilter() {
               {sortedARR.map((item) => {
                 const year = Object.values(item)[0];
                 return (
-                  <option
-                    // key={`${Object.keys(item)}-${nanoid()}`}
-                    key={year}
-                    // value={Object.values(item)}
-                    value={year}
-                  >
-                    {/* {Object.values(item)} */}
+                  <option key={year} value={year}>
                     {year}
                   </option>
                 );

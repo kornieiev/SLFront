@@ -14,7 +14,6 @@ export const UserMenu = () => {
         className={css.btn}
         type='button'
         onClick={() => {
-          console.log("Logout Click");
           dispatch(logOut());
         }}
       >

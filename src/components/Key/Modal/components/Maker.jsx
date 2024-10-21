@@ -6,7 +6,6 @@ import { selectMakersArr } from "../../../../redux/keys/selectors";
 
 export default function Maker({ item }) {
   const makersArr = useSelector(selectMakersArr);
-  console.log("makersArr", makersArr);
   const [field, meta] = useField("Maker"); // Получение метаданных поля
 
   return (
