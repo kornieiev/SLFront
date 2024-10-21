@@ -39,12 +39,12 @@ export default function ModalContent({ item, onClose }) {
     dispatch(fetchKeys());
   }, [dispatch]);
 
-  function capitalizeFirstLetter(str) {
-    return str
-      .toLowerCase() // Преобразуем всю строку в нижний регистр для консистентности
-      .replace(/\b\w/g, (char) => char.toUpperCase()) // Используем регулярное выражение для нахождения первых букв слов
-      .replace(/\B\w/g, (char) => char.toLowerCase()); // Преобразуем все остальные буквы в нижний регистр
-  }
+  // function capitalizeFirstLetter(str) {
+  //   return str
+  //     .toLowerCase() // Преобразуем всю строку в нижний регистр для консистентности
+  //     .replace(/\b\w/g, (char) => char.toUpperCase()) // Используем регулярное выражение для нахождения первых букв слов
+  //     .replace(/\B\w/g, (char) => char.toLowerCase()); // Преобразуем все остальные буквы в нижний регистр
+  // }
 
   function checkKeyData(keyData) {
     const updatedValues = { ...item };

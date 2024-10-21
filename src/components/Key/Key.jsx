@@ -12,24 +12,6 @@ import {
   selectChoosedDealer,
 } from "../../redux/keys/selectors";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "80%",
-  maxHeight: "90vh",
-  overflowY: "auto",
-  bgcolor: "lightgray",
-  border: "1px solid #000",
-  borderRadius: "10px",
-  boxShadow: 24,
-  p: 1,
-  pt: 2,
-  pb: 3,
-  m: 0,
-};
-
 export const Key = ({ item }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -232,7 +214,7 @@ export const Key = ({ item }) => {
             aria-labelledby='modal-modal-title'
             aria-describedby='modal-modal-description'
           >
-            <Box sx={style}>
+            <Box className={css.modalBoxStyles}>
               <ModalContent item={item} onClose={handleClose} />
             </Box>
           </Modal>
@@ -248,7 +230,7 @@ export const Key = ({ item }) => {
             aria-labelledby='modal-modal-title'
             aria-describedby='modal-modal-description'
           >
-            <Box sx={style}>
+            <Box className={css.modalBoxStyles}>
               <ModalEditDealerPrice
                 item={item}
                 onClose={handleClose}
