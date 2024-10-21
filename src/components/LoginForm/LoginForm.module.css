@@ -36,3 +36,9 @@
   border: 1px solid gray;
   border-radius: 8px;
 }
+
+.errorMsg {
+  margin-top: 20px;
+  text-align: center;
+  color: red;
+}
