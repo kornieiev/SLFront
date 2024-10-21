@@ -18,7 +18,6 @@ export default function Year({ item }) {
           id='YearStart'
           name='YearStart'
           placeholder='YearStart'
-          type='number'
           pattern='^(19[0-9]{2}|20[0-9]{2}|2100)$'
         />
         <ErrorMessage name='YearStart' component='div' />
@@ -30,7 +29,6 @@ export default function Year({ item }) {
           id='YearEnd'
           name='YearEnd'
           placeholder='YearEnd'
-          type='number'
           pattern='^(19[0-9]{2}|20[0-9]{2}|2100)$'
         />
         <ErrorMessage name='YearEnd' component='div' />

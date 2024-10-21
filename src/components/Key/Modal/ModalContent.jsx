@@ -103,8 +103,6 @@ export default function ModalContent({ item, onClose }) {
         onSubmit={async (keyData, { resetForm }) => {
           notify();
           // toast("Key is updated!");
-          // toast("Wow so easy!");
-          // notify;
           checkKeyData(keyData);
           resetForm();
         }}
