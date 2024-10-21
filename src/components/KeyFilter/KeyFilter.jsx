@@ -21,6 +21,7 @@ export default function KeyFilter() {
   const modelsArr = useSelector(selectModelsArr);
   const yearsArr = useSelector(selectYearsArr);
   const typeOfKeyArr = useSelector(selectTypeOfKeyArr);
+  console.log("🚀 ~ KeyFilter ~ typeOfKeyArr:", typeOfKeyArr);
   const keysForRender = useSelector(selectkeysForRender);
 
   // Мемозированное вычисление sortedYearsArr
@@ -93,7 +94,7 @@ export default function KeyFilter() {
           >
             <option defaultValue>--Please choose maker--</option>
             {makersArr &&
-              makersArr.map((item) => (
+              makersArr.sort().map((item) => (
                 <option key={item} value={item}>
                   {item}
                 </option>
@@ -116,11 +117,13 @@ export default function KeyFilter() {
               onChange={handleChange}
             >
               <option defaultValue>--Please choose model--</option>
-              {[...new Set(modelsArr.map((item) => item.Model))].map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
+              {[...new Set(modelsArr.map((item) => item.Model))]
+                .sort()
+                .map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
             </select>
           </li>
         )}
@@ -173,13 +176,13 @@ export default function KeyFilter() {
               onChange={handleChange}
             >
               <option defaultValue>--Please choose TypeOfKey--</option>
-              {[
-                ...new Set(typeOfKeyArr.map((item) => item["Type of Key"])),
-              ].map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
+              {[...new Set(typeOfKeyArr.map((item) => item["Type of Key"]))]
+                .sort()
+                .map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
             </select>
           </li>
         )}
