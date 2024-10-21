@@ -18,7 +18,7 @@ export const LoginForm = () => {
     const email = form.elements.email.value.trim().replace(/\s+/g, "");
     const password = form.elements.password.value.trim().replace(/\s+/g, "");
 
-    if (!email || !password || errorMessage) {
+    if (errorMessage) {
       notify();
     }
 
