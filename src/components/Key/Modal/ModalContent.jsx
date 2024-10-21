@@ -1,6 +1,6 @@
 import { Formik, Form } from "formik";
 import css from "./ModalContent.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { editKeyById, fetchKeys } from "../../../redux/keys/operations";
 import { useEffect } from "react";
 import Maker from "./components/Maker";
@@ -23,15 +23,7 @@ import Link from "./components/Link";
 import Comments from "./components/Comments";
 import { editKeyValidationSchema } from "../../helpers/validationData";
 
-// import toast, { Toaster } from "react-hot-toast";
-// const notify = () => toast("Key is updated!");
-
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-const notify = () => toast("Wow so easy!");
-
-export default function ModalContent({ item, onClose }) {
+export default function ModalContent({ item, onClose, notify }) {
   const [yearStart, yearEnd] = item.Year.split("-");
   const dispatch = useDispatch();
 
@@ -68,6 +60,8 @@ export default function ModalContent({ item, onClose }) {
     let date = `${updatedValues.YearStart}-${updatedValues.YearEnd}`;
     updatedValues.Year = date;
 
+    notify("Key data is changed successfully");
+
     dispatch(editKeyById(updatedValues));
     dispatch(fetchKeys());
 
@@ -101,8 +95,6 @@ export default function ModalContent({ item, onClose }) {
         }}
         validationSchema={editKeyValidationSchema}
         onSubmit={async (keyData, { resetForm }) => {
-          notify();
-          // toast("Key is updated!");
           checkKeyData(keyData);
           resetForm();
         }}
@@ -141,8 +133,6 @@ export default function ModalContent({ item, onClose }) {
           </button>
         </Form>
       </Formik>
-      {/* <Toaster position='top-right' reverseOrder={false} /> */}
-      <ToastContainer />
     </>
   );
 }

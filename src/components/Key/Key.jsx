@@ -1,3 +1,5 @@
+import { Toaster, toast } from "react-hot-toast";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -13,6 +15,10 @@ import {
 } from "../../redux/keys/selectors";
 
 export const Key = ({ item }) => {
+  const notify = (message) => {
+    toast.success(message);
+  };
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -215,7 +221,7 @@ export const Key = ({ item }) => {
             aria-describedby='modal-modal-description'
           >
             <Box className={css.modalBoxStyles}>
-              <ModalContent item={item} onClose={handleClose} />
+              <ModalContent item={item} onClose={handleClose} notify={notify} />
             </Box>
           </Modal>
         </div>
@@ -240,6 +246,8 @@ export const Key = ({ item }) => {
           </Modal>
         </div>
       )}
+
+      <Toaster position='top-right' reverseOrder={false} />
     </div>
   );
 };

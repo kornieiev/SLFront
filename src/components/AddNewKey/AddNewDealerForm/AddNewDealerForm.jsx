@@ -4,12 +4,13 @@ import { createDealer } from "../../../redux/dealers/operations";
 import css from "./AddNewDealerForm.module.css";
 
 import toast, { Toaster } from "react-hot-toast";
-const notify = (client) =>
-  toast.success(
-    `${client.dealerCategory} ${client.dealerName} added as new client`
-  );
 
 export default function AddNewDealerForm() {
+  const notify = (client) =>
+    toast.success(
+      `${client.dealerCategory} ${client.dealerName} added as new client`
+    );
+
   const dispatch = useDispatch();
   return (
     <div className={css.mainWrapper}>

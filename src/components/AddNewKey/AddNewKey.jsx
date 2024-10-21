@@ -24,9 +24,10 @@ import { useDispatch } from "react-redux";
 import { createKey } from "../../redux/keys/operations";
 
 import toast, { Toaster } from "react-hot-toast";
-const notify = () => toast.success("New key added!");
 
 export default function AddNewKey() {
+  const notify = () => toast.success("New key added!");
+
   const dispatch = useDispatch();
 
   function capitalizeFirstLetter(str) {
