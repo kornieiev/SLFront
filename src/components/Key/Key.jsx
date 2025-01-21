@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import css from "./Key.module.css";
 import ModalContent from "./Modal/ModalContent";
@@ -15,8 +16,8 @@ import {
 } from "../../redux/keys/selectors";
 
 export const Key = ({ item }) => {
-  const notify = (message) => {
-    toast.success(message);
+  const notify = (message, type) => {
+    type === "error" ? toast.error(message) : toast.success(message);
   };
 
   const [open, setOpen] = useState(false);
@@ -27,7 +28,7 @@ export const Key = ({ item }) => {
   const choosedDealerCategory = useSelector(selectChoosedDealerCategory);
   const choosedDealer = useSelector(selectChoosedDealer);
 
-  const [dealerPriceData, setDealersPriceData] = useState({
+  const [dealerPriceData, setDealerPriceData] = useState({
     "Price All Keys Lost": "no data yet",
     "Price Add a Key": "no data yet",
     "Price Program Only": "no data yet",
@@ -35,15 +36,15 @@ export const Key = ({ item }) => {
 
   useEffect(() => {
     if (choosedDealerCategory === "regular") {
-      setDealersPriceData({
-        "Price All Keys Lost": item["Price All Keys Lost"],
-        "Price Add a Key": item["Price Add a Key"],
-        "Price Program Only": item["Price Program Only"],
+      setDealerPriceData({
+        "Price All Keys Lost": item?.["Price All Keys Lost"],
+        "Price Add a Key": item?.["Price Add a Key"],
+        "Price Program Only": item?.["Price Program Only"],
       });
       return;
     }
     if (!item?.DealersPrice?.[choosedDealer]) {
-      setDealersPriceData({
+      setDealerPriceData({
         "Price All Keys Lost": "no data yet",
         "Price Add a Key": "no data yet",
         "Price Program Only": "no data yet",
@@ -51,50 +52,56 @@ export const Key = ({ item }) => {
       return;
     }
     if (choosedDealer && item?.DealersPrice?.[choosedDealer]) {
-      setDealersPriceData(item?.DealersPrice?.[choosedDealer]);
-      return;
+      setDealerPriceData(item?.DealersPrice?.[choosedDealer]);
+      // return;
     }
   }, [choosedDealer, choosedDealerCategory, item, item?.DealersPrice]);
 
   return (
     <div className={css.wrapper}>
       <table className={css.table}>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Details</th>
+          </tr>
+        </thead>
         <tbody>
           <tr>
             <td className={css.itemName}>
               <strong>Make:</strong>
             </td>
-            <td className={css.itemData}>{item.Maker}</td>
+            <td className={css.itemData}>{item?.Maker}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Model:</strong>
             </td>
-            <td className={css.itemData}>{item.Model}</td>
+            <td className={css.itemData}>{item?.Model}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Year:</strong>
             </td>
-            <td className={css.itemData}>{item.Year}</td>
+            <td className={css.itemData}>{item?.Year}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Type of Ignition:</strong>
             </td>
-            <td className={css.itemData}>{item["Type of Ignition"]}</td>
+            <td className={css.itemData}>{item?.["Type of Ignition"]}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Type of Key:</strong>
             </td>
-            <td className={css.itemData}>{item["Type of Key"]}</td>
+            <td className={css.itemData}>{item?.["Type of Key"]}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>No Buttons:</strong>
             </td>
-            <td className={css.itemData}>{item["No Buttons"]}</td>
+            <td className={css.itemData}>{item?.["No Buttons"]}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
@@ -157,57 +164,57 @@ export const Key = ({ item }) => {
             <td className={css.itemName}>
               <strong>Dealer Price:</strong>
             </td>
-            <td className={css.itemData}>{item["Dealer Price"]}</td>
+            <td className={css.itemData}>{item?.["Dealer Price"]}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Dealer Program:</strong>
             </td>
-            <td className={css.itemData}>{item["Dealer Program"]}</td>
+            <td className={css.itemData}>{item?.["Dealer Program"]}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Dealer Emergency Blade:</strong>
             </td>
-            <td className={css.itemData}>{item["Dealer Emergency Blade"]}</td>
+            <td className={css.itemData}>{item?.["Dealer Emergency Blade"]}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Dealer Price Total:</strong>
             </td>
-            <td className={css.itemData}>{item["Dealer Price Total"]}</td>
+            <td className={css.itemData}>{item?.["Dealer Price Total"]}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Dealer Location:</strong>
             </td>
-            <td className={css.itemData}>{item["Dealer Location"]}</td>
+            <td className={css.itemData}>{item?.["Dealer Location"]}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Secure Locks Parts:</strong>
             </td>
-            <td className={css.itemData}>{item["Secure Locks Parts"]}</td>
+            <td className={css.itemData}>{item?.["Secure Locks Parts"]}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Part #:</strong>
             </td>
-            <td className={css.itemData}>{item["Part #"]}</td>
+            <td className={css.itemData}>{item?.["Part #"]}</td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Link:</strong>
             </td>
             <td className={css.itemData}>
-              <a href={item["Link"]}>visit link...</a>
+              <a href={item?.["Link"]}>visit link...</a>
             </td>
           </tr>
           <tr>
             <td className={css.itemName}>
               <strong>Comments:</strong>
             </td>
-            <td className={css.itemData}>{item.Comments}</td>
+            <td className={css.itemData}>{item?.Comments}</td>
           </tr>
         </tbody>
       </table>
@@ -250,4 +257,28 @@ export const Key = ({ item }) => {
       <Toaster position='top-right' reverseOrder={false} />
     </div>
   );
+};
+
+Key.propTypes = {
+  item: PropTypes.shape({
+    Maker: PropTypes.string,
+    Model: PropTypes.string,
+    Year: PropTypes.string,
+    "Type of Ignition": PropTypes.string,
+    "Type of Key": PropTypes.string,
+    "No Buttons": PropTypes.string,
+    "Price All Keys Lost": PropTypes.string,
+    "Price Add a Key": PropTypes.string,
+    "Price Program Only": PropTypes.string,
+    "Dealer Price": PropTypes.string,
+    "Dealer Program": PropTypes.string,
+    "Dealer Emergency Blade": PropTypes.string,
+    "Dealer Price Total": PropTypes.string,
+    "Dealer Location": PropTypes.string,
+    "Secure Locks Parts": PropTypes.string,
+    "Part #": PropTypes.string,
+    Link: PropTypes.string,
+    Comments: PropTypes.string,
+    DealersPrice: PropTypes.object,
+  }).isRequired,
 };

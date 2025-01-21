@@ -31,13 +31,6 @@ export default function ModalContent({ item, onClose, notify }) {
     dispatch(fetchKeys());
   }, [dispatch]);
 
-  // function capitalizeFirstLetter(str) {
-  //   return str
-  //     .toLowerCase() // Преобразуем всю строку в нижний регистр для консистентности
-  //     .replace(/\b\w/g, (char) => char.toUpperCase()) // Используем регулярное выражение для нахождения первых букв слов
-  //     .replace(/\B\w/g, (char) => char.toLowerCase()); // Преобразуем все остальные буквы в нижний регистр
-  // }
-
   function checkKeyData(keyData) {
     const updatedValues = { ...item };
 
@@ -55,8 +48,6 @@ export default function ModalContent({ item, onClose, notify }) {
       updatedValues.YearEnd = yearEnd;
     }
 
-    // updatedValues.Model = capitalizeFirstLetter(updatedValues.Model);
-
     let date = `${updatedValues.YearStart}-${updatedValues.YearEnd}`;
     updatedValues.Year = date;
 
@@ -69,70 +60,77 @@ export default function ModalContent({ item, onClose, notify }) {
   }
 
   return (
-    <>
-      <Formik
-        className={css.formWrap}
-        initialValues={{
-          Maker: "",
-          Model: "",
-          YearStart: "",
-          YearEnd: "",
-          "Type of Ignition": "",
-          "Type of Key": "",
-          "No Buttons": "",
-          "Price All Keys Lost": "",
-          "Price Add a Key": "",
-          "Price Program Only": "",
-          "Dealer Price": "",
-          "Dealer Program": "",
-          "Dealer Emergency Blade": "",
-          "Dealer Price Total": "",
-          "Dealer Location": "",
-          "Secure Locks Parts": "",
-          "Part #": "",
-          Link: "",
-          Comments: "",
-        }}
-        validationSchema={editKeyValidationSchema}
-        onSubmit={async (keyData, { resetForm }) => {
-          checkKeyData(keyData);
-          resetForm();
-        }}
-      >
-        <Form className={css.formWrap}>
-          <Maker item={item} />
-          <Model item={item} />
-          <Year item={item} />
-          <TypeOfIgnition item={item} />
-          <TypeOfKey item={item} />
-          <NoButtons item={item} />
-          <PriceAllKeysLost item={item} />
-          <PriceAddaKey item={item} />
-          <PriceProgramOnly item={item} />
-          <DealerPrice item={item} />
-          <DealerPriceTotal item={item} />
-          <DealerLocation item={item} />
-          <DealerProgram item={item} />
-          <DealerEmergencyBlade item={item} />
-          <SecureLocksParts item={item} />
-          <PartNumber item={item} />
-          <Link item={item} />
-          <Comments item={item} />
+    <Formik
+      className={css.formWrap}
+      initialValues={{
+        Maker: "",
+        Model: "",
+        YearStart: "",
+        YearEnd: "",
+        "Type of Ignition": "",
+        "Type of Key": "",
+        "No Buttons": "",
+        "Price All Keys Lost": "",
+        "Price Add a Key": "",
+        "Price Program Only": "",
+        "Dealer Price": "",
+        "Dealer Program": "",
+        "Dealer Emergency Blade": "",
+        "Dealer Price Total": "",
+        "Dealer Location": "",
+        "Secure Locks Parts": "",
+        "Part #": "",
+        Link: "",
+        Comments: "",
+      }}
+      validationSchema={editKeyValidationSchema}
+      onSubmit={async (keyData, { resetForm }) => {
+        console.log("keyData.NoButtons", keyData["No Buttons"]);
+        if (
+          keyData["No Buttons"] === null ||
+          keyData["No Buttons"] === "" ||
+          keyData["No Buttons"] === undefined
+        ) {
+          notify(`"["No Buttons"]" data is lost`, "error");
+          return;
+        }
+        checkKeyData(keyData);
+        resetForm();
+      }}
+    >
+      <Form className={css.formWrap}>
+        <Maker item={item} />
+        <Model item={item} />
+        <Year item={item} />
+        <TypeOfIgnition item={item} />
+        <TypeOfKey item={item} />
+        <NoButtons item={item} />
+        <PriceAllKeysLost item={item} />
+        <PriceAddaKey item={item} />
+        <PriceProgramOnly item={item} />
+        <DealerPrice item={item} />
+        <DealerPriceTotal item={item} />
+        <DealerLocation item={item} />
+        <DealerProgram item={item} />
+        <DealerEmergencyBlade item={item} />
+        <SecureLocksParts item={item} />
+        <PartNumber item={item} />
+        <Link item={item} />
+        <Comments item={item} />
 
-          <button className={css.btn} type='submit'>
-            CHANGE DATA
-          </button>
+        <button className={css.btn} type='submit'>
+          CHANGE DATA
+        </button>
 
-          <button
-            className={css.btnCancel}
-            onClick={() => {
-              onClose(false);
-            }}
-          >
-            Close without changes
-          </button>
-        </Form>
-      </Formik>
-    </>
+        <button
+          className={css.btnCancel}
+          onClick={() => {
+            onClose(false);
+          }}
+        >
+          Close without changes
+        </button>
+      </Form>
+    </Formik>
   );
 }

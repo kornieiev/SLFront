@@ -10,6 +10,7 @@ export const fetchKeys = createAsyncThunk("/api/keys", async (_, thunkAPI) => {
 
     return res.data;
   } catch (error) {
+    console.log("operation error:", error);
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -24,8 +25,9 @@ export const editKeyById = createAsyncThunk(
         credentials
       );
       return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+    } catch (error) {
+      console.log("operation error:", error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -37,8 +39,9 @@ export const createKey = createAsyncThunk(
     try {
       const response = await axios.post("/keys", { ...credentials });
       return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+    } catch (error) {
+      console.log("operation error:", error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -49,10 +52,10 @@ export const deleteKey = createAsyncThunk(
   async (keyId, thunkAPI) => {
     try {
       const response = await axios.delete(`/keys/${keyId}`);
-
       return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+    } catch (error) {
+      console.log("operation error:", error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -67,8 +70,9 @@ export const updateDealerPriceByKeyId = createAsyncThunk(
         credentials
       );
       return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+    } catch (error) {
+      console.log("operation error:", error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
